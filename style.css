@@ -4,4 +4,10 @@ CS465 -- Project 2: Hiking Project
 CSS Style Controller
 */
 
-/* Starter file for code */
+/* General Styling */
+
+/* Visibility Controls */
+
+.invisible {
+    display: none;
+}
