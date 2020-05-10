@@ -9,31 +9,35 @@ Javascript Webpage Controller
 /* Variables */
 
 /* Listeners */
-var home_buttons = document.getElementsByClassName("navto_home_page");
 
-for (var i = 0; i < home_buttons.length; i++){
-    home_buttons[i].addEventListener("click", function() { swap_page("navto_home_page") });
-}
+    // Home Button Functionality
+    var home_buttons = document.getElementsByClassName("navto_home_page");
+    for (var i = 0; i < home_buttons.length; i++){
+        home_buttons[i].addEventListener("click", function() { swap_page("home_page") });
+    }
+
+    var details_buttons = document.getElementsByClassName("navto_hike_detail_page");
+    for (var i = 0; i < home_buttons.length; i++){
+        details_buttons[i].addEventListener("click", function() { swap_page("hike_detail_page") });
+    }
 
 /* Functions */
 
-function swap_page(to_go) {
-    alert(to_go);
-    /* Remove all visibility from pages */
-    /*
-    let pages = document.getElementsByClassName("visible").querySelectorAll("div");
-    let i = 0;
-    for (i = 0; i < pages.length; i++){
-        pages[i].classList.remove("visible");
-        pages[i].classList.add("invisible");
+    // Function to hide all pages, then make a page visible
+    function swap_page(to_go) {
+
+        // Remove all visibility from pages
+        let pages = document.getElementsByClassName("visible");
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.add("invisible");
+            pages[i].classList.remove("visible");
+        }
+
+        // Make "to_go" page visible
+        let current = document.getElementsByClassName(to_go);
+        for (var i = 0; i < current.length; i++) {
+            current[i].classList.add("visible");
+            current[i].classList.remove("invisible");
+        }
+
     }
-    */
-    /* Make your page visible */
-    /*
-    let current = document.getElementsByClassName(to_go).querySelectorAll("div");
-    for (i = 0; i < current.length; i++){
-        current[i].classList.add("visible");
-        current[i].classList.remove("invisible");
-    }
-    */
-}
