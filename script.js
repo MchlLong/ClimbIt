@@ -66,3 +66,6 @@ Javascript Webpage Controller
 /* API Controller Functions */
 
   // Ideally this will be separated based on the API being called / used for organization
+
+// TEST
+alert(this.mytestvariable);
