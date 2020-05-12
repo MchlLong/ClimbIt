@@ -11,6 +11,11 @@
         <title>Single Page</title>
         <!-- Styling / JS Components-->
         <!-- Insert your favorite CSS frameworks here -->
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+        />
         <!-- Insert your favorite JavaScript Library(ies) here -->
     </head>
 
@@ -19,6 +24,23 @@
         <!-- Starter search page where you can enter a general location-->
         <div class="home_page visible">
             <p>Home</p>
+            <div class="container mt-4">
+                <form id="bootstrap-form" onSubmit=convertToLatLong() class="bg-light border mx-auto p-4">
+                  <div class="text-center">
+                      <h1 class="mb-3">Where would you like to hike?</h1>
+                      </div>
+                      <div class="form-group row">
+                        <label class = "col-form-label col-sm" for="address">Enter location:</label>
+                          <input
+                            name="address"
+                            type="address"
+                            class="form-control ml-3 mr-3"
+                            id="address"
+                          />
+                      </div>
+                      <button type="submit" class="find-hikes">Find hikes</button>
+                  </div>
+                </form>
             <button type="button" class="navto_hike_detail_page">Go to Details</button>
         </div>
 
@@ -72,6 +94,7 @@
             <button type="button" class="navto_home_page">Go Home</button>
         </div>
         <script src="script.js"></script>
+        <script src="const.js"></script>
     </body>
 
 </html>

@@ -64,3 +64,26 @@ Javascript Webpage Controller
     }
 
 /* API Controller Functions */
+
+// Convert location input to lat/long coordinates using Geocoding API
+function convertToLatLong() {
+    event.preventDefault();  // for testing
+    let address = document.getElementById("address").value;
+    address = JSON.stringify(address);
+    // figure out how to secure the key later
+    let key = keys.GOOGLE_API_KEY; 
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`
+    
+    let getDataPromise = url => {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                data = JSON.stringify(data.results[0].geometry.location);
+                console.log(`Location: ${data}`);
+            })
+            .catch(error => {
+                console.log("Meh it did not work :(", error);
+            })
+    }
+    getDataPromise(url);
+}
