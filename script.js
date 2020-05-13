@@ -42,6 +42,10 @@ Javascript Webpage Controller
         weather_buttons[i].addEventListener("click", function() { swap_page("weather_page") });
     }
 
+    // Find Hike Button Functionality
+    var find_hike_button = document.getElementsByClassName("find-hikes");
+    find_hike_button[0].addEventListener("click", function() { convertAndGetHikes() } );
+
 /* Webpage Controller Functions */
 
     // Function to hide all pages, then make a page visible
@@ -66,25 +70,65 @@ Javascript Webpage Controller
 /* API Controller Functions */
 
 // Convert location input to lat/long coordinates using Geocoding API
-function convertToLatLong() {
+// Call getNearbyHikes to list nearby hikes with one of the hiking APIs
+function convertAndGetHikes() {
+
     event.preventDefault();  // for testing
     let address = document.getElementById("address").value;
     address = JSON.stringify(address);
-    let key = keys.GOOGLE_API_KEY; 
+    let key = secrets.GOOGLE_API_KEY; 
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`
 
-    getDataPromise(url);
-}
-
-function getDataPromise (url) {
+    /* eventually implement API calls as a single function if possible */
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            lat = JSON.stringify(data.results[0].geometry.location.lat);
-            long = JSON.stringify(data.results[0].geometry.location.lng);
-            console.log(`Coordinates: ${lat}, ${long}`);
+            // Get latitude and longitude from Geocoding API
+            const lat = JSON.stringify(data.results[0].geometry.location.lat);
+            const long = JSON.stringify(data.results[0].geometry.location.lng);
+            console.log(`Latitude: ${lat}, Longitude: ${long}`);   // for testing
+            if(lat && long)
+            // Get nearby hikes from hiking API
+                getNearbyHikes(lat, long);
         })
         .catch(error => {
-            console.log("Meh it did not work :(", error);
+            console.log("Geocoding API was not fetched :( ", error);
+        })
+    
+        
+}
+
+// Get list of hikes within x miles of a given location using Hiking Project OR Transit&Trails API
+function getNearbyHikes(lat, long) {
+    let distance = document.getElementById("distance").value;
+  //  const TT_key = secrets.TRANSITTRAILS_API_KEY;
+    const HP_key = secrets.HIKINGPROJ_API_KEY;
+  //  let TT_url = `https://api.transitandtrails.org/api/v1/trailheads.xml?latitude=${lat}&longitude=${long}&distance=${distance}&key=${TT_key}`;
+    let HP_url = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=${distance}&key=${HP_key}`
+
+    // construct the headers
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    headers.append('Origin', 'http://127.0.0.1:5500')
+
+    // Get list of hikes from Hiking API
+    fetch(HP_url, {
+        credentials: 'include',
+        method: 'GET',
+        headers: headers,
+        mode: 'cors' 
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(`Data: ${data}`);
+        })
+        .catch(error => {
+            console.log("HikingProject API was not fetched :(", error);
         })
 }
+ 
+
+    
+ 
+

@@ -8,7 +8,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="style.css">
-        <title>Single Page</title>
+        <title>Hiking App</title>
         <!-- Styling / JS Components-->
         <!-- Insert your favorite CSS frameworks here -->
         <link
@@ -25,19 +25,27 @@
         <div class="home_page visible">
             <p>Home</p>
             <div class="container mt-4">
-                <form id="bootstrap-form" onSubmit=convertToLatLong() class="bg-light border mx-auto p-4">
+                <form id="bootstrap-form" class="bg-light border mx-auto p-4">
                   <div class="text-center">
                       <h1 class="mb-3">Where would you like to hike?</h1>
                       </div>
                       <div class="form-group row">
-                        <label class = "col-form-label col-sm" for="address">Enter location:</label>
+                        <label class = "col-form-label col-sm" for="address">Location:</label>
                           <input
                             name="address"
                             type="address"
                             class="form-control ml-3 mr-3"
                             id="address"
                           />
+                          <label class = "col-form-label col-sm" for="distance">Distance from location (in miles):</label>
+                          <input
+                            name="distance"
+                            type="distance"
+                            class="form-control ml-3 mr-3"
+                            id="distance"
+                          />
                       </div>
+
                       <button type="submit" class="find-hikes">Find hikes</button>
                   </div>
                 </form>
@@ -93,6 +101,7 @@
             <button type="button" class="navto_hike_detail_page">Go to Details</button>
             <button type="button" class="navto_home_page">Go Home</button>
         </div>
+        <!-- Insert JS files below -->
         <script src="script.js"></script>
         <script src="const.js"></script>
     </body>
