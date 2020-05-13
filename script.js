@@ -70,20 +70,21 @@ function convertToLatLong() {
     event.preventDefault();  // for testing
     let address = document.getElementById("address").value;
     address = JSON.stringify(address);
-    // figure out how to secure the key later
     let key = keys.GOOGLE_API_KEY; 
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`
-    
-    let getDataPromise = url => {
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                data = JSON.stringify(data.results[0].geometry.location);
-                console.log(`Location: ${data}`);
-            })
-            .catch(error => {
-                console.log("Meh it did not work :(", error);
-            })
-    }
+
     getDataPromise(url);
+}
+
+function getDataPromise (url) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            lat = JSON.stringify(data.results[0].geometry.location.lat);
+            long = JSON.stringify(data.results[0].geometry.location.lng);
+            console.log(`Coordinates: ${lat}, ${long}`);
+        })
+        .catch(error => {
+            console.log("Meh it did not work :(", error);
+        })
 }
