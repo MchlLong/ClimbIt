@@ -1,1 +1,0 @@
-var mytestvariable = "boop";
