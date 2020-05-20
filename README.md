@@ -17,3 +17,5 @@ $ npm install express
 $ npm install body-parser
 $ npm install dotenv
 
+# How to Run
+$ node server.js

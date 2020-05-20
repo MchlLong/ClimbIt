@@ -6,6 +6,7 @@ Javascript Server
 
 // Definitions
 const express = require("express");
+const dotenv = require("dotenv").config();
 const server = express();
 const port = 5500;
 
@@ -16,4 +17,5 @@ server.use(express.static("public"));
 // Listener
 server.listen(port, "127.0.0.1", () => {
     console.log("Server is listening");
+    console.log(process.env.TEST);
 });
