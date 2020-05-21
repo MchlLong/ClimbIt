@@ -42,9 +42,10 @@ Javascript Webpage Controller
         weather_buttons[i].addEventListener("click", function() { swap_page("weather_page") });
     }
 
+ /*  
     // Find Hike Button Functionality
     var find_hike_button = document.getElementsByClassName("find-hikes");
-    find_hike_button[0].addEventListener("click", function() { convertAndGetHikes() } );
+    find_hike_button[0].addEventListener("click", function() { convertAndGetHikes() } ); */
 
 /* Webpage Controller Functions */
 
@@ -69,17 +70,18 @@ Javascript Webpage Controller
 
 /* API Controller Functions */
 
+// note to self: split this up and move to server //
+/*
 // Convert location input to lat/long coordinates using Geocoding API
 // Call getNearbyHikes to list nearby hikes with one of the hiking APIs
 function convertAndGetHikes() {
 
-    event.preventDefault();  // for testing
+  //  event.preventDefault();  // for testing
     let address = document.getElementById("address").value;
     address = JSON.stringify(address);
     let key = secrets.GOOGLE_API_KEY; 
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`
 
-    /* eventually implement API calls as a single function if possible */
     fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -126,7 +128,7 @@ function getNearbyHikes(lat, long) {
         .catch(error => {
             console.log("HikingProject API was not fetched :(", error);
         })
-}
+}*/
  
 
     
