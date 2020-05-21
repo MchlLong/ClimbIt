@@ -4,6 +4,8 @@ CS465 -- Project 2: Hiking Project
 Javascript Webpage Controller
 */
 
+//require('../api.js');
+
 /* Listeners */
 
     // Home Button Functionality
@@ -78,7 +80,7 @@ function convertToCoords() {
     event.preventDefault();  // for testing
     let address = document.getElementById("address").value;
     address = JSON.stringify(address);
-    let key = secrets.GOOGLE_API_KEY; 
+    let key = process.env.GOOGLE_API_KEY; 
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`
 
    // api call
@@ -88,8 +90,8 @@ function convertToCoords() {
 // Get list of hikes within x miles of a given location using Hiking Project OR Transit&Trails API
 function getNearbyHikes(lat, long) {
     let distance = document.getElementById("distance").value;
-  //  const TT_key = secrets.TRANSITTRAILS_API_KEY;
-    const HP_key = secrets.HIKINGPROJ_API_KEY;
+  //  const TT_key = process.env.TRANSITTRAILS_API_KEY;
+    const HP_key = process.env.HIKINGPROJ_API_KEY;
   //  let TT_url = `https://api.transitandtrails.org/api/v1/trailheads.xml?latitude=${lat}&longitude=${long}&distance=${distance}&key=${TT_key}`;
     let HP_url = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=${distance}&key=${HP_key}`
 
