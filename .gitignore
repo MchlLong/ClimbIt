@@ -1,1 +1,5 @@
+
 const.js
+node_modules/
+.env
+
