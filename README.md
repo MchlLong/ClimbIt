@@ -5,17 +5,17 @@ Bryttanie House and Michael Long's Full Stack programming project: "Hiking Proje
 NodeJS
 
 # Module Dependencies
-Express
-body-parser
-dotenv
+<p>Express</p>
+<p>body-parser</p>
+<p>dotenv</p>
 
 # Install node (Ubuntu)
-$ sudo apt install nodejs
+<p><code>$ sudo apt install nodejs</p></code>
 
 # Install modules
-$ npm install express
-$ npm install body-parser
-$ npm install dotenv
+<p><code>$ npm install express</p></code>
+<p><code>$ npm install body-parser</p></code>
+<p><code>$ npm install dotenv</p></code>
 
 # How to Run
-$ node server.js
+<p><code>$ node server.js</p></code>
