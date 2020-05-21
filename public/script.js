@@ -69,7 +69,33 @@ Javascript Webpage Controller
     }
 
 /* API Controller Functions */
-// now in api.js
+
+// Note to self: keep these separated by API
+
+// Convert location input to lat/long coordinates using Geocoding API
+function convertToCoords() {
+
+    event.preventDefault();  // for testing
+    let address = document.getElementById("address").value;
+    address = JSON.stringify(address);
+    let key = secrets.GOOGLE_API_KEY; 
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`
+
+   // api call
+   // const coords = Geocoding(url);  // returns lat, long
+}
+
+// Get list of hikes within x miles of a given location using Hiking Project OR Transit&Trails API
+function getNearbyHikes(lat, long) {
+    let distance = document.getElementById("distance").value;
+  //  const TT_key = secrets.TRANSITTRAILS_API_KEY;
+    const HP_key = secrets.HIKINGPROJ_API_KEY;
+  //  let TT_url = `https://api.transitandtrails.org/api/v1/trailheads.xml?latitude=${lat}&longitude=${long}&distance=${distance}&key=${TT_key}`;
+    let HP_url = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=${distance}&key=${HP_key}`
+
+    // api call 
+    //HikingProject(url)
+}
 
  
 

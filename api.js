@@ -4,17 +4,12 @@ CS465 -- Project 2: Hiking Project
 API Calls
 */
 
-// Note to self: keep these calls separate
+// Note to self: keep the APIs separate
 
+// These function names are awful right now bc I don't know what to name them // 
 // Convert location input to lat/long coordinates using Geocoding API
-function convertToCoords() {
-
-    event.preventDefault();  // for testing
-    let address = document.getElementById("address").value;
-    address = JSON.stringify(address);
-    let key = secrets.GOOGLE_API_KEY; 
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`
-
+function Geocoding(url) {
+    
     fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -29,13 +24,8 @@ function convertToCoords() {
 }
 
 // Get list of hikes within x miles of a given location using Hiking Project OR Transit&Trails API
-function getNearbyHikes(lat, long) {
-    let distance = document.getElementById("distance").value;
-  //  const TT_key = secrets.TRANSITTRAILS_API_KEY;
-    const HP_key = secrets.HIKINGPROJ_API_KEY;
-  //  let TT_url = `https://api.transitandtrails.org/api/v1/trailheads.xml?latitude=${lat}&longitude=${long}&distance=${distance}&key=${TT_key}`;
-    let HP_url = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=${distance}&key=${HP_key}`
-
+function HikingProject(url) {
+ 
     // Construct the headers
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -56,4 +46,5 @@ function getNearbyHikes(lat, long) {
         .catch(error => {
             console.log("HikingProject API was not fetched :(", error);
         })
+        
 }
