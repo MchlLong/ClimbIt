@@ -4,7 +4,7 @@ CS465 -- Project 2: Hiking Project
 Javascript Webpage Controller
 */
 
-//require('../api.js');
+const api = require('../api.js')
 
 /* Listeners */
 
@@ -46,8 +46,8 @@ Javascript Webpage Controller
 
    
     // Find Hike Button Functionality
-    var find_hike_button = document.getElementsByClassName("find-hikes");
-    find_hike_button[0].addEventListener("click", function() { convertToCoords() } ); 
+    var find_hike_button = document.getElementsByClassName("find_hikes");
+    find_hike_button[0].addEventListener("click", function() { get_hikes() } ); 
 
 /* Webpage Controller Functions */
 
@@ -70,35 +70,17 @@ Javascript Webpage Controller
 
     }
 
-/* API Controller Functions */
+/* API Wrapper Functions */
 
 // Note to self: keep these separated by API
-
-// Convert location input to lat/long coordinates using Geocoding API
-function convertToCoords() {
-
+ 
+function get_hikes() {
     event.preventDefault();  // for testing
-    let address = document.getElementById("address").value;
-    address = JSON.stringify(address);
-    let key = process.env.GOOGLE_API_KEY; 
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`
-
-   // api call
-   // const coords = Geocoding(url);  // returns lat, long
-}
-
-// Get list of hikes within x miles of a given location using Hiking Project OR Transit&Trails API
-function getNearbyHikes(lat, long) {
-    let distance = document.getElementById("distance").value;
-  //  const TT_key = process.env.TRANSITTRAILS_API_KEY;
-    const HP_key = process.env.HIKINGPROJ_API_KEY;
-  //  let TT_url = `https://api.transitandtrails.org/api/v1/trailheads.xml?latitude=${lat}&longitude=${long}&distance=${distance}&key=${TT_key}`;
-    let HP_url = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=${distance}&key=${HP_key}`
-
-    // api call 
-    //HikingProject(url)
-}
-
+    // Send a request to the backend
+  
+    api.convert_to_coords();
+    
+} 
  
 
     
