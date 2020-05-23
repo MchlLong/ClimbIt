@@ -8,6 +8,7 @@ NodeJS
 <p>Express</p>
 <p>body-parser</p>
 <p>dotenv</p>
+<p>axios</p>
 
 # Install node (Ubuntu)
 <p><code>$ sudo apt install nodejs</p></code>
@@ -16,6 +17,7 @@ NodeJS
 <p><code>$ npm install express</p></code>
 <p><code>$ npm install body-parser</p></code>
 <p><code>$ npm install dotenv</p></code>
+<p><code>$ npm install axios</p></code>
 
 # How to Run
 <p><code>$ node server.js</p></code>
