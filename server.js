@@ -6,8 +6,9 @@ Javascript Server
 
 
 // Definitions
-const axios = require('axios');
+const axios = require("axios");
 const express = require("express");
+const api = require("./api.js");
 const dotenv = require("dotenv").config();
 const server = express();
 const port = 5500;
@@ -23,6 +24,6 @@ server.listen(port, "127.0.0.1", () => {
 });
 
 // API 
-server.post("/endpoint", (req, resp) => {
+server.get("/", (req, resp) => {
  
 })

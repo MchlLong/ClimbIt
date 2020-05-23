@@ -10,11 +10,13 @@ API Calls
 module.exports = 
 {
     convert_to_coords: function () {
+        const key = process.env.GOOGLE_API_KEY;
+        const url = 'https://maps.googleapis.com/maps/api/geocode/json?'
         let address = document.getElementById("address").value;
         address = JSON.stringify(address);
        
         // API call //
-        axios.get(url)
+        axios.get(`${url}/address=${address}&key=${key}`)
         .then(response => response.json())
         .then(data => {
             // Get latitude and longitude from Geocoding API
@@ -25,13 +27,15 @@ module.exports =
         .catch(error => {
             console.log("Geocoding API was not fetched :( ", error);
         })  
-        // let coords = Geocoding(url);  // returns lat, long 
     },
 
     // Get list of hikes within x miles of a given location using Hiking Project OR Transit&Trails API
     get_nearby_hikes: function (lat, long) {
+        const key = process.env.HP_KEY;
+         // const url =
         let distance = document.getElementById("distance").value;
-   
+       
+
         // API call //
    
         // Get list of hikes from Hiking API using axios
@@ -40,6 +44,6 @@ module.exports =
 
 }
     
-
+ 
 
 

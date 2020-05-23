@@ -4,8 +4,6 @@ CS465 -- Project 2: Hiking Project
 Javascript Webpage Controller
 */
 
-//const api = require('../api.js')
-
 /* Listeners */
 
     // Home Button Functionality
@@ -77,7 +75,10 @@ function get_hikes() {
     event.preventDefault();  // for testing
   
     // Send a request to the backend
-    api.convert_to_coords();
+    /*axios.get("/endpoint", (req, resp) => {
+        convert_to_coords();
+    })*/
+    
     
 } 
  
