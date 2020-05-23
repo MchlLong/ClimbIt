@@ -6,12 +6,21 @@ CSS Style Controller
 
 /* General Styling */
 
-/* Visibility Controls */
+.list-container {
+    text-align: center;
+}
 
-.invisible {
-    display: none;
+.list-and-nav {
+    display: inline-block;
 }
 
 ul {
     list-style-type: none;
+    padding-right: 20%;
+}
+
+/* Visibility Controls */
+
+.invisible {
+    display: none;
 }

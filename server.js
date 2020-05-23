@@ -23,6 +23,6 @@ server.listen(port, "127.0.0.1", () => {
 });
 
 // API 
-server.post("/givemetest", (req, resp) => {
-    console.log("Sending off 'test'");
+server.post("/endpoint", (req, resp) => {
+ 
 })
