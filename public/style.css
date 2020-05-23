@@ -11,3 +11,7 @@ CSS Style Controller
 .invisible {
     display: none;
 }
+
+ul {
+    list-style-type: none;
+}

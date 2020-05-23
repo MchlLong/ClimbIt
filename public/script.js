@@ -4,7 +4,7 @@ CS465 -- Project 2: Hiking Project
 Javascript Webpage Controller
 */
 
-const api = require('../api.js')
+//const api = require('../api.js')
 
 /* Listeners */
 
@@ -43,7 +43,6 @@ const api = require('../api.js')
     for (var i = 0; i < weather_buttons.length; i++) {
         weather_buttons[i].addEventListener("click", function() { swap_page("weather_page") });
     }
-
    
     // Find Hike Button Functionality
     var find_hike_button = document.getElementsByClassName("find_hikes");
@@ -76,8 +75,8 @@ const api = require('../api.js')
  
 function get_hikes() {
     event.preventDefault();  // for testing
-    // Send a request to the backend
   
+    // Send a request to the backend
     api.convert_to_coords();
     
 } 
