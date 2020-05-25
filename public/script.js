@@ -70,15 +70,16 @@ Javascript Webpage Controller
 /* API Wrapper Functions */
 
 function get_hikes() {
-    data = document.getElementById("address").value;
-    console.log(JSON.stringify({address: data}));
+    addr = document.getElementById("address").value;
+    dist = document.getElementById("distance").value;
+    console.log(JSON.stringify({address: addr, distance: dist}));
     fetch("/get_hikes", { 
         method: "post", 
         headers: {
             "Accept": "application/json, text/plain, */*",
             "Content-Type": "application/json"
           },
-        body: JSON.stringify({address: data})
+        body: JSON.stringify({address: addr, distance: dist})
     })
     .then (resp => { return resp; })
     .then (val => { return val.json(); })
