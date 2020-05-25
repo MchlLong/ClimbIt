@@ -40,10 +40,6 @@ module.exports =
    
         // Get list of hikes from Hiking API using axios
 
-    },
-
-    test: function() {
-        console.log("We called from api.js");
     }
 
 }
