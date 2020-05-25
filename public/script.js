@@ -67,10 +67,11 @@ Javascript Webpage Controller
 
     }
 
-
-
 /* API Wrapper Functions */
 
+    // Convert location input to lat/long coordinates using Geocoding API
+    // Get list of hikes within x miles of a given location using REI Hiking Project API
+    // Add list of hikes to the DOM
     function get_hikes() {
         // Get address and distance from form input 
         addr = document.getElementById("address").value;
@@ -87,41 +88,27 @@ Javascript Webpage Controller
         .then (resp => { return resp; })
         .then (val => { return val.json(); })
         .then (mydata => { 
-            // Adds only 5 hikes at the moment 
-            for(i = 0; i < 5; i++) {
+            // Loop through all the trails from the response
+            for(i = 0; i < mydata.length ; i++) {
                 // Get the trail name and ID 
                 let name = mydata[i].name;
                 let id = mydata[i].id;
                 console.log(id)
                 console.log(name); 
                 // Add the ID and trail name to the DOM
-                add_hike_to_DOM(id, name);
+                add_hike_to_DOM(id, name); 
             }
         })
         .catch (error => console.log(error));
     }
 
-    // Display the route map for the hike from Google Maps JavaScript API
-    function get_route_map() {
+    // Display the route map from Google Maps JavaScript API
+    function get_map() {
         
     }
 
-    // Display directions for the hike 
-    function get_directions() {
 
-    }
-
-    // Display weather for the hike 
-    function get_weather() {
-
-    }
-
-    // Display air quality information for the hike 
-    function get_air_quality() {
-
-    }
-
-    /* DOM Manipulation Functions */ 
+/* DOM Manipulation Functions */ 
 
     // Add hike button to the "hike_list" in the DOM
     function add_hike_to_DOM(id, trail_name) {

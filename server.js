@@ -29,3 +29,7 @@ server.post("/get_hikes", (req, resp) => {
     .then(data => {resp.send(data);})
     .catch(error => console.log(error));
 });
+
+server.post("/get_map", (req, resp) => { 
+
+});

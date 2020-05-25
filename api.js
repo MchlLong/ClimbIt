@@ -13,6 +13,9 @@ module.exports =
     convert_to_coords: function (address, distance) {
         const key = process.env.GOOGLE_API_KEY;
         const url = "https://maps.googleapis.com/maps/api/geocode/json?";
+        // Sets distance to 50 miles if it isn't given
+        if(!distance) 
+            distance = 50;
         _address = JSON.stringify(address);
         // API call //
         return axios.get(`${url}address=${_address}&key=${key}`)
