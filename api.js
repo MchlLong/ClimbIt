@@ -5,28 +5,37 @@ API Calls
 */
 
 // Note to self: keep the APIs separate
+const express = require("express");
+const dotenv = require("dotenv").config();
+const axios = require("axios");
+const api = require("./api.js");
+const server = express();
+const port = 5500;
 
 // Convert location input to lat/long coordinates using Geocoding API
 module.exports = 
 {
-    convert_to_coords: function () {
+    convert_to_coords: function (arg) {
         const key = process.env.GOOGLE_API_KEY;
         const url = 'https://maps.googleapis.com/maps/api/geocode/json?'
-        let address = document.getElementById("address").value;
+        let address = arg;
         address = JSON.stringify(address);
-       
+        console.log("arg: " + arg);
         // API call //
-        axios.get(`${url}/address=${address}&key=${key}`)
-        .then(response => response.json())
-        .then(data => {
+        axios.get(`${url}address=${address}&key=${key}`)
+        .then(response => {console.log("Got response: " + response); return response} )
+        .then(proc => {
             // Get latitude and longitude from Geocoding API
-            const lat = JSON.stringify(data.results[0].geometry.location.lat);
-            const long = JSON.stringify(data.results[0].geometry.location.lng);
-            console.log(`Latitude: ${lat}, Longitude: ${long}`);   // for testing
+            console.log("Beginning process of data");
+            let test = proc["data"].results[0].geometry.location.lat;
+            console.log(test);
+            //const lat = JSON.stringify(data.results[0].geometry.location.lat);
+            //const long = JSON.stringify(data.results[0].geometry.location.lng);
+            //console.log(`Latitude: ${lat}, Longitude: ${long}`);   // for testing
         })
         .catch(error => {
             console.log("Geocoding API was not fetched :( ", error);
-        })  
+        });
     },
 
     // Get list of hikes within x miles of a given location using Hiking Project OR Transit&Trails API

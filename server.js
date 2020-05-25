@@ -31,6 +31,7 @@ server.get("/", (req, resp) => {
 
 server.post("/get_hikes", (req, resp) => { 
     console.log("We got data");
-    console.log(req);
-    resp.send("server.js response");
+    data = api.convert_to_coords("1600+Amphitheatre+Parkway,+Mountain+View,+CA");
+    console.log(data);
+    //resp.send(api.convert_to_coords("1600+Amphitheatre+Parkway,+Mountain+View,+CA")); // from documentation to verify call is working
 });
