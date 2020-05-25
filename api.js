@@ -29,7 +29,8 @@ module.exports =
             console.log("Beginning process of data");
             let test = proc["data"].results[0].geometry.location.lat;
             console.log(test);
-            return this.get_nearby_hikes(proc["data"].results[0].geometry.location.lat, proc["data"].results[0].geometry.location.lng, distance)
+            return test;
+            //return this.get_nearby_hikes(proc["data"].results[0].geometry.location.lat, proc["data"].results[0].geometry.location.lng, distance)
             //const lat = JSON.stringify(data.results[0].geometry.location.lat);
             //const long = JSON.stringify(data.results[0].geometry.location.lng);
             //console.log(`Latitude: ${lat}, Longitude: ${long}`);   // for testing
@@ -43,7 +44,7 @@ module.exports =
     get_nearby_hikes: function (lat, long, dist) {
         const key = process.env.HP_KEY;
          // const url =
-        let distance = document.getElementById("distance").value;
+        // let distance = document.getElementById("distance").value;s
        
 
         // API call //
