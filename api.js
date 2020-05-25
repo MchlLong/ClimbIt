@@ -5,43 +5,42 @@ API Calls
 */
 
 // Note to self: keep the APIs separate
+const express = require("express");
+const dotenv = require("dotenv").config();
+const axios = require("axios");
+const api = require("./api.js");
+const server = express();
+const port = 5500;
 
 // Convert location input to lat/long coordinates using Geocoding API
 module.exports = 
 {
-    convert_to_coords: function () {
+    convert_to_coords: function (address, distance) {
         const key = process.env.GOOGLE_API_KEY;
-        const url = 'https://maps.googleapis.com/maps/api/geocode/json?'
-        let address = document.getElementById("address").value;
-        address = JSON.stringify(address);
-       
+        const url = 'https://maps.googleapis.com/maps/api/geocode/json?';
+        _address = JSON.stringify(address);
         // API call //
-        axios.get(`${url}/address=${address}&key=${key}`)
-        .then(response => response.json())
-        .then(data => {
+        return axios.get(`${url}address=${_address}&key=${key}`)
+        .then(response => {return response;} )
+        .then(proc => {
             // Get latitude and longitude from Geocoding API
-            const lat = JSON.stringify(data.results[0].geometry.location.lat);
-            const long = JSON.stringify(data.results[0].geometry.location.lng);
-            console.log(`Latitude: ${lat}, Longitude: ${long}`);   // for testing
+            let lat = proc["data"].results[0].geometry.location.lat;
+            let long = proc["data"].results[0].geometry.location.lng;
+            return this.get_nearby_hikes(lat, long, distance);
         })
         .catch(error => {
-            console.log("Geocoding API was not fetched :( ", error);
-        })  
+            console.log("Geocoding API was not fetched", error);
+        });
     },
 
     // Get list of hikes within x miles of a given location using Hiking Project OR Transit&Trails API
-    get_nearby_hikes: function (lat, long) {
-        const key = process.env.HP_KEY;
-         // const url =
-        let distance = document.getElementById("distance").value;
-       
-
-        // API call //
-   
-        // Get list of hikes from Hiking API using axios
-
+    get_nearby_hikes: function (lat, long, dist) {
+        const key = process.env.REI_API_KEY;
+        const url = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=${10}&key=${key}`;
+        return axios.get(url)
+        .then (response => { return response["data"].trails; })
+        .catch(error => console.log(error));
     }
-
 }
     
  

@@ -69,20 +69,22 @@ Javascript Webpage Controller
 
 /* API Wrapper Functions */
 
-// Note to self: keep these separated by API
- 
 function get_hikes() {
-    event.preventDefault();  // for testing
-  
-    // Send a request to the backend
-    /*axios.get("/endpoint", (req, resp) => {
-        convert_to_coords();
-    })*/
-    
-    
-} 
- 
-
-    
+    addr = document.getElementById("address").value;
+    dist = document.getElementById("distance").value;
+    console.log(JSON.stringify({address: addr, distance: dist}));
+    fetch("/get_hikes", { 
+        method: "post", 
+        headers: {
+            "Accept": "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+          },
+        body: JSON.stringify({address: addr, distance: dist})
+    })
+    .then (resp => { return resp; })
+    .then (val => { return val.json(); })
+    .then (mydata => {console.log(JSON.stringify(mydata[0])); })
+    .catch (error => console.log(error));
+}
  
 
