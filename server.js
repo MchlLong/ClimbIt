@@ -22,6 +22,7 @@ server.use(express.static("public"));
 server.listen(port, "127.0.0.1", () => {
     console.log("Server is listening");
     console.log(process.env.TEST);
+    api.test();
 });
 
 // API 

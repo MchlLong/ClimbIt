@@ -1,0 +1,25 @@
+{
+  "name": "cs465hikingproject",
+  "version": "1.0.0",
+  "description": "Bryttanie House and Michael Long's Full Stack programming project: \"Hiking Project\" (name and description tentative)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MchlLong/CS465HikingProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MchlLong/CS465HikingProject/issues"
+  },
+  "homepage": "https://github.com/MchlLong/CS465HikingProject#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  }
+}
