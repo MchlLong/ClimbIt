@@ -26,26 +26,24 @@ module.exports =
         .then(response => {console.log("Got response: " + response); return response} )
         .then(proc => {
             // Get latitude and longitude from Geocoding API
-            console.log("Beginning process of data");
             let lat = proc["data"].results[0].geometry.location.lat;
             let long = proc["data"].results[0].geometry.location.lng;
-            return { "lat": lat, "long": long};
-            //return this.get_nearby_hikes(proc["data"].results[0].geometry.location.lat, proc["data"].results[0].geometry.location.lng, distance)
-            //const lat = JSON.stringify(data.results[0].geometry.location.lat);
-            //const long = JSON.stringify(data.results[0].geometry.location.lng);
-            //console.log(`Latitude: ${lat}, Longitude: ${long}`);   // for testing
+            return this.get_nearby_hikes(lat, long, distance);
+            // return { "lat": lat, "long": long};
         })
         .catch(error => {
-            console.log("Geocoding API was not fetched :( ", error);
+            console.log("Geocoding API was not fetched", error);
         });
     },
 
     // Get list of hikes within x miles of a given location using Hiking Project OR Transit&Trails API
     get_nearby_hikes: function (lat, long, dist) {
-        const key = process.env.HP_KEY;
-         // const url =
+        const key = process.env.REI_API_KEY;
+        const url = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=${10}&key=${key}`
         // let distance = document.getElementById("distance").value;s
-       
+        axios.get(url)
+        .then (response => console.log(response["data"].trails))
+        .catch(error => console.log(error));
 
         // API call //
    
