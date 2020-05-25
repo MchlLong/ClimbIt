@@ -41,8 +41,8 @@ module.exports =
         const key = process.env.REI_API_KEY;
         const url = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=${10}&key=${key}`
         // let distance = document.getElementById("distance").value;s
-        axios.get(url)
-        .then (response => console.log(response["data"].trails))
+        return axios.get(url)
+        .then (response => { console.log(response["data"].trails); return response["data"].trails })
         .catch(error => console.log(error));
 
         // API call //
