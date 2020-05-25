@@ -80,8 +80,8 @@ function get_hikes() {
           },
         body: JSON.stringify({address: data})
     })
-    .then (resp => { return resp; })
-    .then (text => console.log(text.json()));
+    .then (resp => { return resp.text; })
+    .then (val => console.log(val));
 }
  
 
