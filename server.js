@@ -36,6 +36,8 @@ server.post("/get_hikes", (req, resp) => {
     let arg = req.body;
     //console.log(arg);
     //data = api.convert_to_coords(arg);
-    console.log("Calculated Value: " + (api.convert_to_coords(arg, 10)));
-    resp.send(JSON.stringify(api.convert_to_coords(arg, 10))); // from documentation to verify call is working
+    api.convert_to_coords(arg, 10)
+    .then(data => {console.log(data); resp.send(data)})
+    .catch(error => console.log(error));
+    //resp.send(JSON.stringify(api.convert_to_coords(arg, 10))); // from documentation to verify call is working
 });

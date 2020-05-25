@@ -22,14 +22,14 @@ module.exports =
         address = JSON.stringify(address);
         console.log("arg: " + arg);
         // API call //
-        axios.get(`${url}address=${address}&key=${key}`)
+        return axios.get(`${url}address=${address}&key=${key}`)
         .then(response => {console.log("Got response: " + response); return response} )
         .then(proc => {
             // Get latitude and longitude from Geocoding API
             console.log("Beginning process of data");
-            let test = proc["data"].results[0].geometry.location.lat;
-            console.log(test);
-            return test;
+            let lat = proc["data"].results[0].geometry.location.lat;
+            let long = proc["data"].results[0].geometry.location.lng;
+            return { "lat": lat, "long": long};
             //return this.get_nearby_hikes(proc["data"].results[0].geometry.location.lat, proc["data"].results[0].geometry.location.lng, distance)
             //const lat = JSON.stringify(data.results[0].geometry.location.lat);
             //const long = JSON.stringify(data.results[0].geometry.location.lng);
