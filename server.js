@@ -16,6 +16,7 @@ const port = 5500;
 
 // Serve Static Pages
 server.use(express.urlencoded());
+server.use(express.json());
 server.use(express.static("public"));
 
 // Listener
@@ -31,7 +32,10 @@ server.get("/", (req, resp) => {
 
 server.post("/get_hikes", (req, resp) => { 
     console.log("We got data");
-    data = api.convert_to_coords("1600+Amphitheatre+Parkway,+Mountain+View,+CA");
-    console.log(data);
+    console.log(req.body);
+    //let arg = req;
+    //console.log(arg);
+    //data = api.convert_to_coords(arg);
+    //console.log(data);
     //resp.send(api.convert_to_coords("1600+Amphitheatre+Parkway,+Mountain+View,+CA")); // from documentation to verify call is working
 });
