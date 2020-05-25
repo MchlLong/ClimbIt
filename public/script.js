@@ -72,6 +72,7 @@ Javascript Webpage Controller
 /* API Wrapper Functions */
 
     function get_hikes() {
+        // Get address and distance from form input 
         addr = document.getElementById("address").value;
         dist = document.getElementById("distance").value;
         console.log(JSON.stringify({address: addr, distance: dist}));
@@ -94,7 +95,7 @@ Javascript Webpage Controller
                 console.log(id)
                 console.log(name); 
                 // Add the ID and trail name to the DOM
-                add_button_to_DOM(id, name);
+                add_hike_to_DOM(id, name);
             }
         })
         .catch (error => console.log(error));
@@ -123,14 +124,19 @@ Javascript Webpage Controller
     /* DOM Manipulation Functions */ 
 
     // Add hike button to the "hike_list" in the DOM
-    function add_button_to_DOM(id, trail_name) {
+    function add_hike_to_DOM(id, trail_name) {
         let button = document.createElement("button");
+        let line_break = document.createElement("br");
+        // Set button details
         button.innerHTML = trail_name;
         button.type = "button";
         button.className = "navto_hike_map_page";
         button.id = id;
+        // Add functionality
         button.addEventListener("click", function() { swap_page("hike_map_page") });
+        // Add button to the DOM and break after
         document.getElementById("hike_list").appendChild(button);
+        document.getElementById("hike_list").appendChild(line_break);
     }
 
 
