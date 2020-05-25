@@ -67,6 +67,8 @@ Javascript Webpage Controller
 
     }
 
+
+
 /* API Wrapper Functions */
 
 function get_hikes() {
@@ -83,8 +85,56 @@ function get_hikes() {
     })
     .then (resp => { return resp; })
     .then (val => { return val.json(); })
-    .then (mydata => {console.log(JSON.stringify(mydata[0])); })
+    .then (mydata => { 
+        // Adds only 5 hikes at the moment 
+        //console.log(JSON.stringify(mydata));
+        for(i = 0; i < 5; i++) {
+            // Get the trail name and ID 
+            let name = mydata[i].name;
+            let id = JSON.stringify(mydata[i].id);
+            console.log(id)
+            console.log(name); 
+            // Add the ID and trail name to the DOM
+            add_to_DOM(id, name);
+        }
+    })
     .catch (error => console.log(error));
 }
+
+// Display the route map for the hike from Google Maps JavaScript API
+function get_route_map() {
+    
+}
+
+// Display directions for the hike 
+function get_directions() {
+
+}
+
+// Display weather for the hike 
+function get_weather() {
+
+}
+
+// Display air quality information for the hike 
+function get_air_quality() {
+
+}
+
+/* DOM Manipulation Functions */ 
+
+// Add hike button to the "hike_list" in the DOM
+function add_to_DOM(id, trail_name) {
+    let button = document.createElement("button");
+    button.innerHTML = trail_name;
+    button.type = "button";
+    button.className += "navto_hike_map_page";
+    button.id += id;
+    button.addEventListener("click", function() { swap_page("hike_map_page") });
+    document.getElementById("hike_list").appendChild(button);
+}
+
+
+
  
 

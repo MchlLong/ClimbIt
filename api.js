@@ -4,20 +4,15 @@ CS465 -- Project 2: Hiking Project
 API Calls
 */
 
-// Note to self: keep the APIs separate
-const express = require("express");
-const dotenv = require("dotenv").config();
+// Packages/Modules
 const axios = require("axios");
-const api = require("./api.js");
-const server = express();
-const port = 5500;
 
-// Convert location input to lat/long coordinates using Geocoding API
 module.exports = 
 {
+    // Convert location input to lat/long coordinates using Geocoding API
     convert_to_coords: function (address, distance) {
         const key = process.env.GOOGLE_API_KEY;
-        const url = 'https://maps.googleapis.com/maps/api/geocode/json?';
+        const url = "https://maps.googleapis.com/maps/api/geocode/json?";
         _address = JSON.stringify(address);
         // API call //
         return axios.get(`${url}address=${_address}&key=${key}`)
@@ -33,10 +28,10 @@ module.exports =
         });
     },
 
-    // Get list of hikes within x miles of a given location using Hiking Project OR Transit&Trails API
+    // Get list of hikes within x miles of a given location using REI Hiking Project API
     get_nearby_hikes: function (lat, long, dist) {
         const key = process.env.REI_API_KEY;
-        const url = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=${10}&key=${key}`;
+        const url = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=${dist}&key=${key}`;
         return axios.get(url)
         .then (response => { return response["data"].trails; })
         .catch(error => console.log(error));
