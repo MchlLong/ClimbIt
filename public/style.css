@@ -6,6 +6,19 @@ CSS Style Controller
 
 /* General Styling */
 
+.list-container {
+    text-align: center;
+}
+
+.list-and-nav {
+    display: inline-block;
+}
+
+ul {
+    list-style-type: none;
+    padding-right: 20%;
+}
+
 /* Visibility Controls */
 
 .invisible {
