@@ -11,7 +11,7 @@ const dotenv = require("dotenv").config();
 const axios = require("axios");
 const api = require("./api.js");
 const server = express();
-const port = 5500;
+const port = process.env.PORT || 5500;
 
 // Serve Static Pages
 server.use(express.urlencoded());
