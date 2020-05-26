@@ -14,7 +14,7 @@ const server = express();
 const port = process.env.PORT || 5500;
 
 // Serve Static Pages
-server.use(express.urlencoded());
+//server.use(express.urlencoded());
 server.use(express.json());
 server.use(express.static("public"));
 
