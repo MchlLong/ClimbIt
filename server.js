@@ -4,15 +4,14 @@ CS465 -- Project 2: Hiking Project
 Javascript Server
 */
 
-
 // Definitions
 const express = require("express");
 const dotenv = require("dotenv").config();
 const axios = require("axios");
 const api = require("./api.js");
 const server = express();
-var port = process.env.PORT || 5500;
-var host = process.env.HOST || "0.0.0.0"
+const port = process.env.PORT || 5500;
+const host = process.env.HOST || "0.0.0.0"
 
 // Serve Static Pages
 server.use(express.urlencoded());
