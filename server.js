@@ -11,7 +11,8 @@ const dotenv = require("dotenv").config();
 const axios = require("axios");
 const api = require("./api.js");
 const server = express();
-const port = process.env.PORT || 5500;
+var port = process.env.PORT || 5500;
+var host = process.env.HOST || "0.0.0.0"
 
 // Serve Static Pages
 //server.use(express.urlencoded());
@@ -19,7 +20,7 @@ server.use(express.json());
 server.use(express.static("public"));
 
 // Listener
-server.listen(port, "127.0.0.1", () => {
+server.listen(port, host, () => {
     console.log("Server is listening");
 });
 
