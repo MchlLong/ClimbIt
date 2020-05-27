@@ -102,6 +102,19 @@ Javascript Webpage Controller
         .catch (error => console.log(error));
     }
 
+    // Goto Hike Menu (will invoke get_map())
+    function goto_hike() {
+        swap_page("hike_map_page");
+        console.log("Triggered object: " + event.target.id);
+        let pages = document.getElementsByClassName("visible");
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].setAttribute("hikeid", event.target.id);
+            pages[i].setAttribute("hikename", event.target.name);
+            pages[i].setAttribute("lat", event.target.latitude);
+            pages[i].setAttribute("long", event.target.longitude);
+        }
+
+    }
     // Display the hike map from Google Maps Static API
     function get_map(hike_id) {
         // Retrieve the lat/long from the HTML associated with the hike ID
@@ -142,9 +155,8 @@ Javascript Webpage Controller
         button.className = "navto_hike_map_page";
         button.id = id;
         // Add functionality to switch to map page when clicked
-        button.addEventListener("click", function() { swap_page("hike_map_page") });
         // Add functionality to show map when clicked 
-        button.addEventListener("click", function() { get_map(id) });
+        button.addEventListener("click", function() { goto_hike() });
         // Add button to the DOM and break after
         document.getElementById("hike_list").appendChild(button);
         document.getElementById("hike_list").appendChild(line_break);
