@@ -116,7 +116,7 @@ Javascript Webpage Controller
             method: "post", 
             headers: {
                 "Accept": "application/json, text/plain, image/png, */*",
-                "Content-Type": "image/png"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({lat, long})
         })
