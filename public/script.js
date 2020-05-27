@@ -90,28 +90,50 @@ Javascript Webpage Controller
         .then (mydata => { 
             // Loop through all the trails from the response
             for(i = 0; i < mydata.length ; i++) {
-                // Get the trail name and ID 
+                // Save the trail name, ID, lat, and long 
                 let name = mydata[i].name;
                 let id = mydata[i].id;
-                console.log(id)
-                console.log(name); 
+                let lat = mydata[i].latitude;
+                let long = mydata[i].longitude; 
                 // Add the ID and trail name to the DOM
-                add_hike_to_DOM(id, name); 
+                add_hike_to_DOM(id, name, lat, long); 
             }
         })
         .catch (error => console.log(error));
     }
 
-    // Display the route map from Google Maps JavaScript API
-    function get_map() {
-        
+    // Display the hike map from Google Maps Static API
+    function get_map(hike_id) {
+        // Retrieve the lat/long from the HTML associated with the hike ID
+        lat = document.getElementById(hike_id).getAttribute("lat");
+        long = document.getElementById(hike_id).getAttribute("long");
+
+        console.log("lat:" + lat)
+        console.log("long:" + long)
+        console.log(JSON.stringify({lat, long}));
+
+        fetch("/get_map", { 
+            method: "post", 
+            headers: {
+                "Accept": "application/json, text/plain, image/png, */*",
+                "Content-Type": "image/png"
+            },
+            body: JSON.stringify({lat, long})
+        })
+        .then (resp => { return resp; })
+        .then (mydata => {
+            console.log(mydata);
+             // get image URL 
+             // add map to DOM
+        })
+        .catch (error => console.log(error));
     }
 
 
 /* DOM Manipulation Functions */ 
 
     // Add hike button to the "hike_list" in the DOM
-    function add_hike_to_DOM(id, trail_name) {
+    function add_hike_to_DOM(id, trail_name, lat, long) {
         let button = document.createElement("button");
         let line_break = document.createElement("br");
         // Set button details
@@ -119,12 +141,18 @@ Javascript Webpage Controller
         button.type = "button";
         button.className = "navto_hike_map_page";
         button.id = id;
-        // Add functionality
+        // Add functionality to switch to map page when clicked
         button.addEventListener("click", function() { swap_page("hike_map_page") });
+        // Add functionality to show map when clicked 
+        button.addEventListener("click", function() { get_map(id) });
         // Add button to the DOM and break after
         document.getElementById("hike_list").appendChild(button);
         document.getElementById("hike_list").appendChild(line_break);
+        // Add latitude and longitude as custom attributes
+        button.setAttribute("lat", lat);
+        button.setAttribute("long", long);
     }
+
 
 
 

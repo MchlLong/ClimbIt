@@ -14,7 +14,7 @@ const port = process.env.PORT || 5500;
 const host = process.env.HOST || "0.0.0.0"
 
 // Serve Static Pages
-server.use(express.urlencoded());
+//server.use(express.urlencoded());
 server.use(express.json());
 server.use(express.static("public"));
 
@@ -31,5 +31,10 @@ server.post("/get_hikes", (req, resp) => {
 });
 
 server.post("/get_map", (req, resp) => { 
+    console.log("lat from server.js: " + req.body["lat"]);
+    console.log("long from server.js: " + req.body["long"]);
 
+    api.get_map(req.body["lat"], req.body["long"])
+    .then(data => {resp.send(data);})
+    .catch(error => console.log(error));
 });
