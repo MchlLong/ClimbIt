@@ -96,8 +96,7 @@ Javascript Webpage Controller
             },
             body: JSON.stringify({address: addr, distance: dist})
         })
-        .then (resp => { return resp; })
-        .then (val => { return val.json(); })
+        .then (resp => { return resp.json(); })
         .then (mydata => { 
             // Loop through all the trails from the response
             for(i = 0; i < mydata.length ; i++) {
@@ -138,9 +137,6 @@ Javascript Webpage Controller
         console.log(data);
         let lat = data.attributes.getNamedItem("lat").value;
         let long = data.attributes.getNamedItem("long").value;
-        //lat = document.getElementById(hike_id).getAttribute("lat");
-        //long = document.getElementById(hike_id).getAttribute("long");
-
         console.log("lat:" + lat)
         console.log("long:" + long)
         console.log(JSON.stringify({lat, long}));
@@ -163,8 +159,23 @@ Javascript Webpage Controller
     }
 
     function goto_weather() {
+
         swap_page("weather_page");
-        // Implement 
+        let pages = document.getElementsByClassName("active")[0];
+        let lat = data.attributes.getNamedItem("lat").value;
+        let long = data.attributes.getNamedItem("long").value;
+
+        fetch("/get_weather", { 
+            method: "post", 
+            headers: {
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(JSON.stringify({lat, long}))
+        })
+        .then (resp => { return resp.json(); })
+        .then (ret => { return render_weather(); })
+        .catch (error => console.log(error));
     }
 
     function goto_air() {
@@ -172,7 +183,6 @@ Javascript Webpage Controller
         // Implement
     }
 
-    function goto_
 /* DOM Manipulation Functions */ 
 
     // Add hike button to the "hike_list" in the DOM
@@ -195,7 +205,11 @@ Javascript Webpage Controller
         button.setAttribute("long", long);
     }
 
-
+    // 
+    function render_weather() {
+        console.log("Called render_weather, exiting.");
+        return;
+    }
 
 
     
