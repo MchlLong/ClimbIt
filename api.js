@@ -45,15 +45,7 @@ module.exports =
     // Display a map centered on the hike's coordinates
     get_map: function (lat, long) {
         const key = process.env.GOOGLE_API_KEY;
-
-        console.log("lat from api.js: " + lat);
-        console.log("long from api.js: " + long);
-
-      //  const JS_url = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`;
-
-        // changed center to Portland,Oregon for now instead of ${lat},${long} until I can figure out why they are undefined
-        const static_url = `https://maps.googleapis.com/maps/api/staticmap?center=Portland,Oregon&zoom=10&size=400x400&maptype=terrain&key=${key}`;
-
+        const static_url = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${long}&zoom=10&size=400x400&maptype=terrain&key=${key}`;
         return axios.get(static_url)
         .then (response => { return response; })
         .then (data => console.log(data.config.url))

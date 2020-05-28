@@ -167,23 +167,21 @@ Javascript Webpage Controller
 /* DOM Manipulation Functions */ 
 
     // Add hike button to the "hike_list" in the DOM
-    function add_hike_to_DOM(id, trail_name, lat, long) {
+    function add_hike_to_DOM(hike_id, hike_name, lat, long) {
         let button = document.createElement("button");
         let line_break = document.createElement("br");
         // Set button details
-        button.innerHTML = trail_name;
+        button.innerHTML = hike_name;
         button.type = "button";
         button.className = "navto_hike_map_page";
-        button.id = id;
-        // Add functionality to switch to map page when clicked
-        // Add functionality to show map when clicked 
+        // Add functionality to switch to map page and show map when clicked
         button.addEventListener("click", function() { goto_hike() });
         // Add button to the DOM and break after
         document.getElementById("hike_list").appendChild(button);
         document.getElementById("hike_list").appendChild(line_break);
-        // Add latitude and longitude as custom attributes
-        button.setAttribute("hike_id", id);
-        button.setAttribute("hike_name", trail_name);
+        // Add hike name, id, latitude, and longitude as custom attributes
+        button.setAttribute("hike_id", hike_id);
+        button.setAttribute("hike_name", hike_name);
         button.setAttribute("lat", lat);
         button.setAttribute("long", long);
     }
