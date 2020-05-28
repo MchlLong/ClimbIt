@@ -118,16 +118,16 @@ Javascript Webpage Controller
     function goto_hike() {
         swap_page("hike_map_page");
         console.log("Triggered object: " + event.target.id);
-        let pages = document.getElementsByClassName("visible");
+        let pages = document.getElementsByClassName("visible")[0];
         if (pages.length > 1) {
             console.log("Error,  multiple pages should not be visible at one time");
         }
         deactivate();
-        pages[0].classList.add("active");
-        pages[0].setAttribute("hike_id", event.target.attributes.getNamedItem("hike_id").value);
-        pages[0].setAttribute("hike_name", event.target.attributes.getNamedItem("hike_name").value);
-        pages[0].setAttribute("lat", event.target.attributes.getNamedItem("lat").value);
-        pages[0].setAttribute("long", event.target.attributes.getNamedItem("long").value);
+        pages.classList.add("active");
+        pages.setAttribute("hike_id", event.target.attributes.getNamedItem("hike_id").value);
+        pages.setAttribute("hike_name", event.target.attributes.getNamedItem("hike_name").value);
+        pages.setAttribute("lat", event.target.attributes.getNamedItem("lat").value);
+        pages.setAttribute("long", event.target.attributes.getNamedItem("long").value);
         get_map();
     }
 
