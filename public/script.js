@@ -67,6 +67,18 @@ Javascript Webpage Controller
 
     }
 
+    // Remove All Active
+    function deactivate() {
+
+        // Deactivate all pages with an active tag
+        let pages = document.getElementsByClassName("active");
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.add("inactive");
+            pages[i].classList.remove("active");
+        }
+
+    }
+
 /* API Wrapper Functions */
 
     // Convert location input to lat/long coordinates using Geocoding API
@@ -102,11 +114,33 @@ Javascript Webpage Controller
         .catch (error => console.log(error));
     }
 
+    // Goto Hike Menu (will invoke get_map())
+    function goto_hike() {
+        swap_page("hike_map_page");
+        console.log("Triggered object: " + event.target.id);
+        let pages = document.getElementsByClassName("visible");
+        if (pages.length > 1) {
+            console.log("Error,  multiple pages should not be visible at one time");
+        }
+        deactivate();
+        pages[0].classList.add("active");
+        pages[0].setAttribute("hike_id", event.target.attributes.getNamedItem("hike_id").value);
+        pages[0].setAttribute("hike_name", event.target.attributes.getNamedItem("hike_name").value);
+        pages[0].setAttribute("lat", event.target.attributes.getNamedItem("lat").value);
+        pages[0].setAttribute("long", event.target.attributes.getNamedItem("long").value);
+        get_map();
+    }
+
     // Display the hike map from Google Maps Static API
-    function get_map(hike_id) {
+    function get_map() {
         // Retrieve the lat/long from the HTML associated with the hike ID
-        lat = document.getElementById(hike_id).getAttribute("lat");
-        long = document.getElementById(hike_id).getAttribute("long");
+        console.log("Triggered object: " + event.target.id);
+        let data = document.getElementsByClassName("active")[0];
+        console.log(data);
+        let lat = data.attributes.getNamedItem("lat").value;
+        let long = data.attributes.getNamedItem("long").value;
+        //lat = document.getElementById(hike_id).getAttribute("lat");
+        //long = document.getElementById(hike_id).getAttribute("long");
 
         console.log("lat:" + lat)
         console.log("long:" + long)
@@ -142,13 +176,14 @@ Javascript Webpage Controller
         button.className = "navto_hike_map_page";
         button.id = id;
         // Add functionality to switch to map page when clicked
-        button.addEventListener("click", function() { swap_page("hike_map_page") });
         // Add functionality to show map when clicked 
-        button.addEventListener("click", function() { get_map(id) });
+        button.addEventListener("click", function() { goto_hike() });
         // Add button to the DOM and break after
         document.getElementById("hike_list").appendChild(button);
         document.getElementById("hike_list").appendChild(line_break);
         // Add latitude and longitude as custom attributes
+        button.setAttribute("hike_id", id);
+        button.setAttribute("hike_name", trail_name);
         button.setAttribute("lat", lat);
         button.setAttribute("long", long);
     }
