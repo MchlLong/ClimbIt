@@ -33,13 +33,13 @@ Javascript Webpage Controller
     // Air Button Functionality
     var air_buttons = document.getElementsByClassName("navto_air_page");
     for (var i = 0; i < air_buttons.length; i++) {
-        air_buttons[i].addEventListener("click", function() { swap_page("air_page") });
+        air_buttons[i].addEventListener("click", function() { goto_air() });
     }
 
     // Weather Button Functionality
     var weather_buttons = document.getElementsByClassName("navto_weather_page");
     for (var i = 0; i < weather_buttons.length; i++) {
-        weather_buttons[i].addEventListener("click", function() { swap_page("weather_page") });
+        weather_buttons[i].addEventListener("click", function() { goto_weather() });
     }
    
     // Find Hike Button Functionality
@@ -73,7 +73,6 @@ Javascript Webpage Controller
         // Deactivate all pages with an active tag
         let pages = document.getElementsByClassName("active");
         for (var i = 0; i < pages.length; i++) {
-            pages[i].classList.add("inactive");
             pages[i].classList.remove("active");
         }
 
@@ -163,7 +162,17 @@ Javascript Webpage Controller
         .catch (error => console.log(error));
     }
 
+    function goto_weather() {
+        swap_page("weather_page");
+        // Implement 
+    }
 
+    function goto_air() {
+        swap_page("air_page");
+        // Implement
+    }
+
+    function goto_
 /* DOM Manipulation Functions */ 
 
     // Add hike button to the "hike_list" in the DOM
