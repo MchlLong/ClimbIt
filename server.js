@@ -38,3 +38,12 @@ server.post("/get_map", (req, resp) => {
     .then(data => {resp.send(data);})
     .catch(error => console.log(error));
 });
+
+server.post("/get_weather", (req, resp) => {
+    console.log("POST request for weather");
+    api.get_weather(req.body["lat"], req.body["long"])
+    .then(data => { 
+        resp.send("Weather request successful");
+    })
+    .catch(error => console.log(error));
+});
