@@ -207,6 +207,7 @@ Javascript Webpage Controller
 
     // 
     function render_weather() {
+
         console.log("Called render_weather, exiting.");
         return;
     }
