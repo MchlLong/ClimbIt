@@ -131,16 +131,14 @@ Javascript Webpage Controller
         get_map();
     }
 
-    // Display the hike map from Google Maps Static API
+    // Display the hike map from Google Maps JS API
     function get_map() {
-        // Retrieve the lat/long from the HTML associated with the hike ID
+        // Retrieve the lat/long from the HTML
         console.log("Triggered object: " + event.target.id);
         let data = document.getElementsByClassName("active")[0];
         console.log(data);
         let lat = data.attributes.getNamedItem("lat").value;
         let long = data.attributes.getNamedItem("long").value;
-        //lat = document.getElementById(hike_id).getAttribute("lat");
-        //long = document.getElementById(hike_id).getAttribute("long");
 
         console.log("lat:" + lat)
         console.log("long:" + long)
@@ -149,19 +147,15 @@ Javascript Webpage Controller
         fetch("/get_map", { 
             method: "post", 
             headers: {
-                "Accept": "application/json, text/plain, image/png, */*",
+                "Accept": "application/json, text/plain, */*",
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({lat, long})
         })
         .then (resp => { return resp; })
-        .then (mydata => {
-            console.log(mydata);
-             // get image URL 
-             // add map to DOM
-        })
         .catch (error => console.log(error));
     }
+
 
 
 /* DOM Manipulation Functions */ 
@@ -174,6 +168,7 @@ Javascript Webpage Controller
         button.innerHTML = hike_name;
         button.type = "button";
         button.className = "navto_hike_map_page";
+        button.id = hike_id;
         // Add functionality to switch to map page and show map when clicked
         button.addEventListener("click", function() { goto_hike() });
         // Add button to the DOM and break after
@@ -184,6 +179,32 @@ Javascript Webpage Controller
         button.setAttribute("hike_name", hike_name);
         button.setAttribute("lat", lat);
         button.setAttribute("long", long);
+    }
+      
+    // Initialize JS Map
+    function initMap() {
+      // Initialize the map at thoose coordinates 
+      let map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 40, lng: -100},
+        zoom: 8
+      });
+
+      // add marker to the map
+      addMarker(map);
+    }
+
+    // Add marker to map at given coordinates
+    function addMarker(map) {
+       // console.log("Triggered object: " + event.target.id);
+        let data = document.getElementsByClassName("active")[0];
+        console.log(data);
+        let lat = data.attributes.getNamedItem("lat").value;
+        let long = data.attributes.getNamedItem("long").value;
+
+        let marker = new google.maps.Marker({
+            position:{lat,long},
+            map: map
+        });
     }
 
 
