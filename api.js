@@ -61,7 +61,7 @@ module.exports =
         // dt_txt is the date and time
         // weather 
         .then (resp => { 
-            return resp;
+            return resp["list"];
         })
         .catch(error => console.log(error));
     },
