@@ -162,8 +162,8 @@ Javascript Webpage Controller
 
         swap_page("weather_page");
         let pages = document.getElementsByClassName("active")[0];
-        let lat = data.attributes.getNamedItem("lat").value;
-        let long = data.attributes.getNamedItem("long").value;
+        let lat = pages.attributes.getNamedItem("lat").value;
+        let long = pages.attributes.getNamedItem("long").value;
 
         fetch("/get_weather", { 
             method: "post", 
@@ -171,7 +171,7 @@ Javascript Webpage Controller
                 "Accept": "application/json, text/plain, */*",
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(JSON.stringify({lat, long}))
+            body: JSON.stringify({lat, long})
         })
         .then (resp => { return resp.json(); })
         .then (ret => { return render_weather(); })

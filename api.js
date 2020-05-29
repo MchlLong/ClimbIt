@@ -55,13 +55,13 @@ module.exports =
     // Weather Functionality
     get_weather: function (lat, long) { 
         const key = process.env.WEATHER_KEY;
-        const url = `api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${key}`;
+        const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${key}`;
         return axios.get(url)
         // "list" indices 0 ~ . . ., list[0].main["temp_min"], list.main["temp_max"], list.main["temp"], list[0].weather[0].main
         // dt_txt is the date and time
         // weather 
         .then (resp => { 
-            return resp["datapoint"].item;
+            return resp;
         })
         .catch(error => console.log(error));
     },

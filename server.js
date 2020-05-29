@@ -43,7 +43,8 @@ server.post("/get_weather", (req, resp) => {
     console.log("POST request for weather");
     api.get_weather(req.body["lat"], req.body["long"])
     .then(data => { 
-        resp.send("Weather request successful");
+        console.log("Weather request successful: " + req.body["lat"] + ", " + req.body["long"])
+        resp.send(JSON.data);
     })
     .catch(error => console.log(error));
 });
