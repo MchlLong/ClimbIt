@@ -108,7 +108,7 @@ Javascript Webpage Controller
                 let lat = mydata[i].latitude;
                 let long = mydata[i].longitude; 
                 // Add the ID and trail name to the DOM
-                add_hike_to_DOM(id, name, lat, long); 
+                add_hike(id, name, lat, long); 
             }
         })
         .catch (error => console.log(error));
@@ -133,14 +133,14 @@ Javascript Webpage Controller
 
     // Display the hike map from Google Maps Static API
     function get_map() {
+        const key = process.env.GOOGLE_API_KEY;
+        const url = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`
         // Retrieve the lat/long from the HTML associated with the hike ID
         console.log("Triggered object: " + event.target.id);
         let data = document.getElementsByClassName("active")[0];
         console.log(data);
         let lat = data.attributes.getNamedItem("lat").value;
         let long = data.attributes.getNamedItem("long").value;
-        //lat = document.getElementById(hike_id).getAttribute("lat");
-        //long = document.getElementById(hike_id).getAttribute("long");
 
         console.log("lat:" + lat)
         console.log("long:" + long)
@@ -156,9 +156,8 @@ Javascript Webpage Controller
         })
         .then (resp => { return resp; })
         .then (mydata => {
-            console.log(mydata);
-             // get image URL 
-             // add map to DOM
+          //  console.log(mydata); 
+            add_script(url);
         })
         .catch (error => console.log(error));
     }
@@ -167,7 +166,7 @@ Javascript Webpage Controller
 /* DOM Manipulation Functions */ 
 
     // Add hike button to the "hike_list" in the DOM
-    function add_hike_to_DOM(hike_id, hike_name, lat, long) {
+    function add_hike(hike_id, hike_name, lat, long) {
         let button = document.createElement("button");
         let line_break = document.createElement("br");
         // Set button details
@@ -186,8 +185,43 @@ Javascript Webpage Controller
         button.setAttribute("long", long);
     }
 
+    function add_script(url) {
+        let map_script = document.createElement("script");
+        map_script.setAttribute("src", url);
+        document.head.appendChild(map_script);
+
+    }
+
+    // Initialize JS Map
+    function initMap() {
+        // Initialize the map at random coordinates 
+        let map = new google.maps.Map(document.getElementById("map"), {
+            center: new google.maps.LatLng(-33.91722, 151.23064),
+            zoom: 8
+        });
+
+        // Add marker 
+        add_marker(map);
+    }
+
+    // Add marker to map at given coordinates
+    function add_marker(map) {
+        // Get active hike data 
+        let data = document.getElementsByClassName("active")[0];
+      //  console.log(data);
+        let lat = data.attributes.getNamedItem("lat").value;
+        let long = data.attributes.getNamedItem("long").value;
+        // Set marker at coordinates
+        let marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, long),
+            map: map
+        });
+        // Set map center at coordinates
+        map.setCenter(marker.position);
+    }
 
 
 
-    
+
+
 

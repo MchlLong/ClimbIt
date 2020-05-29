@@ -19,6 +19,12 @@ ul {
     padding-right: 10%;
 }
 
+#map {
+    height: 400px;
+    width: 100%;
+    margin-bottom: 5%;
+}
+
 /* Visibility Controls */
 
 .invisible {

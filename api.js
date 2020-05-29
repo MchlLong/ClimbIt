@@ -45,10 +45,9 @@ module.exports =
     // Display a map centered on the hike's coordinates
     get_map: function (lat, long) {
         const key = process.env.GOOGLE_API_KEY;
-        const static_url = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${long}&zoom=10&size=400x400&maptype=terrain&key=${key}`;
-        return axios.get(static_url)
-        .then (response => { return response; })
-        .then (data => console.log(data.config.url))
+        const js_url = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`
+        return axios.get(js_url)
+        .then (response => { return response["data"]; })
         .catch(error => console.log(error));
     }
 }
