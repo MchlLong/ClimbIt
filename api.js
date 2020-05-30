@@ -41,15 +41,6 @@ module.exports =
         .then (response => { return response["data"].trails; })
         .catch(error => console.log(error));
     },
-
-    // Display a map centered on the hike's coordinates
-    get_map: function (lat, long) {
-        const key = process.env.GOOGLE_API_KEY;
-        const js_url = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`
-        return axios.get(js_url)
-        .then (response => { return response["data"]; })
-        .catch(error => console.log(error));
-    }
 }
     
  

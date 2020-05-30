@@ -144,18 +144,9 @@ Javascript Webpage Controller
         console.log("lat:" + lat)
         console.log("long:" + long)
         console.log(JSON.stringify({lat, long}));
-
-        fetch("/get_map", { 
-            method: "post", 
-            headers: {
-                "Accept": "application/json, text/plain, image/png, */*",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({lat, long})
-        })
-        .then (resp => { return resp; })
-        .then (mydata => { add_script(url); })
-        .catch (error => console.log(error));
+        
+        // Add script to the DOM
+        add_script(url);
     }
 
 
