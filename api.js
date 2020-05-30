@@ -56,12 +56,23 @@ module.exports =
     get_weather: function (lat, long) { 
         const key = process.env.WEATHER_KEY;
         const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${key}`;
+        const url_cur = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${key}`;
         return axios.get(url)
         // "list" indices 0 ~ . . ., list[0].main["temp_min"], list.main["temp_max"], list.main["temp"], list[0].weather[0].main
         // dt_txt is the date and time
         // weather 
         .then (resp => { 
+            // Get current day and add a day, this is to find the cutoff point
+            var day_cur = new Date();
+            var temp = day_cur.getDate() + 1;
+            day_cur.setDate(temp);
+            day_cur.setHours(0, 0, 0, 0);
+            console.log(day_cur.getTime());
+            // Gather current day data
             return resp["list"];
+            // Gather future day data
+
+            return data;
         })
         .catch(error => console.log(error));
     },

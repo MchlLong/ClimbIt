@@ -14,7 +14,6 @@ const port = process.env.PORT || 5500;
 const host = process.env.HOST || "0.0.0.0"
 
 // Serve Static Pages
-//server.use(express.urlencoded());
 server.use(express.json());
 server.use(express.static("public"));
 
@@ -44,9 +43,6 @@ server.post("/get_weather", (req, resp) => {
     api.get_weather(req.body["lat"], req.body["long"])
     .then(data => { 
         console.log("Weather request successful: " + req.body["lat"] + ", " + req.body["long"])
-        //resp.send(JSON.data);
-        test = new Date();
-        console.log(test.getTime());
         resp.send(data);
     })
     .catch(error => console.log(error));
