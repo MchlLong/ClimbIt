@@ -133,9 +133,8 @@ Javascript Webpage Controller
 
     // Display the hike map from Google Maps Static API
     function get_map() {
-        const key = process.env.GOOGLE_API_KEY;
-        const url = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`
-        // Retrieve the lat/long from the HTML associated with the hike ID
+        const url = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCw6yD8WOm2BDI1nzERttC5meDgBPFbMIo&callback=initMap"
+        // Retrieve coords from HTML of active hike
         console.log("Triggered object: " + event.target.id);
         let data = document.getElementsByClassName("active")[0];
         console.log(data);
@@ -155,10 +154,7 @@ Javascript Webpage Controller
             body: JSON.stringify({lat, long})
         })
         .then (resp => { return resp; })
-        .then (mydata => {
-          //  console.log(mydata); 
-            add_script(url);
-        })
+        .then (mydata => { add_script(url); })
         .catch (error => console.log(error));
     }
 
@@ -178,18 +174,18 @@ Javascript Webpage Controller
         // Add button to the DOM and break after
         document.getElementById("hike_list").appendChild(button);
         document.getElementById("hike_list").appendChild(line_break);
-        // Add hike name, id, latitude, and longitude as custom attributes
+        // Add hike id, name, latitude, and longitude as custom attributes
         button.setAttribute("hike_id", hike_id);
         button.setAttribute("hike_name", hike_name);
         button.setAttribute("lat", lat);
         button.setAttribute("long", long);
     }
 
+    // Add the GMaps script tag to the DOM
     function add_script(url) {
         let map_script = document.createElement("script");
         map_script.setAttribute("src", url);
         document.head.appendChild(map_script);
-
     }
 
     // Initialize JS Map
@@ -199,7 +195,6 @@ Javascript Webpage Controller
             center: new google.maps.LatLng(-33.91722, 151.23064),
             zoom: 8
         });
-
         // Add marker 
         add_marker(map);
     }
@@ -208,7 +203,6 @@ Javascript Webpage Controller
     function add_marker(map) {
         // Get active hike data 
         let data = document.getElementsByClassName("active")[0];
-      //  console.log(data);
         let lat = data.attributes.getNamedItem("lat").value;
         let long = data.attributes.getNamedItem("long").value;
         // Set marker at coordinates
