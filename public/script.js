@@ -10,6 +10,7 @@ Javascript Webpage Controller
     var home_buttons = document.getElementsByClassName("navto_home_page");
     for (var i = 0; i < home_buttons.length; i++) {
         home_buttons[i].addEventListener("click", function() { swap_page("home_page") });
+        home_buttons[i].addEventListener("click", function() { remove_hikes() });
     }
 
     // Details Button Functionality
@@ -45,6 +46,10 @@ Javascript Webpage Controller
     // Find Hike Button Functionality
     var find_hike_button = document.getElementsByClassName("find_hikes");
     find_hike_button[0].addEventListener("click", function() { get_hikes() } ); 
+
+    // Get Directions Button Functionality
+    var get_directions_button = document.getElementsByClassName("get_directions");
+    get_directions_button[0].addEventListener("click", function() { get_directions() });
 
 /* Webpage Controller Functions */
 
@@ -86,8 +91,8 @@ Javascript Webpage Controller
     // Add list of hikes to the DOM
     function get_hikes() {
         // Get address and distance from form input 
-        addr = document.getElementById("address").value;
-        dist = document.getElementById("distance").value;
+        let addr = document.getElementById("address").value;
+        let dist = document.getElementById("distance").value;
         console.log(JSON.stringify({address: addr, distance: dist}));
         fetch("/get_hikes", { 
             method: "post", 
@@ -144,9 +149,35 @@ Javascript Webpage Controller
         console.log("lat:" + lat)
         console.log("long:" + long)
         console.log(JSON.stringify({lat, long}));
-        
+
         // Add script to the DOM
         add_script(url);
+    }
+
+    // Display directions from given origin to trailhead location
+    function get_directions() {
+        // Retrieve coords of destination 
+        let data = document.getElementsByClassName("active")[0];
+        let lat = data.attributes.getNamedItem("lat").value;
+        let long = data.attributes.getNamedItem("long").value;
+        let destination = `${lat},${long}`
+        // Retrieve origin from user input 
+        let origin = document.getElementById("origin").value;
+        console.log({origin, destination});
+        fetch("/get_directions", { 
+            method: "post", 
+            headers: {
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({origin, destination})
+        })
+        .then (resp => { return resp; })
+        .then (val => { return val.json(); })
+        .then (mydata => { 
+            console.log(mydata["routes"][0].legs);
+        })
+        .catch (error => console.log(error));
     }
 
 
@@ -172,6 +203,13 @@ Javascript Webpage Controller
         button.setAttribute("long", long);
     }
 
+    function remove_hikes() {
+        let hike_list = document.getElementById("hike_list");
+        while(hike_list.hasChildNodes()) {
+            hike_list.removeChild(hike_list.firstChild);
+        }
+    }
+
     // Add the GMaps script tag to the DOM
     function add_script(url) {
         let map_script = document.createElement("script");
@@ -179,18 +217,25 @@ Javascript Webpage Controller
         document.head.appendChild(map_script);
     }
 
+    // Remove the GMaps script tag from the DOM
+    function remove_script(url) {
+
+    }
+
+/* Other Helper Functions */
+
     // Initialize JS Map
     function initMap() {
-        // Initialize the map at random coordinates 
+        // Initialize the map
         let map = new google.maps.Map(document.getElementById("map"), {
-            center: new google.maps.LatLng(-33.91722, 151.23064),
+            center: new google.maps.LatLng(0,0),
             zoom: 8
         });
         // Add marker 
         add_marker(map);
     }
 
-    // Add marker to map at given coordinates
+    // Add marker to map at given coordinates and center on the marker
     function add_marker(map) {
         // Get active hike data 
         let data = document.getElementsByClassName("active")[0];

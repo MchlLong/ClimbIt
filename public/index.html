@@ -34,6 +34,7 @@
                             type="address"
                             class="form-control ml-3 mr-3"
                             id="address"
+                            onfocus="this.value=''"
                           />
                           <label class = "col-form-label col-sm" for="distance">Distance from location (in miles):</label>
                           <input
@@ -41,6 +42,7 @@
                             type="distance"
                             class="form-control ml-3 mr-3"
                             id="distance"
+                            onfocus="this.value=''"
                           />
                       </div>
                       <div class="text-center">
@@ -58,7 +60,7 @@
                 <h2>Nearby Trails</h2>
                 <ul class="hike_list" id="hike_list">
                 </ul>
-                <button type="button" class="navto_home_page">Search for More Hikes</button>
+                <button type="button" class="navto_home_page">Back</button>
               </div>
             </div>
         </div>
@@ -70,12 +72,12 @@
             <div id="map">
               <!-- Map will go here -->
             </div>  
-            <button type="button" class="navto_hike_detail_page">Go to Details</button>
-            <button type="button" class="navto_home_page">Search for More Hikes</button>
             <!-- Other Buttons -->
             <button type="button" class="navto_directions_page">Directions</button>
             <button type="button" class="navto_air_page">Air</button>
-            <button type="button" class="navto_weather_page">Weather</button>
+            <button type="button" class="navto_weather_page">Weather</button><br><br>
+            <button type="button" class="navto_hike_detail_page">Go Back to Hike List</button>
+            <button type="button" class="navto_home_page">Go Back to Search</button>
           </div>
         </div>
 
@@ -83,8 +85,14 @@
         <div class="directions_page invisible">
           <div class="container text-center">
             <h2>Directions</h2>
-            <button type="button" class="navto_hike_detail_page">Go to Details</button>
-            <button type="button" class="navto_home_page">Search for More Hikes</button>
+            <label>Enter Origin:</label>
+            <input 
+              type = "text"
+              id = "origin"/><br> 
+            <button type="button" class="get_directions">Get Directions</button><br><br>
+            <button type="button" class="navto_hike_detail_page">Go Back to Hike List</button>
+            <button type="button" class="navto_home_page">Go Back to Search</button>
+            <button type="button" class="navto_hike_map_page">Go Back to Map</button>
           </div>
         </div>
  
@@ -92,8 +100,9 @@
         <div class="air_page invisible">
           <div class="container text-center">
             <h2>Air</h2>
-            <button type="button" class="navto_hike_detail_page">Go to Details</button>
-            <button type="button" class="navto_home_page">Search for More Hikes</button>
+            <button type="button" class="navto_hike_detail_page">Go Back to Hike List</button>
+            <button type="button" class="navto_home_page">Go Back to Search</button>
+            <button type="button" class="navto_hike_map_page">Go Back to Map</button>
           </div>
         </div>
 
@@ -101,8 +110,9 @@
         <div class="weather_page invisible">
           <div class="container text-center">
             <h2>Weather</h2>
-            <button type="button" class="navto_hike_detail_page">Go to Details</button>
-            <button type="button" class="navto_home_page">Search for More Hikes</button>
+            <button type="button" class="navto_hike_detail_page">Go Back to Hike List</button>
+            <button type="button" class="navto_home_page">Go Back to Search</button>
+            <button type="button" class="navto_hike_map_page">Go Back to Map</button>
           </div>
         </div>
         <!-- Insert JS files below -->
