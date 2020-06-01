@@ -67,12 +67,28 @@ module.exports =
             var temp = day_cur.getDate() + 1;
             day_cur.setDate(temp);
             day_cur.setHours(0, 0, 0, 0);
+            // Usage of the current next four day object
+            // var ret_week = {"time": "", "weather": "", "temp": "", "min_temp": "", "max_temp": ""};
+            // Usage of the current day object 
+            // var ret_cur = {"time": "", "weather": "", "temp": "", "min_temp": "", "max_temp": ""};
+            var ret = [];
             console.log(day_cur.getTime());
-            // Gather current day data
-            return resp["list"];
-            // Gather future day data
+            // Gather current day data (multiply by 10^3 (or 10**3) since the response is different than the output data
+            for (let i=0; i<(resp["data"].list).length; i++ ) {
+                let vals = (resp["data"].list[i]["dt"])*(10**3);
+                if (vals > day_cur) {
+                    let ret_week = {};
+                    ret_week["time"] = (resp["data"].list[i]["dt"])*(10**3);
+                    ret_week["temp"] = resp["data"].list[i]["main"]["temp"];
+                    ret_week["min_temp"] = resp["data"].list[i]["main"]["temp_min"];
+                    ret_week["max_temp"] = resp["data"].list[i]["main"]["temp_max"];
+                    ret_week["weather"] = resp["data"].list[i]["weather"][0]["main"];
+                    console.log(ret_week["weather"]);
+                    ret.push(ret_week);
+                }
+            }
 
-            return data;
+            return ret;
         })
         .catch(error => console.log(error));
     },
