@@ -11,12 +11,14 @@ Javascript Webpage Controller
     for (var i = 0; i < home_buttons.length; i++) {
         home_buttons[i].addEventListener("click", function() { swap_page("home_page") });
         home_buttons[i].addEventListener("click", function() { remove_hikes() });
+        home_buttons[i].addEventListener("click", function() { remove_script() });
     }
 
     // Details Button Functionality
     var details_buttons = document.getElementsByClassName("navto_hike_detail_page");
     for (var i = 0; i < details_buttons.length; i++) {
         details_buttons[i].addEventListener("click", function() { swap_page("hike_detail_page") });
+        details_buttons[i].addEventListener("click", function() { remove_script() });
     }
 
     // Map Button Functionality
@@ -212,14 +214,17 @@ Javascript Webpage Controller
 
     // Add the GMaps script tag to the DOM
     function add_script(url) {
+        
         let map_script = document.createElement("script");
         map_script.setAttribute("src", url);
+        map_script.setAttribute("class", "map_script");
         document.head.appendChild(map_script);
+        //document.head.removeChild(map_script);
     }
 
     // Remove the GMaps script tag from the DOM
     function remove_script(url) {
-
+        window.google = {};
     }
 
 /* Other Helper Functions */
