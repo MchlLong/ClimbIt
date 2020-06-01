@@ -56,39 +56,77 @@ module.exports =
     get_weather: function (lat, long) { 
         const key = process.env.WEATHER_KEY;
         const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${key}`;
-        const url_cur = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${key}`;
-        return axios.get(url)
-        // "list" indices 0 ~ . . ., list[0].main["temp_min"], list.main["temp_max"], list.main["temp"], list[0].weather[0].main
-        // dt_txt is the date and time
-        // weather 
-        .then (resp => { 
-            // Get current day and add a day, this is to find the cutoff point
+        const url_cur = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=currently,minutely,daily&appid=${key}`;
+
+        return axios.get(url_cur)
+        .then(cur_resp => {
+            var day_nxt = new Date();
             var day_cur = new Date();
-            var temp = day_cur.getDate() + 1;
+            var day_time = new Date();
+
+            var temp = day_time.getDate();
+            day_time.setDate(temp);
+
+            var temp = day_nxt.getDate() + 1;
+            day_nxt.setDate(temp);
+            day_nxt.setHours(0, 0, 0, 0);
+
+            var temp = day_cur.getDate();
             day_cur.setDate(temp);
             day_cur.setHours(0, 0, 0, 0);
-            // Usage of the current next four day object
-            // var ret_week = {"time": "", "weather": "", "temp": "", "min_temp": "", "max_temp": ""};
-            // Usage of the current day object 
-            // var ret_cur = {"time": "", "weather": "", "temp": "", "min_temp": "", "max_temp": ""};
-            var ret = [];
-            console.log(day_cur.getTime());
-            // Gather current day data (multiply by 10^3 (or 10**3) since the response is different than the output data
-            for (let i=0; i<(resp["data"].list).length; i++ ) {
-                let vals = (resp["data"].list[i]["dt"])*(10**3);
-                if (vals > day_cur) {
-                    let ret_week = {};
-                    ret_week["time"] = (resp["data"].list[i]["dt"])*(10**3);
-                    ret_week["temp"] = resp["data"].list[i]["main"]["temp"];
-                    ret_week["min_temp"] = resp["data"].list[i]["main"]["temp_min"];
-                    ret_week["max_temp"] = resp["data"].list[i]["main"]["temp_max"];
-                    ret_week["weather"] = resp["data"].list[i]["weather"][0]["main"];
-                    console.log(ret_week["weather"]);
-                    ret.push(ret_week);
-                }
-            }
 
-            return ret;
+            // Usage of the day object
+            // var ret_week = {"time": "", "weather": "", "temp": "", "min_temp": "", "max_temp": ""};
+            var ret = [];
+            console.log(day_nxt.getTime());
+            const hour = 1080 * (10**3);
+            const ms_hr = 36 * (10**5); 
+            let curr = day_nxt.getTime() - day_time.getTime();
+            console.log((day_nxt.getTime() - ms_hr * 3));
+
+            hrs = 24 - (curr / ms_hr);
+            if (hrs >= 18) {
+                ret.push({"count": 0});
+            }
+            else if (hrs < 6) {
+                ret.push({"count": 5});
+            }
+            else {
+                ret.push({"count": Math.ceil(7 - hrs / 3)});
+            }
+            console.log("Current time (epoch): " + curr);
+            console.log(24 - (curr / ms_hr));
+
+            // Process current day forecast
+            
+
+
+
+
+
+            // Get next four day forecast
+            return axios.get(url)
+            .then (resp => { 
+                // Gather current day data (multiply by 10^3 (or 10**3) since the response is different than the output data)
+                // Seconds vs Milliseconds
+                for (let i=0; i<(resp["data"].list).length; i++ ) {
+                    let vals = (resp["data"].list[i]["dt"])*(10**3);
+                    // Four day forecast data
+                    if (vals > day_nxt) {
+                        let ret_week = {};
+                        ret_week["time"] = (resp["data"].list[i]["dt"])*(10**3);
+                        ret_week["temp"] = resp["data"].list[i]["main"]["temp"];
+                        ret_week["min_temp"] = resp["data"].list[i]["main"]["temp_min"];
+                        ret_week["max_temp"] = resp["data"].list[i]["main"]["temp_max"];
+                        ret_week["weather"] = resp["data"].list[i]["weather"][0]["main"];
+                        console.log(ret_week["weather"]);
+                        ret.push(ret_week);
+                    }
+                }
+
+                return ret;
+            })
+            .catch(error => console.log(error));
         })
         .catch(error => console.log(error));
     },
