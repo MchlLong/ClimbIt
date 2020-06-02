@@ -62,6 +62,7 @@ module.exports =
         .then(cur_resp => {
             const hour = 1080 * (10**3);
             const ms_hr = 36 * (10**5); 
+            const ms_day = ms_hr * 24;
             const hr_day = 24;
             const ms = 10**3;
             var day_nxt = new Date();
@@ -115,33 +116,62 @@ module.exports =
             }
             let max_len = ((cur_resp["data"].hourly).length - (hr_day + Math.floor(hrs))); // output has two days worth of data, only want first day
             console.log(max_len);
+            console.log("Entering check phase");
             for (let i=max_len; i>0; i--) {
-                let check = cur_resp["data"].hourly[i]["dt"];
-                console.log(check);
+                let check = cur_resp["data"].hourly[i]["dt"] * ms;
+                for (let j=0; j<5; j++) {
+                    if (check === times[j]){
+                        let ret_day = {}
+                        ret_day["time"] = cur_resp["data"].hourly[i]["dt"] * ms;
+                        ret_day["temp"] = cur_resp["data"].hourly[i]["temp"];
+                        ret_day["min_temp"] = cur_resp["data"].hourly[i]["temp"];
+                        ret_day["max_temp"] = cur_resp["data"].hourly[i]["temp"];
+                        ret_day["temp"] = cur_resp["data"].hourly[i]["temp"];
+                        console.log(check);
+                    }
+                }
             }
 
 
 
             // Get next four day forecast
             return axios.get(url)
-            .then (resp => { 
+            .then (resp => {
+                // Ceil to midnight of the next day 
+                var time_slots = [];
+                
+                for (let i=0; i<4; i++){
+                    for (let j=0; j<5; j++){
+                        // Tomorrow in MS, add additional days, add a 6 hour offset to start at 6:00 am, add 3 hour increments up until 6pm
+                        time_slots.push(day_nxt.getTime() + (ms_day * i) + (ms_hr * 6) + (ms_hr * 3 * j) );
+                    }
+                }
+                console.log(time_slots);
                 // Gather current day data (multiply by 10^3 (or 10**3) since the response is different than the output data)
                 // Seconds vs Milliseconds
+                let time_zone = (resp["data"].city.timezone) * ms;
                 for (let i=0; i<(resp["data"].list).length; i++ ) {
                     let vals = (resp["data"].list[i]["dt"])*ms;
                     // Four day forecast data
-                    if (vals > day_nxt) {
-                        let ret_week = {};
-                        ret_week["time"] = (resp["data"].list[i]["dt"])*(10**3);
-                        ret_week["temp"] = resp["data"].list[i]["main"]["temp"];
-                        ret_week["min_temp"] = resp["data"].list[i]["main"]["temp_min"];
-                        ret_week["max_temp"] = resp["data"].list[i]["main"]["temp_max"];
-                        ret_week["weather"] = resp["data"].list[i]["weather"][0]["main"];
-                        console.log(ret_week["weather"]);
-                        ret.push(ret_week);
+                    console.log(vals);
+                    for (let j=0; j<time_slots.length; j++){
+                        console.log(". . . . .")
+                        console.log(vals);
+                        console.log("vs. . .")
+                        console.log(time_slots[j]);
+                        if (vals === time_slots[j]) {
+                            let ret_week = {};
+                            ret_week["time"] = (resp["data"].list[i]["dt"]) * ms;
+                            ret_week["temp"] = resp["data"].list[i]["main"]["temp"];
+                            ret_week["min_temp"] = resp["data"].list[i]["main"]["temp_min"];
+                            ret_week["max_temp"] = resp["data"].list[i]["main"]["temp_max"];
+                            ret_week["weather"] = resp["data"].list[i]["weather"][0]["main"];
+                            console.log(ret_week["weather"]);
+                            ret.push(ret_week);
+                        }
                     }
                 }
-
+                console.log(ret);
                 return ret;
             })
             .catch(error => console.log(error));
