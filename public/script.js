@@ -120,7 +120,7 @@ Javascript Webpage Controller
                 document.getElementById("hike_body").appendChild(row);
                 
                 // 3 columns: hike button, length, and elevation gain
-                // this is so gross but adds a lot of lines so whatever
+                // this is so gross and repetitive but adds a lot of lines so i'm leaving it for now
                 for(let j = 0; j < 3; j++) {
                     if(j == 0) {
                         // Get the hike name, ID, lat, and long 
@@ -198,9 +198,12 @@ Javascript Webpage Controller
         let lat = data.attributes.getNamedItem("lat").value;
         let long = data.attributes.getNamedItem("long").value;
         let destination = `${lat},${long}`
+
         // Retrieve origin from user input 
         let origin = document.getElementById("origin").value;
         console.log({origin, destination});
+
+        // API call
         fetch("/get_directions", { 
             method: "post", 
             headers: {
@@ -213,8 +216,6 @@ Javascript Webpage Controller
         .then (val => { return val.json(); })
         .then (mydata => { 
 
-            add_table("directions");
-
             // Get data from response
             let total_distance = mydata["routes"][0].legs[0].distance.text;
             let steps = mydata["routes"][0].legs[0].steps;
@@ -224,7 +225,10 @@ Javascript Webpage Controller
             console.log(duration);
             console.log(total_distance);
 
-            // Loop through steps and add instructions and leg distances to the DOM
+             // Add the table body
+             add_table("directions");
+
+            // Add data to table 
             for(let i = 0; i < steps.length; i++) {
 
                 // Create a row and append it to the table body
@@ -236,23 +240,25 @@ Javascript Webpage Controller
 
                 console.log(html_instructions);
                 console.log(distance);
-                    for(let j = 0; j < 2; j++) {
-                        // first column
-                        if(j == 0) {
-                            //add directions
-                            let directions = document.createElement("td");
-                            directions.innerHTML = html_instructions;
-                            row.appendChild(directions);
-                        }
-                        // second column
-                        if(j == 1) {
-                            // add length to next direction
-                            let length_to_next = document.createElement("td");
-                            length_to_next.innerHTML = distance;
-                            row.appendChild(length_to_next);
-                        }
-                        
+
+                // Add data to each column
+                for(let j = 0; j < 2; j++) {
+
+                    // First column
+                    if(j == 0) {
+                        // Add directions
+                        let directions = document.createElement("td");
+                        directions.innerHTML = html_instructions;
+                        row.appendChild(directions);
                     }
+                    // Second column
+                    if(j == 1) {
+                        // Add distance to next direction
+                        let length_to_next = document.createElement("td");
+                        length_to_next.innerHTML = distance;
+                        row.appendChild(length_to_next);
+                    }
+                }
             }
         })
         .catch (error => console.log(error));
