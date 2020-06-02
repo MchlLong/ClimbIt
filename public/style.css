@@ -8,16 +8,23 @@ CSS Style Controller
 
 .table_container {
     text-align: center;
-    overflow-x:auto;
+    overflow-x: auto;
 }
 
 .table_and_nav {
     display: inline-block;
 }
 
-ul {
-    list-style-type: none;
-    padding-right: 10%;
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+    
+td {
+    text-align: left;
+    padding: 8px;
 }
 
 #map {
@@ -28,6 +35,10 @@ ul {
 
 .navto_hike_map_page {
     margin-bottom: 2%;
+}
+
+.directions_container {
+    overflow-x: auto;
 }
 
 /* Visibility Controls */

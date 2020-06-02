@@ -15,7 +15,7 @@ Javascript Webpage Controller
     // Details Button Functionality
     var details_buttons = document.getElementsByClassName("navto_hike_detail_page");
     for (var i = 0; i < details_buttons.length; i++) {
-        details_buttons[i].addEventListener("click", function() { goto_hike_details() });
+        details_buttons[i].addEventListener("click", function() { swap_page("hike_detail_page") });
     }
 
     // Map Button Functionality
@@ -44,11 +44,11 @@ Javascript Webpage Controller
    
     // Find Hike Button Functionality
     var find_hike_button = document.getElementsByClassName("find_hikes");
-    find_hike_button[0].addEventListener("click", function() { get_hikes() } ); 
+    find_hike_button[0].addEventListener("click", function() { goto_hikes() } ); 
 
     // Get Directions Button Functionality
     var get_directions_button = document.getElementsByClassName("get_directions");
-    get_directions_button[0].addEventListener("click", function() { get_directions() });
+    get_directions_button[0].addEventListener("click", function() { goto_directions() });
 
 /* Webpage Controller Functions */
 
@@ -88,7 +88,7 @@ Javascript Webpage Controller
     // Convert location input to lat/long coordinates using Geocoding API
     // Get list of hikes within x miles of a given location using REI Hiking Project API
     // Add list of hikes to the DOM
-    function get_hikes() {
+    function goto_hikes() {
         // Get address and distance from form input 
         let addr = document.getElementById("address").value;
         let dist = document.getElementById("distance").value;
@@ -153,20 +153,16 @@ Javascript Webpage Controller
         .catch (error => console.log(error));
     }
 
-    // Called when user switches to home page 
+    // Switches to home page, deallocates tables, and removes map script from DOM
     function goto_home() {
         swap_page("home_page");
+        // should really implement emptyAll()
         empty_table("hike_table");
         empty_table("directions_table");
         remove_script();
     }
 
-    function goto_hike_details() {
-        swap_page("hike_detail_page");
-        remove_script();
-    }
-
-    // Goto Hike Menu (will invoke get_map())
+    // Go to Hike Menu (will invoke get_map())
     function goto_hike() {
         swap_page("hike_map_page");
         console.log("Triggered object: " + event.target.id);
@@ -183,13 +179,11 @@ Javascript Webpage Controller
         get_map();
     }
 
-    // Display the hike map from Google Maps Static API
+    // Display the hike map from Google Maps JavaScript API
     function get_map() {
         const url = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCw6yD8WOm2BDI1nzERttC5meDgBPFbMIo&callback=initMap"
         // Retrieve coords from HTML of active hike
-        console.log("Triggered object: " + event.target.id);
         let data = document.getElementsByClassName("active")[0];
-        console.log(data);
         let lat = data.attributes.getNamedItem("lat").value;
         let long = data.attributes.getNamedItem("long").value;
 
@@ -201,8 +195,10 @@ Javascript Webpage Controller
         add_script(url);
     }
 
-    // Display directions from given origin to trailhead location
-    function get_directions() {
+    // Display directions from given origin to trailhead location using Directions API
+    function goto_directions() {
+
+        
         // Retrieve coords of destination 
         let data = document.getElementsByClassName("active")[0];
         let lat = data.attributes.getNamedItem("lat").value;
@@ -235,8 +231,8 @@ Javascript Webpage Controller
             console.log(duration);
             console.log(total_distance);
 
-             // Add the table body
-             add_table("directions_table");
+            // Add the table body
+            add_table("directions_table");
 
             // Add data to table 
             for(let i = 0; i < steps.length; i++) {
@@ -333,9 +329,8 @@ Javascript Webpage Controller
         window.google = {};
     }
 
-    // Add the direction data as table items and labels to the DOM
+    // Add the direction data to the table
     function add_directions(table_item) {
-        // Create the table data
         let cell = document.createElement("td");
         cell.innerHTML = table_item;
         document.getElementById("directions").appendChild(cell);
