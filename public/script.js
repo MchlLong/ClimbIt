@@ -107,15 +107,50 @@ Javascript Webpage Controller
         .then (resp => { return resp; })
         .then (val => { return val.json(); })
         .then (mydata => { 
-            // Loop through all the trails from the response
-            for(i = 0; i < mydata.length ; i++) {
-                // Save the trail name, ID, lat, and long 
-                let name = mydata[i].name;
-                let id = mydata[i].id;
-                let lat = mydata[i].latitude;
-                let long = mydata[i].longitude; 
-                // Add the ID and trail name to the DOM
-                add_hike(id, name, lat, long); 
+            console.log(mydata);
+
+            // Add the table body 
+            add_table("hike_table");
+
+            // Add response data to table
+            let length = mydata.length;
+            for(let i = 0; i < length; i++) {
+                // Create row and append to tbody
+                let row = document.createElement("tr");
+                document.getElementById("hike_body").appendChild(row);
+                
+                // 3 columns: hike button, length, and elevation gain
+                // this is so gross but adds a lot of lines so whatever
+                for(let j = 0; j < 3; j++) {
+                    if(j == 0) {
+                        // Get the hike name, ID, lat, and long 
+                        let name = mydata[i].name;
+                        let id = mydata[i].id;
+                        let lat = mydata[i].latitude;
+                        let long = mydata[i].longitude; 
+
+                        // Add the hike button and details to each column 
+                        let hike_cell = add_hike(id, name, lat, long); 
+                        // Append the data to the row
+                        row.appendChild(hike_cell); 
+                    }
+                    if(j == 1) {
+                        // Add the length of the hike in miles
+                        let length_of_hike = mydata[i].length;
+                        let length_cell = document.createElement("td");
+                        let length_value = document.createTextNode(length_of_hike + " miles");
+                        length_cell.appendChild(length_value);
+                        row.appendChild(length_cell);
+                    }
+                    if(j == 2) {
+                        // Add the elevation of the hike in feet 
+                        let elevation = mydata[i].ascent;
+                        let elevation_cell = document.createElement("td");
+                        let elevation_value = document.createTextNode(elevation + " feet gain");
+                        elevation_cell.appendChild(elevation_value);
+                        row.appendChild(elevation_cell);
+                    }
+                }
             }
         })
         .catch (error => console.log(error));
@@ -177,7 +212,48 @@ Javascript Webpage Controller
         .then (resp => { return resp; })
         .then (val => { return val.json(); })
         .then (mydata => { 
-            console.log(mydata["routes"][0].legs);
+
+            add_table("directions");
+
+            // Get data from response
+            let total_distance = mydata["routes"][0].legs[0].distance.text;
+            let steps = mydata["routes"][0].legs[0].steps;
+            let duration = mydata["routes"][0].legs[0].duration.text;
+
+            console.log(steps);
+            console.log(duration);
+            console.log(total_distance);
+
+            // Loop through steps and add instructions and leg distances to the DOM
+            for(let i = 0; i < steps.length; i++) {
+
+                // Create a row and append it to the table body
+                let row = document.createElement("tr");
+                document.getElementById("directions_body").appendChild(row);
+
+                let html_instructions = steps[i].html_instructions;
+                let distance = steps[i].distance.text;
+
+                console.log(html_instructions);
+                console.log(distance);
+                    for(let j = 0; j < 2; j++) {
+                        // first column
+                        if(j == 0) {
+                            //add directions
+                            let directions = document.createElement("td");
+                            directions.innerHTML = html_instructions;
+                            row.appendChild(directions);
+                        }
+                        // second column
+                        if(j == 1) {
+                            // add length to next direction
+                            let length_to_next = document.createElement("td");
+                            length_to_next.innerHTML = distance;
+                            row.appendChild(length_to_next);
+                        }
+                        
+                    }
+            }
         })
         .catch (error => console.log(error));
     }
@@ -185,26 +261,44 @@ Javascript Webpage Controller
 
 /* DOM Manipulation Functions */ 
 
-    // Add hike button to the "hike_list" in the DOM
+    function add_table(table_id) {
+        // Create tbody 
+        let table_body = document.createElement("tbody");
+        // Add the table_body to the table
+        document.getElementById(table_id).appendChild(table_body);
+    }
+
+
+    // Add a hike button to the "hike_table" in the DOM
     function add_hike(hike_id, hike_name, lat, long) {
+        // Create the table data
+        let cell = document.createElement("td");
+
+        // Create the hike button
         let button = document.createElement("button");
         let line_break = document.createElement("br");
+
         // Set button details
         button.innerHTML = hike_name;
         button.type = "button";
         button.className = "navto_hike_map_page";
+
         // Add functionality to switch to map page and show map when clicked
         button.addEventListener("click", function() { goto_hike() });
-        // Add button to the DOM and break after
-        document.getElementById("hike_list").appendChild(button);
-        document.getElementById("hike_list").appendChild(line_break);
+
+        // Append the button to the table data
+        cell.appendChild(button);
+
         // Add hike id, name, latitude, and longitude as custom attributes
         button.setAttribute("hike_id", hike_id);
         button.setAttribute("hike_name", hike_name);
         button.setAttribute("lat", lat);
         button.setAttribute("long", long);
+
+        return cell;
     }
 
+    // Empty the hike list
     function remove_hikes() {
         let hike_list = document.getElementById("hike_list");
         while(hike_list.hasChildNodes()) {
@@ -214,12 +308,10 @@ Javascript Webpage Controller
 
     // Add the GMaps script tag to the DOM
     function add_script(url) {
-        
         let map_script = document.createElement("script");
         map_script.setAttribute("src", url);
         map_script.setAttribute("class", "map_script");
         document.head.appendChild(map_script);
-        //document.head.removeChild(map_script);
     }
 
     // Remove the GMaps script tag from the DOM
@@ -227,7 +319,15 @@ Javascript Webpage Controller
         window.google = {};
     }
 
-/* Other Helper Functions */
+    // Add the direction data as table items and labels to the DOM
+    function add_directions(table_item) {
+        // Create the table data
+        let cell = document.createElement("td");
+        cell.innerHTML = table_item;
+        document.getElementById("directions").appendChild(cell);
+
+    }
+
 
     // Initialize JS Map
     function initMap() {

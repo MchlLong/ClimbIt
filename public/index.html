@@ -55,11 +55,12 @@
 
         <!-- Page which defines an area where hikes are located and filter options -->
         <div class="hike_detail_page invisible">
-            <div class="list_container">
-              <div class="list_and_nav">
+            <div class="table_container">
+              <div class="table_and_nav">
                 <h2>Nearby Trails</h2>
-                <ul class="hike_list" id="hike_list">
-                </ul>
+                <table id="hike_table">
+                  <tbody id="hike_body"></tbody>       
+                </table>
                 <button type="button" class="navto_home_page">Back</button>
               </div>
             </div>
@@ -83,17 +84,23 @@
 
         <!-- Sub-index page which contains a list of directions to a hiking location -->
         <div class="directions_page invisible">
-          <div class="container text-center">
+          <div class="header_container text-center">
             <h2>Directions</h2>
             <label>Enter Origin:</label>
             <input 
-              type = "text"
-              id = "origin"/><br> 
-            <button type="button" class="get_directions">Get Directions</button><br><br>
-            <button type="button" class="navto_hike_detail_page">Go Back to Hike List</button>
-            <button type="button" class="navto_home_page">Go Back to Search</button>
-            <button type="button" class="navto_hike_map_page">Go Back to Map</button>
-          </div>
+              type="text"
+              id="origin"/><br> 
+            </div>
+            <table id="directions">
+              <tbody id="directions_body"></tbody>   
+            </table>
+            
+            <div class="button_container text-center">
+              <button type="button" class="get_directions">Get Directions</button><br><br>
+              <button type="button" class="navto_hike_detail_page">Go Back to Hike List</button>
+              <button type="button" class="navto_home_page">Go Back to Search</button>
+              <button type="button" class="navto_hike_map_page">Go Back to Map</button>
+            </div>
         </div>
  
         <!-- Sub-index page which contains the air quality and explanation / information -->

@@ -6,11 +6,11 @@ CSS Style Controller
 
 /* General Styling */
 
-.list_container {
+.table_container {
     text-align: center;
 }
 
-.list_and_nav {
+.table_and_nav {
     display: inline-block;
 }
 
