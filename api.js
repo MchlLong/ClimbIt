@@ -60,59 +60,46 @@ module.exports =
 
         return axios.get(url_cur)
         .then(cur_resp => {
-            const hour = 1080 * (10**3);
-            const ms_hr = 36 * (10**5); 
-            const ms_day = ms_hr * 24;
-            const hr_day = 24;
-            const ms = 10**3;
-            var day_nxt = new Date();
-            var day_cur = new Date();
 
-            var temp = (cur_resp["data"].current["dt"]) * ms;
-            console.log(temp);
-            var day_time = new Date(temp);
+            // Constants for converting time
+            // Reads previous unit converted to new unit
+            const ms_hr = 36 * (10**5); // milliseconds in an hour
+            const ms_day = ms_hr * 24;  // milliseconds in a day
+            const hr_day = 24;          // hours in a day
+            const ms = 10**3;           // milliseconds scalar
 
-            var temp = day_time.getDate();
-            day_time.setDate(temp);
-
-            // Ceil to midnight of the next day 
-            var temp = day_nxt.getDate() + 1;
-            day_nxt.setDate(temp);
-            day_nxt.setHours(0, 0, 0, 0);
-
-            // Floor to midnight of the current day
-            var temp = day_cur.getDate();
-            day_cur.setDate(temp);
-            day_cur.setHours(0, 0, 0, 0);
-
+            // Create Date objects based on the first received date
+            var timezone_offset = (cur_resp["data"]["timezone_offset"]) * ms;
+            var time_now = (cur_resp["data"].current["dt"] * ms);
+            var cur_midnight = time_now - (time_now % ms_day) - timezone_offset; 
+            var tom_midnight = cur_midnight + ms_day;
+            
+            console.log(tom_midnight);
+            console.log(time_now);
             // Usage of the day object
             // var ret_week = {"time": "", "weather": "", "temp": "", "min_temp": "", "max_temp": ""};
             var ret = [];
-            console.log(day_nxt.getTime());
-            let curr = day_nxt.getTime() - day_time.getTime();
-            console.log((day_nxt.getTime() - ms_hr * 3));
 
-            hrs = 24 - (curr / ms_hr);
-            if (hrs >= 18) {
+            let hrs_left = tom_midnight - time_now;
+            hrs = 24 - (hrs_left / ms_hr);
+            if (hrs >= 18) {                // If 18 hours have passed, no weather data for today
                 ret.push({"count": 0});
             }
-            else if (hrs < 6) {
+            else if (hrs < 6) {             // If less than 6 hours have passed, all weather data is available
                 ret.push({"count": 5});
             }
             else {
                 console.log(Math.ceil(6 - hrs / 3));
                 ret.push({"count": Math.ceil(6 - hrs / 3)});
             }
-            console.log("Current time (epoch): " + curr);
-            console.log(24 - (curr / ms_hr));
 
             // Process current day forecast
             
             // Compute timeslots
             let times = [];
             for (let i=0; i<5; i++) {
-                times.push(day_cur.getTime() + ( (6 + 3*i) * (ms_hr)) );
-                console.log(day_cur.getTime() + ( (6 + 3*i) * (ms_hr)) );
+                times.push(cur_midnight + ( (6 + 3*i) * (ms_hr)) );
+                console.log(cur_midnight + ( (6 + 3*i) * (ms_hr)) );
             }
             let max_len = ((cur_resp["data"].hourly).length - (hr_day + Math.floor(hrs))); // output has two days worth of data, only want first day
             console.log(max_len);
@@ -127,7 +114,7 @@ module.exports =
                         ret_day["min_temp"] = cur_resp["data"].hourly[i]["temp"];
                         ret_day["max_temp"] = cur_resp["data"].hourly[i]["temp"];
                         ret_day["temp"] = cur_resp["data"].hourly[i]["temp"];
-                        console.log(check);
+                        console.log(j);
                     }
                 }
             }
@@ -137,11 +124,13 @@ module.exports =
             // Get next four day forecast
             return axios.get(url)
             .then (resp => {
+
                 // Ceil to midnight of the next day 
                 var time_slots = [];
-                
+                let time_zone = (resp["data"].city.timezone) / 3600;
+
                 for (let i=0; i<4; i++){
-                    for (let j=5; j<20; j++){
+                    for (let j=(6-time_zone); j<(20+time_zone); j++){
                         // Tomorrow in MS, add additional days, add a 6 hour offset to start at 6:00 am, add 3 hour increments up until 6pm
                         time_slots.push(day_nxt.getTime() + (ms_day * i) + (ms_hr * j) );
                     }
@@ -149,16 +138,12 @@ module.exports =
                 console.log(time_slots);
                 // Gather current day data (multiply by 10^3 (or 10**3) since the response is different than the output data)
                 // Seconds vs Milliseconds
-                let time_zone = (resp["data"].city.timezone) * ms;
+
                 for (let i=0; i<(resp["data"].list).length; i++ ) {
                     let vals = (resp["data"].list[i]["dt"])*ms;
                     // Four day forecast data
                     console.log(vals);
                     for (let j=0; j<time_slots.length; j++){
-                        console.log(". . . . .")
-                        console.log(vals);
-                        console.log("vs. . .")
-                        console.log(time_slots[j]);
                         if (vals === time_slots[j]) {
                             let ret_week = {};
                             ret_week["time"] = (resp["data"].list[i]["dt"]) * ms;
