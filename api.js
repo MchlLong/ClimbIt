@@ -141,9 +141,9 @@ module.exports =
                 var time_slots = [];
                 
                 for (let i=0; i<4; i++){
-                    for (let j=0; j<5; j++){
+                    for (let j=5; j<20; j++){
                         // Tomorrow in MS, add additional days, add a 6 hour offset to start at 6:00 am, add 3 hour increments up until 6pm
-                        time_slots.push(day_nxt.getTime() + (ms_day * i) + (ms_hr * 6) + (ms_hr * 3 * j) );
+                        time_slots.push(day_nxt.getTime() + (ms_day * i) + (ms_hr * j) );
                     }
                 }
                 console.log(time_slots);
