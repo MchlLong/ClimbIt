@@ -9,16 +9,13 @@ Javascript Webpage Controller
     // Home Button Functionality
     var home_buttons = document.getElementsByClassName("navto_home_page");
     for (var i = 0; i < home_buttons.length; i++) {
-        home_buttons[i].addEventListener("click", function() { swap_page("home_page") });
-        home_buttons[i].addEventListener("click", function() { remove_hikes() });
-        home_buttons[i].addEventListener("click", function() { remove_script() });
+        home_buttons[i].addEventListener("click", function() { goto_home() });
     }
 
     // Details Button Functionality
     var details_buttons = document.getElementsByClassName("navto_hike_detail_page");
     for (var i = 0; i < details_buttons.length; i++) {
-        details_buttons[i].addEventListener("click", function() { swap_page("hike_detail_page") });
-        details_buttons[i].addEventListener("click", function() { remove_script() });
+        details_buttons[i].addEventListener("click", function() { goto_hike_details() });
     }
 
     // Map Button Functionality
@@ -156,6 +153,19 @@ Javascript Webpage Controller
         .catch (error => console.log(error));
     }
 
+    // Called when user switches to home page 
+    function goto_home() {
+        swap_page("home_page");
+        empty_table("hike_table");
+        empty_table("directions_table");
+        remove_script();
+    }
+
+    function goto_hike_details() {
+        swap_page("hike_detail_page");
+        remove_script();
+    }
+
     // Goto Hike Menu (will invoke get_map())
     function goto_hike() {
         swap_page("hike_map_page");
@@ -226,7 +236,7 @@ Javascript Webpage Controller
             console.log(total_distance);
 
              // Add the table body
-             add_table("directions");
+             add_table("directions_table");
 
             // Add data to table 
             for(let i = 0; i < steps.length; i++) {
@@ -304,12 +314,10 @@ Javascript Webpage Controller
         return cell;
     }
 
-    // Empty the hike list
-    function remove_hikes() {
-        let hike_list = document.getElementById("hike_list");
-        while(hike_list.hasChildNodes()) {
-            hike_list.removeChild(hike_list.firstChild);
-        }
+    // Empty the table
+    function empty_table(table_name) {
+        let hike_table = document.getElementById(table_name).getElementsByTagName("tbody")[0];
+        hike_table.innerHTML = "";
     }
 
     // Add the GMaps script tag to the DOM

@@ -8,6 +8,7 @@ CSS Style Controller
 
 .table_container {
     text-align: center;
+    overflow-x:auto;
 }
 
 .table_and_nav {
