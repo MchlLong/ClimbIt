@@ -33,13 +33,13 @@ Javascript Webpage Controller
     // Air Button Functionality
     var air_buttons = document.getElementsByClassName("navto_air_page");
     for (var i = 0; i < air_buttons.length; i++) {
-        air_buttons[i].addEventListener("click", function() { swap_page("air_page") });
+        air_buttons[i].addEventListener("click", function() { goto_air() });
     }
 
     // Weather Button Functionality
     var weather_buttons = document.getElementsByClassName("navto_weather_page");
     for (var i = 0; i < weather_buttons.length; i++) {
-        weather_buttons[i].addEventListener("click", function() { swap_page("weather_page") });
+        weather_buttons[i].addEventListener("click", function() { goto_weather() });
     }
    
     // Find Hike Button Functionality
@@ -77,7 +77,6 @@ Javascript Webpage Controller
         // Deactivate all pages with an active tag
         let pages = document.getElementsByClassName("active");
         for (var i = 0; i < pages.length; i++) {
-            pages[i].classList.add("inactive");
             pages[i].classList.remove("active");
         }
 
@@ -101,8 +100,7 @@ Javascript Webpage Controller
             },
             body: JSON.stringify({address: addr, distance: dist})
         })
-        .then (resp => { return resp; })
-        .then (val => { return val.json(); })
+        .then (resp => { return resp.json(); })
         .then (mydata => { 
             console.log(mydata);
 
@@ -166,16 +164,16 @@ Javascript Webpage Controller
     function goto_hike() {
         swap_page("hike_map_page");
         console.log("Triggered object: " + event.target.id);
-        let pages = document.getElementsByClassName("visible");
+        let pages = document.getElementsByClassName("visible")[0];
         if (pages.length > 1) {
             console.log("Error,  multiple pages should not be visible at one time");
         }
         deactivate();
-        pages[0].classList.add("active");
-        pages[0].setAttribute("hike_id", event.target.attributes.getNamedItem("hike_id").value);
-        pages[0].setAttribute("hike_name", event.target.attributes.getNamedItem("hike_name").value);
-        pages[0].setAttribute("lat", event.target.attributes.getNamedItem("lat").value);
-        pages[0].setAttribute("long", event.target.attributes.getNamedItem("long").value);
+        pages.classList.add("active");
+        pages.setAttribute("hike_id", event.target.attributes.getNamedItem("hike_id").value);
+        pages.setAttribute("hike_name", event.target.attributes.getNamedItem("hike_name").value);
+        pages.setAttribute("lat", event.target.attributes.getNamedItem("lat").value);
+        pages.setAttribute("long", event.target.attributes.getNamedItem("long").value);
         get_map();
     }
 
@@ -186,7 +184,6 @@ Javascript Webpage Controller
         let data = document.getElementsByClassName("active")[0];
         let lat = data.attributes.getNamedItem("lat").value;
         let long = data.attributes.getNamedItem("long").value;
-
         console.log("lat:" + lat)
         console.log("long:" + long)
         console.log(JSON.stringify({lat, long}));
@@ -270,6 +267,30 @@ Javascript Webpage Controller
         .catch (error => console.log(error));
     }
 
+    function goto_weather() {
+
+        swap_page("weather_page");
+        let pages = document.getElementsByClassName("active")[0];
+        let lat = pages.attributes.getNamedItem("lat").value;
+        let long = pages.attributes.getNamedItem("long").value;
+
+        fetch("/get_weather", { 
+            method: "post", 
+            headers: {
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({lat, long})
+        })
+        .then (resp => { return resp.json(); })
+        .then (ret => { return render_weather(); })
+        .catch (error => console.log(error));
+    }
+
+    function goto_air() {
+        swap_page("air_page");
+        // Implement
+    }
 
 /* DOM Manipulation Functions */ 
 
@@ -364,8 +385,10 @@ Javascript Webpage Controller
         map.setCenter(marker.position);
     }
 
-
-
+function render_weather() {
+        console.log("Called render_weather, exiting.");
+        return;
+    }
 
 
 
