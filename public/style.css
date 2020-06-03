@@ -29,44 +29,6 @@ table {
     margin-bottom: 4%;
 }
 
-#hike_table {
-    border: 1px solid #ddd;
-}
-
-#hikes_column1 {
-    width: 60%;
-}
-
-#hikes_column2 {
-    width: 20%;
-    padding-left: 6.5%;
-}
-
-#hikes_column3 {
-    width: 20%;
-    padding-left: 5.5%;
-}
-
-.directions_container {
-    text-align: center;
-    overflow-x: auto;
-}
-
-#directions_table {
-    padding-left: 10%;
-    padding-right: 10%;
-    width: 80%;
-    display: inline-block;
-}
-
-#directions_column1 {
-     width: 60%;
-}
-
-#directions_column2 {
-     width: 20%;
-}
-
 tbody {
     height: 100%;
     overflow-y: auto;
@@ -76,16 +38,17 @@ th {
     padding-top: 2%;
     padding-bottom: 2%;
     padding-right: 4%;
-    background-color: rgb(71, 92, 72);
+    background-color: rgb(71, 92, 72); /* just playing with colors, not set on anything */
     color: white;
     text-align: justify;
     font-size: 1.25rem;
  }
  
+ /* again just playing */
  tr:nth-child(even){
      background-color: #f2f2f2
  }
- 
+ /* here too */
  tr:hover {
      background-color: #ddd;
  }
@@ -97,9 +60,49 @@ th {
      padding-right: 4%;
  }
 
- #directions_table td {
-     padding-left: 7.5%;
- }
+    /* Hike Table */
+    #hike_table {
+        border: 1px solid #ddd;
+    }
+
+    #hikes_column1 {
+        width: 60%;
+    }
+
+    #hikes_column2 {
+        width: 20%;
+        padding-left: 6.5%;
+    }
+
+    #hikes_column3 {
+        width: 20%;
+        padding-left: 5.5%;
+    }
+
+    /* Directions Table */
+    .directions_container {
+        text-align: center;
+        overflow-x: auto;
+    }
+
+    #directions_table {
+        padding-left: 10%;
+        padding-right: 10%;
+        width: 80%;
+        display: inline-block;
+    }
+
+    #directions_column1 {
+        width: 60%;
+    }
+
+    #directions_column2 {
+        width: 20%;
+    }
+
+    #directions_table td {
+        padding-left: 7.5%;
+    }
 
 /* Headers */
 h1 {
