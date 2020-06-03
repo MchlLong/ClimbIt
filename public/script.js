@@ -282,8 +282,8 @@ Javascript Webpage Controller
             },
             body: JSON.stringify({lat, long})
         })
-        .then (resp => { return resp.json(); })
-        .then (ret => { return render_weather(); })
+        .then (resp => {return resp.json(); })
+        .then (ret => {return render_weather(ret); })
         .catch (error => console.log(error));
     }
 
@@ -385,7 +385,7 @@ Javascript Webpage Controller
         map.setCenter(marker.position);
     }
 
-function render_weather() {
+function render_weather(weather_list) {
         console.log("Called render_weather, exiting.");
         return;
     }
