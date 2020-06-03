@@ -17,6 +17,8 @@
           type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
         />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&family=Poppins:wght@200&family=Ubuntu&display=swap" rel="stylesheet">
+
         <!-- Insert your favorite JavaScript Library(ies) here -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     </head>
@@ -58,7 +60,7 @@
         <div class="hike_detail_page invisible">
             <div class="table_container">
               <div class="table_and_nav">
-                <h2>Nearby Trails</h2>
+                <h1>Nearby Trails</h1>
                 <table id="hike_table"></table>
                 <button type="button" class="navto_home_page">Back</button>
               </div>
@@ -68,7 +70,7 @@
         <!-- Page which renders a map and allows for subindices of (weather, air quality, conditions, directions) -->
         <div class="hike_map_page invisible">
           <div class="container text-center">
-            <h2>Hike Map</h2>
+            <h1>Hike Map</h1>
             <div id="map">
               <!-- Map will go here -->
             </div>  
@@ -84,7 +86,7 @@
         <!-- Sub-index page which contains a list of directions to a hiking location -->
         <div class="directions_page invisible">
           <div id="header_container" class="header_container text-center">
-            <h2>Directions</h2>
+            <h1>Directions</h1>
             <label>Enter Origin:</label>
             <input 
               type="text"
@@ -106,7 +108,7 @@
         <!-- Sub-index page which contains the air quality and explanation / information -->
         <div class="air_page invisible">
           <div class="container text-center">
-            <h2>Air</h2>
+            <h1>Air</h1>
             <button type="button" class="navto_hike_detail_page">Go Back to Hike List</button>
             <button type="button" class="navto_home_page">Go Back to Search</button>
             <button type="button" class="navto_hike_map_page">Go Back to Map</button>
@@ -116,7 +118,7 @@
         <!-- Sub-index page which contains a weekly weather summary -->
         <div class="weather_page invisible">
           <div class="container text-center">
-            <h2>Weather</h2>
+            <h1>Weather</h1>
             <button type="button" class="navto_hike_detail_page">Go Back to Hike List</button>
             <button type="button" class="navto_home_page">Go Back to Search</button>
             <button type="button" class="navto_hike_map_page">Go Back to Map</button>

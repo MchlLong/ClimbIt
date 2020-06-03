@@ -94,6 +94,7 @@ Javascript Webpage Controller
         empty_table("directions_table");
         remove_script();
         remove_elements(headers);
+
     }
 
     // Go to Hike Menu (will invoke get_map())
@@ -153,13 +154,10 @@ Javascript Webpage Controller
 
             // Save necessary response data
             for(let i = 0; i < mydata.length; i++) {
-
                 // Save data for table to array
                 table_data.push([i, mydata[i].name, mydata[i].length, mydata[i].ascent]);
-
                 // Save index, hike name, ID, lat, and long to array
-                results.push([i, mydata[i].name, mydata[i].id, mydata[i].latitude, mydata[i].longitude]) 
-
+                results.push([i, mydata[i].name, mydata[i].id, mydata[i].latitude, mydata[i].longitude]); 
             }
 
             // Get number of columns
@@ -169,6 +167,7 @@ Javascript Webpage Controller
             let row = table.insertRow(-1);
             for (let i = 0; i < num_columns; i++) {
                 let header = document.createElement("th");
+                header.id = "hike_table_header";
                 header.innerHTML = table_data[0][i];
                 row.appendChild(header);
             }
@@ -184,6 +183,8 @@ Javascript Webpage Controller
                         if(results[i]) {
                             // Add hike button 
                             let hike_cell = add_hike(results[i][j+1], results[i][j], results[i][j+2], results[i][j+3]); 
+                            // Set ids for styling
+                            hike_cell.id = "hikes_column1";
                             // Append the data to the row
                             row.appendChild(hike_cell); 
                         }
@@ -192,6 +193,13 @@ Javascript Webpage Controller
                         // Append text 
                         let cell = row.insertCell(-1);
                         cell.innerHTML = table_data[i][j];
+                        // Set ids for styling
+                        if(j == 2) {
+                            cell.id = "hikes_column2";
+                        }
+                        if(j == 3) {
+                            cell.id = "hikes_column3";
+                        }
                     }
                 }
             }
@@ -248,13 +256,12 @@ Javascript Webpage Controller
             let steps = mydata["routes"][0].legs[0].steps;
             let duration = mydata["routes"][0].legs[0].duration.text;
 
-            // Add total distance and duration to DOM
+            // Add total distance to DOM
             let distance_header = document.createElement("h3");
             distance_header.innerHTML = `Total Distance: ${total_distance}`;
             distance_header.id = "distance_header"
             document.getElementById("header_container").appendChild(distance_header);
-            //let line_break = document.createElement("br");
-            //distance_header.appendChild(line_break);
+            // Add duration to DOM
             let duration_header = document.createElement("h3");
             duration_header.innerHTML = `Duration: ${duration}`;
             duration_header.id = "duration_header"
@@ -267,7 +274,7 @@ Javascript Webpage Controller
             // Save response data 
             let results = new Array();
             // Save header data
-            results.push(["Steps", "Distance to Next Step"]);
+            results.push(["Steps", "Distance to Next"]);
             // Save data to put in table
             for(let i = 0; i < steps.length; i++) {
                 results.push(([i, steps[i].html_instructions, steps[i].distance.text]));
@@ -291,6 +298,13 @@ Javascript Webpage Controller
                     // Append text 
                     let cell = row.insertCell(-1);
                     cell.innerHTML = results[i][j];
+                    // Set ids for styling
+                    if(j == 1) {
+                        cell.id = "directions_column1";
+                    }
+                    if(j == 2) {
+                        cell.id = "directions_column2";
+                    }
                 }
             }
         })
@@ -372,7 +386,7 @@ Javascript Webpage Controller
         // Initialize the map
         let map = new google.maps.Map(document.getElementById("map"), {
             center: new google.maps.LatLng(0,0),
-            zoom: 15
+            zoom: 10
         });
         // Add marker 
         add_marker(map);
