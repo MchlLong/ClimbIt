@@ -71,7 +71,7 @@ module.exports =
             // Create Date objects based on the first received date
             var timezone_offset = (cur_resp["data"]["timezone_offset"]) * ms;
             var time_now = (cur_resp["data"].current["dt"] * ms);
-            var cur_midnight = time_now - (time_now % ms_day) + timezone_offset; 
+            var cur_midnight = time_now - (time_now % ms_day) - timezone_offset - ms_day; 
             var tom_midnight = cur_midnight + ms_day;
             console.log("Timing things")
             console.log(cur_midnight);
