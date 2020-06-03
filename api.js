@@ -72,8 +72,10 @@ module.exports =
             var timezone_offset = (cur_resp["data"]["timezone_offset"]) * ms;
             var timezone_offset_hr = (((cur_resp["data"]["timezone_offset"]) * ms) / ms_hr);
             var time_now = (cur_resp["data"].current["dt"] * ms);
-            var cur_midnight = time_now - (time_now % ms_day) - (ms_day + timezone_offset);
+            var cur_midnight = time_now - (time_now % ms_day) - (timezone_offset);
             var tom_midnight = cur_midnight + ms_day;
+            var days_max = 5;
+
             console.log("Timing things")
             console.log(cur_midnight);
             console.log(tom_midnight);
@@ -85,11 +87,16 @@ module.exports =
 
             let hrs_left = tom_midnight - time_now;
             hrs = (24 - (hrs_left / ms_hr));
+            console.log(hrs_left / ms_hr);
+
             if (hrs >= 24) {
                 cur_midnight = cur_midnight + ms_day;
                 tom_midnight = cur_midnight + ms_day;
                 hrs = hrs % 24;
+                days_max += 1;
+                console.log("Increased. . . ");
             }
+
             console.log(hrs);
             if (hrs >= 18) {                // If 18 hours have passed, no weather data for today
                 ret.push({"count": 0});
@@ -124,8 +131,8 @@ module.exports =
                         ret_day["min_temp"] = cur_resp["data"].hourly[i]["temp"];
                         ret_day["max_temp"] = cur_resp["data"].hourly[i]["temp"];
                         ret_day["temp"] = cur_resp["data"].hourly[i]["temp"];
-                        console.log(ret_day);
-                        console.log('. . .');
+                        //console.log(ret_day);
+                        //console.log('. . .');
                     }
                 }
             }
@@ -140,8 +147,8 @@ module.exports =
                 var time_slots = [];
                 let time_zone = (resp["data"].city.timezone) / 3600;
 
-                for (let i=0; i<4; i++){
-                    for (let j=4; j<21; j++){
+                for (let i=0; i<days_max; i++){
+                    for (let j=5; j<21; j++){
                         // Tomorrow in MS, add additional days, add a 6 hour offset to start at 6:00 am, add 3 hour increments up until 6pm
                         time_slots.push(cur_midnight + (ms_day * i) + (ms_hr * j) );
                     }
@@ -167,7 +174,7 @@ module.exports =
                         }
                     }
                 }
-                //console.log(ret);
+                console.log(ret.length);
                 return ret;
             })
             .catch(error => console.log(error));
