@@ -395,8 +395,10 @@ Javascript Webpage Controller
             const table = document.getElementById("weather_body");
             const width = 5;
             const height = 6;
+            const elem_per_row = 1;
             const skip_base = 25 - weather_list.length;
-            var skip_factor = skip_base;
+            var skip_factor = skip_base * elem_per_row;
+            console.log(weather_list.length);
             // Generate table
             /*
             ret_week["time"] = (resp["data"].list[i]["dt"]) * ms;
@@ -408,29 +410,49 @@ Javascript Webpage Controller
 
             for (let i=0; i<height; i++) {
                 // Generate row
-                let row = table.insertRow(i);
-                if (i === 0) {
+                for (let k=0; k<elem_per_row; k++){
+                    let row = table.insertRow((i * elem_per_row) + k);
+                    if (i == 0) {
 
-                    for (let j=0; j<width; j++) {
-                        let cell = row.insertCell(j);
-                        cell.innerHTML = `Header: (${j}, ${i})`;
-                    } 
-
-                }
-                else {
-
-                    for (let j=0; j<width; j++) {
-                        // Check skip_factor
-                        if (skip_factor > 0 && j === 0 ) {
+                        for (let j=0; j<width; j++) {
                             let cell = row.insertCell(j);
-                            cell.innerHTML = "";
-                            skip_factor--;
-                        }
-                        else {
-                            let cell = row.insertCell(j);
-                            let flat = (j * width) + (i-1) - skip_base;
-                            //cell.innerHTML = `${weather_list[flat]["time"]} (${j}, ${i})`;
-                            cell.innerHTML = flat;
+                            if (k == 0)
+                                cell.innerHTML = `Header: (${j}, ${i})`;
+                        } 
+
+                    }
+                    else {
+
+                        for (let j=0; j<width; j++) {
+                            // Check skip_factor
+                            if (skip_factor > 0 && j == 0 ) {
+                                let cell = row.insertCell(j);
+                                cell.innerHTML = "";
+                                skip_factor--;
+                            }
+                            else {
+                                let cell = row.insertCell(j);
+                                let flat = (j * width) + (i-1) - skip_base;
+                                var temp = document.createElement("label");
+                                date = new Date(weather_list[flat]["time"]);
+                                temp.innerHTML = `${date.toLocaleString()}`;
+                                cell.appendChild(temp);
+                                cell.appendChild(document.createElement("br"));
+                                var temp = document.createElement("label");
+                                temp.innerHTML = `${weather_list[flat]["weather"]}`;
+                                cell.appendChild(temp);
+                                cell.appendChild(document.createElement("br"));
+                                var temp = document.createElement("label");
+                                temp.innerHTML = `${weather_list[flat]["temp"]}`;
+                                cell.appendChild(temp);
+                                cell.appendChild(document.createElement("br"));
+                                var temp = document.createElement("label");
+                                temp.innerHTML = `${weather_list[flat]["min_temp"]} ~ ${weather_list[flat]["max_temp"]}`;
+                                cell.appendChild(temp);
+                                //cell.innerHTML = `${weather_list[flat]["time"]} (${j}, ${i})`;
+                                //cell.innerHTML = flat;
+                            
+                            }
                         }
                     }
                 }
