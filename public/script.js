@@ -109,49 +109,64 @@ Javascript Webpage Controller
             // Add the table body 
             add_table("hike_table");
 
-            // Add response data to table
+            let table = document.getElementById("hike_table");
+
+            // Build array containing results to access outside of here if possible
+            let table_data = new Array();
+            let results = new Array();
+            table_data.push(["Hike Name (click to see map)", "Length (in miles)", "Elevation Gain (in feet)"]);
+
+            // Save necessary response data
             let length = mydata.length;
             for(let i = 0; i < length; i++) {
-                // Create row and append to tbody
-                let row = document.createElement("tr");
-                document.getElementById("hike_body").appendChild(row);
-                
-                // 3 columns: hike button, length, and elevation gain
-                // this is so gross and repetitive but adds a lot of lines so i'm leaving it for now
-                for(let j = 0; j < 3; j++) {
-                    if(j == 0) {
-                        // Get the hike name, ID, lat, and long 
-                        let name = mydata[i].name;
-                        let id = mydata[i].id;
-                        let lat = mydata[i].latitude;
-                        let long = mydata[i].longitude; 
 
-                        // Add the hike button and details to each column 
-                        let hike_cell = add_hike(id, name, lat, long); 
-                        // Append the data to the row
-                        row.appendChild(hike_cell); 
-                    }
+                // Save data for table to array
+                table_data.push([i, mydata[i].name, mydata[i].length, mydata[i].ascent]);
+
+                // Save the hike name, ID, lat, and long to array
+                results.push([i, mydata[i].name, mydata[i].id, mydata[i].latitude, mydata[i].longitude]) 
+
+            }
+
+            // Get number of columns
+            let num_columns = table_data[0].length;
+
+            // Add the header 
+            let row = table.insertRow(-1);
+            for (let i = 0; i < num_columns; i++) {
+                let header = document.createElement("th");
+                header.innerHTML = table_data[0][i];
+                row.appendChild(header);
+            }
+
+            // Add table data
+            for (let i = 1; i < results.length; i++) {
+                row = table.insertRow(-1);
+                for (let j = 1; j <= num_columns; j++) {
                     if(j == 1) {
-                        // Add the length of the hike in miles
-                        let length_of_hike = mydata[i].length;
-                        let length_cell = document.createElement("td");
-                        let length_value = document.createTextNode(length_of_hike + " miles");
-                        length_cell.appendChild(length_value);
-                        row.appendChild(length_cell);
+                        // Add the hike button and details to each column 
+                        // format: add_hike(id, name, lat ,long)
+                        if(results[i]) {
+                            // Add hike button 
+                            let hike_cell = add_hike(results[i][j+1], results[i][j], results[i][j+2], results[i][j+3]); 
+                            // Append the data to the row
+                            row.appendChild(hike_cell); 
+                        }
                     }
-                    if(j == 2) {
-                        // Add the elevation of the hike in feet 
-                        let elevation = mydata[i].ascent;
-                        let elevation_cell = document.createElement("td");
-                        let elevation_value = document.createTextNode(elevation + " feet gain");
-                        elevation_cell.appendChild(elevation_value);
-                        row.appendChild(elevation_cell);
+                    else {
+                        let cell = row.insertCell(-1);
+                        cell.innerHTML = table_data[i][j];
                     }
                 }
             }
+                
+            
         })
         .catch (error => console.log(error));
+
     }
+
+    
 
     // Switches to home page, deallocates tables, and removes map script from DOM
     function goto_home() {
@@ -226,6 +241,7 @@ Javascript Webpage Controller
             let steps = mydata["routes"][0].legs[0].steps;
             let duration = mydata["routes"][0].legs[0].duration.text;
 
+
             console.log(steps);
             console.log(duration);
             console.log(total_distance);
@@ -268,8 +284,7 @@ Javascript Webpage Controller
         })
         .catch (error => console.log(error));
 
-        //hide button
-        document.getElementById("direction_button").classList.add("invisible");
+        // Hide button
     }
 
 
@@ -338,7 +353,6 @@ Javascript Webpage Controller
         let cell = document.createElement("td");
         cell.innerHTML = table_item;
         document.getElementById("directions").appendChild(cell);
-
     }
 
 

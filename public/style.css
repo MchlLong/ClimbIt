@@ -20,7 +20,13 @@ table {
     border-spacing: 0;
     width: 100%;
     border: 1px solid #ddd;
+    margin-top: 4%;
     margin-bottom: 4%;
+}
+
+th {
+    text-align: left;
+    padding: 8px;
 }
 
 tr:nth-child(even){
