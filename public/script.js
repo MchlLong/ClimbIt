@@ -333,8 +333,11 @@ Javascript Webpage Controller
 
     // Empty the table
     function empty_table(table_name) {
-        let hike_table = document.getElementById(table_name).getElementsByTagName("tbody")[0];
-        hike_table.innerHTML = "";
+        let hike_table = document.getElementById(table_name).getElementsByTagName("tbody");
+        if (hike_table) {
+            hike_table = hike_table[0];
+            hike_table.innerHTML = "";
+        }
     }
 
     // Add the GMaps script tag to the DOM
@@ -355,7 +358,6 @@ Javascript Webpage Controller
         let cell = document.createElement("td");
         cell.innerHTML = table_item;
         document.getElementById("directions").appendChild(cell);
-
     }
 
 
@@ -385,10 +387,58 @@ Javascript Webpage Controller
         map.setCenter(marker.position);
     }
 
-function render_weather(weather_list) {
-        console.log("Called render_weather, exiting.");
-        return;
+    function render_weather(weather_list) {
+            /*
+                <tbody id="weather_body">
+            */
+            empty_table("weather_table");
+            const table = document.getElementById("weather_body");
+            const width = 5;
+            const height = 6;
+            const skip_base = 25 - weather_list.length;
+            var skip_factor = skip_base;
+            // Generate table
+            /*
+            ret_week["time"] = (resp["data"].list[i]["dt"]) * ms;
+            ret_week["temp"] = resp["data"].list[i]["main"]["temp"];
+            ret_week["min_temp"] = resp["data"].list[i]["main"]["temp_min"];
+            ret_week["max_temp"] = resp["data"].list[i]["main"]["temp_max"];
+            ret_week["weather"] = resp["data"].list[i]["weather"][0]["main"];
+            */
+
+            for (let i=0; i<height; i++) {
+                // Generate row
+                let row = table.insertRow(i);
+                if (i === 0) {
+
+                    for (let j=0; j<width; j++) {
+                        let cell = row.insertCell(j);
+                        cell.innerHTML = `Header: (${j}, ${i})`;
+                    } 
+
+                }
+                else {
+
+                    for (let j=0; j<width; j++) {
+                        // Check skip_factor
+                        if (skip_factor > 0 && j === 0 ) {
+                            let cell = row.insertCell(j);
+                            cell.innerHTML = "";
+                            skip_factor--;
+                        }
+                        else {
+                            let cell = row.insertCell(j);
+                            let flat = (j * width) + (i-1) - skip_base;
+                            //cell.innerHTML = `${weather_list[flat]["time"]} (${j}, ${i})`;
+                            cell.innerHTML = flat;
+                        }
+                    }
+                }
+            }
+
+            return;
+        }
+
+    function get_icon(icon) {
+        return icon;
     }
-
-
-
