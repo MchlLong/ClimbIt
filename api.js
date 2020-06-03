@@ -71,18 +71,25 @@ module.exports =
             // Create Date objects based on the first received date
             var timezone_offset = (cur_resp["data"]["timezone_offset"]) * ms;
             var time_now = (cur_resp["data"].current["dt"] * ms);
-            var cur_midnight = time_now - (time_now % ms_day) - timezone_offset - ms_day; 
+            var cur_midnight = time_now - (time_now % ms_day) - (ms_day + timezone_offset);
             var tom_midnight = cur_midnight + ms_day;
             console.log("Timing things")
             console.log(cur_midnight);
             console.log(tom_midnight);
             console.log(time_now);
+            console.log(timezone_offset);
             // Usage of the day object
             // var ret_week = {"time": "", "weather": "", "temp": "", "min_temp": "", "max_temp": ""};
             var ret = [];
 
             let hrs_left = tom_midnight - time_now;
-            hrs = 24 - (hrs_left / ms_hr);
+            hrs = (24 - (hrs_left / ms_hr));
+            if (hrs >= 24) {
+                cur_midnight = cur_midnight + ms_day;
+                tom_midnight = cur_midnight + ms_day;
+                hrs = hrs % 24;
+            }
+            console.log(hrs);
             if (hrs >= 18) {                // If 18 hours have passed, no weather data for today
                 ret.push({"count": 0});
             }
@@ -102,6 +109,7 @@ module.exports =
                 times.push(cur_midnight + ( (6 + 3*i) * (ms_hr)) );
                 console.log(cur_midnight + ( (6 + 3*i) * (ms_hr)) );
             }
+            console.log((cur_resp["data"].hourly).length);
             let max_len = ((cur_resp["data"].hourly).length - (hr_day + Math.floor(hrs))); // output has two days worth of data, only want first day
             console.log(max_len);
             console.log("Entering check phase");
