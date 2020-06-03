@@ -70,6 +70,7 @@ module.exports =
 
             // Create Date objects based on the first received date
             var timezone_offset = (cur_resp["data"]["timezone_offset"]) * ms;
+            var timezone_offset_hr = (((cur_resp["data"]["timezone_offset"]) * ms) / ms_hr);
             var time_now = (cur_resp["data"].current["dt"] * ms);
             var cur_midnight = time_now - (time_now % ms_day) - (ms_day + timezone_offset);
             var tom_midnight = cur_midnight + ms_day;
@@ -140,9 +141,9 @@ module.exports =
                 let time_zone = (resp["data"].city.timezone) / 3600;
 
                 for (let i=0; i<4; i++){
-                    for (let j=(6-time_zone); j<(20+time_zone); j++){
+                    for (let j=4; j<21; j++){
                         // Tomorrow in MS, add additional days, add a 6 hour offset to start at 6:00 am, add 3 hour increments up until 6pm
-                        time_slots.push(day_nxt.getTime() + (ms_day * i) + (ms_hr * j) );
+                        time_slots.push(cur_midnight + (ms_day * i) + (ms_hr * j) );
                     }
                 }
                 console.log(time_slots);
@@ -161,12 +162,12 @@ module.exports =
                             ret_week["min_temp"] = resp["data"].list[i]["main"]["temp_min"];
                             ret_week["max_temp"] = resp["data"].list[i]["main"]["temp_max"];
                             ret_week["weather"] = resp["data"].list[i]["weather"][0]["main"];
-                            console.log(ret_week["weather"]);
+                            console.log(ret_week);
                             ret.push(ret_week);
                         }
                     }
                 }
-                console.log(ret);
+                //console.log(ret);
                 return ret;
             })
             .catch(error => console.log(error));
