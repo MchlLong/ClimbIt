@@ -74,6 +74,7 @@ module.exports =
             var time_now = (cur_resp["data"].current["dt"] * ms);
             var cur_midnight = time_now - (time_now % ms_day) - (timezone_offset);
             var tom_midnight = cur_midnight + ms_day;
+            var days_min = 1;
             var days_max = 5;
 
             console.log("Timing things")
@@ -96,13 +97,14 @@ module.exports =
                 days_max += 1;
                 console.log("Increased. . . ");
             }
-
+            /*
             console.log(hrs);
             if (hrs >= 18) {                // If 18 hours have passed, no weather data for today
                 ret.push({"count": 0});
             }
             else if (hrs < 6) {             // If less than 6 hours have passed, all weather data is available
                 ret.push({"count": 5});
+                console.log("All hikes available");
             }
             else {
                 console.log(Math.ceil(6 - hrs / 3));
@@ -136,7 +138,7 @@ module.exports =
                     }
                 }
             }
-
+            */
 
 
             // Get next four day forecast
@@ -145,10 +147,10 @@ module.exports =
 
                 // Ceil to midnight of the next day 
                 var time_slots = [];
-                let time_zone = (resp["data"].city.timezone) / 3600;
+                let time_zone = (resp["data"].city.timezone) * ms;
 
-                for (let i=0; i<days_max; i++){
-                    for (let j=5; j<21; j++){
+                for (let i=0; i<5; i++){
+                    for (let j=5; j<20; j++){
                         // Tomorrow in MS, add additional days, add a 6 hour offset to start at 6:00 am, add 3 hour increments up until 6pm
                         time_slots.push(cur_midnight + (ms_day * i) + (ms_hr * j) );
                     }
