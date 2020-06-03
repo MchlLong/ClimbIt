@@ -83,6 +83,38 @@ Javascript Webpage Controller
 
     }
 
+    // Switches to home page, deallocates tables, and removes map script from DOM
+    function goto_home() {
+
+        headers = ["distance_header", "duration_header"];
+
+        swap_page("home_page");
+        // should really implement emptyAll()
+        empty_table("hike_table");
+        empty_table("directions_table");
+        remove_script();
+        remove_elements(headers);
+    }
+
+    // Go to Hike Menu (will invoke get_map())
+    function goto_hike() {
+
+        swap_page("hike_map_page");
+        console.log("Triggered object: " + event.target.id);
+        let pages = document.getElementsByClassName("visible");
+        if (pages.length > 1) {
+            console.log("Error,  multiple pages should not be visible at one time");
+        }
+        deactivate();
+        pages[0].classList.add("active");
+        pages[0].setAttribute("hike_id", event.target.attributes.getNamedItem("hike_id").value);
+        pages[0].setAttribute("hike_name", event.target.attributes.getNamedItem("hike_name").value);
+        pages[0].setAttribute("lat", event.target.attributes.getNamedItem("lat").value);
+        pages[0].setAttribute("long", event.target.attributes.getNamedItem("long").value);
+        get_map();
+
+    }
+
 /* API Wrapper Functions */
 
     // Convert location input to lat/long coordinates using Geocoding API
@@ -169,35 +201,6 @@ Javascript Webpage Controller
         .catch (error => console.log(error));
     }
 
-    // Switches to home page, deallocates tables, and removes map script from DOM
-    function goto_home() {
-        headers = ["distance_header", "duration_header"];
-
-        swap_page("home_page");
-        // should really implement emptyAll()
-        empty_table("hike_table");
-        empty_table("directions_table");
-        remove_script();
-        remove_elements(headers);
-    }
-
-    // Go to Hike Menu (will invoke get_map())
-    function goto_hike() {
-        swap_page("hike_map_page");
-        console.log("Triggered object: " + event.target.id);
-        let pages = document.getElementsByClassName("visible");
-        if (pages.length > 1) {
-            console.log("Error,  multiple pages should not be visible at one time");
-        }
-        deactivate();
-        pages[0].classList.add("active");
-        pages[0].setAttribute("hike_id", event.target.attributes.getNamedItem("hike_id").value);
-        pages[0].setAttribute("hike_name", event.target.attributes.getNamedItem("hike_name").value);
-        pages[0].setAttribute("lat", event.target.attributes.getNamedItem("lat").value);
-        pages[0].setAttribute("long", event.target.attributes.getNamedItem("long").value);
-        get_map();
-    }
-
     // Display the hike map from Google Maps JavaScript API
     function get_map() {
         const url = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCw6yD8WOm2BDI1nzERttC5meDgBPFbMIo&callback=initMap"
@@ -250,8 +253,8 @@ Javascript Webpage Controller
             distance_header.innerHTML = `Total Distance: ${total_distance}`;
             distance_header.id = "distance_header"
             document.getElementById("header_container").appendChild(distance_header);
-            let line_break = document.createElement("br");
-            distance_header.appendChild(line_break);
+            //let line_break = document.createElement("br");
+            //distance_header.appendChild(line_break);
             let duration_header = document.createElement("h3");
             duration_header.innerHTML = `Duration: ${duration}`;
             duration_header.id = "duration_header"
@@ -363,14 +366,6 @@ Javascript Webpage Controller
     function remove_script(url) {
         window.google = {};
     }
-
-    // Add the direction data to the table
-    function add_directions(table_item) {
-        let cell = document.createElement("td");
-        cell.innerHTML = table_item;
-        document.getElementById("directions").appendChild(cell);
-    }
-
 
     // Initialize JS Map
     function initMap() {
