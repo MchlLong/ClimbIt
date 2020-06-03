@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="style.css">
         <title>Hiking App</title>
         <!-- Styling / JS Components-->
+        <!-- Favicons -->
         <!-- Insert your favorite CSS frameworks here -->
         <link
           rel="stylesheet"
@@ -82,7 +83,7 @@
 
         <!-- Sub-index page which contains a list of directions to a hiking location -->
         <div class="directions_page invisible">
-          <div class="header_container text-center">
+          <div id="header_container" class="header_container text-center">
             <h2>Directions</h2>
             <label>Enter Origin:</label>
             <input 
@@ -90,10 +91,8 @@
               id="origin"
               onfocus="this.value=''"/><br> 
             </div>
-            <div class="directions_container">
-            <table id="directions_table">
-              <tbody id="directions_body"></tbody>   
-            </table>
+            <div id="directions_container" class="directions_container">
+            <table id="directions_table"></table>
           </div>
           
             <div class="button_container text-center">

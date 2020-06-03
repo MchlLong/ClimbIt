@@ -17,20 +17,37 @@ CSS Style Controller
 
 table {
     border-collapse: collapse;
-    border-spacing: 0;
     width: 100%;
     border: 1px solid #ddd;
     margin-top: 4%;
     margin-bottom: 4%;
 }
 
+#directions_table {
+    padding-left: 2%;
+    padding-right: 5%;
+}
+
+h3 {
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
 th {
-    text-align: left;
-    padding: 8px;
+   padding-top: 2%;
+   padding-bottom: 2%;
+   padding-right: 4%;
+   background-color: rgb(71, 92, 72);
+   color: white;
+   text-align: left;
 }
 
 tr:nth-child(even){
     background-color: #f2f2f2
+}
+
+tr:hover {
+    background-color: #ddd;
 }
     
 td {
