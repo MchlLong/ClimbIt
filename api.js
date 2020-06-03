@@ -42,13 +42,11 @@ module.exports =
         .catch(error => console.log(error));
     },
 
-    // Display a map centered on the hike's coordinates
-    get_map: function (lat, long) {
+    get_directions: function (origin, destination) {
         const key = process.env.GOOGLE_API_KEY;
-        const static_url = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${long}&zoom=10&size=400x400&maptype=terrain&key=${key}`;
-        return axios.get(static_url)
-        .then (response => { return response; })
-        .then (data => console.log(data.config.url))
+        const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${key}`;
+        return axios.get(url)
+        .then (response => { return response["data"]; })
         .catch(error => console.log(error));
     },
 

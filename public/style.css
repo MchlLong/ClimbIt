@@ -6,17 +6,39 @@ CSS Style Controller
 
 /* General Styling */
 
-.list_container {
+.table_container {
     text-align: center;
+    overflow-x: auto;
 }
 
-.list_and_nav {
+.table_and_nav {
     display: inline-block;
 }
 
-ul {
-    list-style-type: none;
-    padding-right: 10%;
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+    
+td {
+    text-align: left;
+    padding: 8px;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+    margin-bottom: 2%;
+}
+
+.navto_hike_map_page {
+    margin-bottom: 2%;
+}
+
+.directions_container {
+    overflow-x: auto;
 }
 
 /* Visibility Controls */

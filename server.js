@@ -29,11 +29,8 @@ server.post("/get_hikes", (req, resp) => {
     .catch(error => console.log(error));
 });
 
-server.post("/get_map", (req, resp) => { 
-    console.log("lat from server.js: " + req.body["lat"]);
-    console.log("long from server.js: " + req.body["long"]);
-
-    api.get_map(req.body["lat"], req.body["long"])
+server.post("/get_directions", (req, resp) => {
+    api.get_directions(req.body["origin"], req.body["destination"])
     .then(data => {resp.send(data);})
     .catch(error => console.log(error));
 });
