@@ -71,9 +71,10 @@ module.exports =
             // Create Date objects based on the first received date
             var timezone_offset = (cur_resp["data"]["timezone_offset"]) * ms;
             var time_now = (cur_resp["data"].current["dt"] * ms);
-            var cur_midnight = time_now - (time_now % ms_day) - timezone_offset; 
+            var cur_midnight = time_now - (time_now % ms_day) + timezone_offset; 
             var tom_midnight = cur_midnight + ms_day;
-            
+            console.log("Timing things")
+            console.log(cur_midnight);
             console.log(tom_midnight);
             console.log(time_now);
             // Usage of the day object
@@ -104,7 +105,7 @@ module.exports =
             let max_len = ((cur_resp["data"].hourly).length - (hr_day + Math.floor(hrs))); // output has two days worth of data, only want first day
             console.log(max_len);
             console.log("Entering check phase");
-            for (let i=max_len; i>0; i--) {
+            for (let i=0; i<max_len; i++) {
                 let check = cur_resp["data"].hourly[i]["dt"] * ms;
                 for (let j=0; j<5; j++) {
                     if (check === times[j]){
@@ -114,7 +115,8 @@ module.exports =
                         ret_day["min_temp"] = cur_resp["data"].hourly[i]["temp"];
                         ret_day["max_temp"] = cur_resp["data"].hourly[i]["temp"];
                         ret_day["temp"] = cur_resp["data"].hourly[i]["temp"];
-                        console.log(j);
+                        console.log(ret_day);
+                        console.log('. . .');
                     }
                 }
             }
