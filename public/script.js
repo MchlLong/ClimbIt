@@ -269,7 +269,7 @@ Javascript Webpage Controller
         .catch (error => console.log(error));
 
         //hide button
-       // document.getElementById("direction_button").classList.add("invisible");
+        document.getElementById("direction_button").classList.add("invisible");
     }
 
 
@@ -281,14 +281,6 @@ Javascript Webpage Controller
         // Add the table_body to the table
         document.getElementById(table_id).appendChild(table_body);
     }
-
-    function add_header(num_columns, data) {
-        var header = table.createTHead();
-        var row = header.insertRow(0);
-        var cell = row.insertCell(0);
-        cell.innerHTML = data;
-    }
-
 
     // Add a hike button to the "hike_table" in the DOM
     function add_hike(hike_id, hike_name, lat, long) {
@@ -321,8 +313,11 @@ Javascript Webpage Controller
 
     // Empty the table
     function empty_table(table_name) {
-        let hike_table = document.getElementById(table_name).getElementsByTagName("tbody")[0];
-        hike_table.innerHTML = "";
+        var table = document.getElementById(table_name);
+        var num_rows = table.rows.length;
+        for (var i = num_rows-1; i >= 0; i--) 
+            table.deleteRow(i);
+    
     }
 
     // Add the GMaps script tag to the DOM
