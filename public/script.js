@@ -198,7 +198,6 @@ Javascript Webpage Controller
     // Display directions from given origin to trailhead location using Directions API
     function goto_directions() {
 
-        
         // Retrieve coords of destination 
         let data = document.getElementsByClassName("active")[0];
         let lat = data.attributes.getNamedItem("lat").value;
@@ -268,6 +267,9 @@ Javascript Webpage Controller
             }
         })
         .catch (error => console.log(error));
+
+        //hide button
+       // document.getElementById("direction_button").classList.add("invisible");
     }
 
 
@@ -278,6 +280,13 @@ Javascript Webpage Controller
         let table_body = document.createElement("tbody");
         // Add the table_body to the table
         document.getElementById(table_id).appendChild(table_body);
+    }
+
+    function add_header(num_columns, data) {
+        var header = table.createTHead();
+        var row = header.insertRow(0);
+        var cell = row.insertCell(0);
+        cell.innerHTML = data;
     }
 
 
