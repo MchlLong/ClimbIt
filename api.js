@@ -68,8 +68,14 @@ module.exports =
 
             var time_now = (resp["data"].list[0]["dt"] * ms);
             let time_zone = (resp["data"].city.timezone) * ms;
-            var cur_midnight = time_now - (time_now % ms_day) - (time_zone);
+            console.log(time_zone);
+            if (time_zone < 0)
+                var cur_midnight = time_now - (time_now % ms_day) - (time_zone) - ms_day;
+            else
+                var cur_midnight = time_now - (time_now % ms_day) - (time_zone);
+
             var tom_midnight = cur_midnight + ms_day;
+            console.log(cur_midnight);
             // Usage of the day object
             // var ret_week = {"time": "", "weather": "", "temp": "", "min_temp": "", "max_temp": ""};
             var ret = [];
@@ -77,19 +83,20 @@ module.exports =
 
             for (let i=0; i<5; i++){
                 for (let j=5; j<20; j++){
-                    time_slots.push(cur_midnight + (ms_day * i) + (ms_hr * j) );
+                    time_slots.push(cur_midnight + (ms_day * i) + (ms_hr * j));
                 }
             }
+            console.log(time_slots);
             // Gather current day data (multiply by 10^3 (or 10**3) since the response is different than the output data)
             // Seconds vs Milliseconds
 
-            for (let i=0; i<(resp["data"].list).length; i++ ) {
+            for (let i=0; i<(resp["data"].list).length; i++) {
                 let vals = (resp["data"].list[i]["dt"])*ms;
                 // Four day forecast data
                 for (let j=0; j<time_slots.length; j++){
                     if (vals === time_slots[j]) {
                         let ret_week = {};
-                        ret_week["time"] = (resp["data"].list[i]["dt"]) * ms;
+                        ret_week["time"] = ((resp["data"].list[i]["dt"]) * ms) + time_zone;
                         ret_week["temp"] = resp["data"].list[i]["main"]["temp"];
                         ret_week["min_temp"] = resp["data"].list[i]["main"]["temp_min"];
                         ret_week["max_temp"] = resp["data"].list[i]["main"]["temp_max"];
@@ -98,6 +105,7 @@ module.exports =
                     }
                 }
             }
+            console.log(ret);
             return ret;
         })
         .catch(error => console.log(error));

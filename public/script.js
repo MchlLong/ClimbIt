@@ -435,7 +435,7 @@ Javascript Webpage Controller
                                 let flat = (j * width) + (i-1) - skip_base;
                                 var temp = document.createElement("label");
                                 date = new Date(weather_list[flat]["time"]);
-                                temp.innerHTML = `${date.toLocaleString()}`;
+                                temp.innerHTML = `${date.toGMTString().slice(0, -4)}`;
                                 cell.appendChild(temp);
                                 cell.appendChild(document.createElement("br"));
                                 var temp = document.createElement("label");
@@ -460,6 +460,7 @@ Javascript Webpage Controller
 
             return;
         }
+
 
     function get_icon(icon) {
         return icon;
