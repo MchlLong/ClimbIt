@@ -260,12 +260,12 @@ Javascript Webpage Controller
             let distance_header = document.createElement("h3");
             distance_header.innerHTML = `Total Distance: ${total_distance}`;
             distance_header.id = "distance_header"
-            document.getElementById("header_container").appendChild(distance_header);
+            document.getElementById("distance_and_duration").appendChild(distance_header);
             // Add duration to DOM
             let duration_header = document.createElement("h3");
             duration_header.innerHTML = `Duration: ${duration}`;
             duration_header.id = "duration_header"
-            document.getElementById("header_container").appendChild(duration_header);
+            document.getElementById("distance_and_duration").appendChild(duration_header);
            
             // Add the table body
             add_table("directions_table");
