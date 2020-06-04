@@ -484,15 +484,12 @@ Javascript Webpage Controller
                                 cell.appendChild(temp);
                                 cell.appendChild(document.createElement("br"));
                                 var temp = document.createElement("label");
-                                temp.innerHTML = `${weather_list[flat]["temp"]}`;
+                                temp.innerHTML = `${Math.round((weather_list[flat]["temp"] - 273.15)*(9/5) + 32)}ºF / ${Math.round(weather_list[flat]["temp"] - 273.15)}ºC`;
                                 cell.appendChild(temp);
                                 cell.appendChild(document.createElement("br"));
-                                var temp = document.createElement("label");
-                                temp.innerHTML = `${weather_list[flat]["min_temp"]} ~ ${weather_list[flat]["max_temp"]}`;
-                                cell.appendChild(temp);
-                                //cell.innerHTML = `${weather_list[flat]["time"]} (${j}, ${i})`;
-                                //cell.innerHTML = flat;
-                            
+                                //var temp = document.createElement("label");
+                                //temp.innerHTML = `${Math.round((weather_list[flat]["min_temp"] - 273.15)*(9/5) + 32)}ºF / ${Math.round(weather_list[flat]["min_temp"] - 273.15)}ºC ~ ${Math.round((weather_list[flat]["max_temp"] - 273.15)*(9/5) + 32)}ºF / ${Math.round(weather_list[flat]["max_temp"] - 273.15)}ºC`;
+                                //cell.appendChild(temp);                           
                             }
                         }
                     }
