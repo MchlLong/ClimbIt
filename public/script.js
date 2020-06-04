@@ -85,10 +85,10 @@ Javascript Webpage Controller
     // Switches to home page, deallocates tables, and removes map script from DOM
     function goto_home() {
 
-        headers = ["distance_header", "duration_header"];
+        headers = ["distance_and_duration"];
 
         swap_page("home_page");
-        // should really implement emptyAll()
+        // should really implement empty_all()
         empty_table("hike_table");
         empty_table("directions_table");
         remove_script();
