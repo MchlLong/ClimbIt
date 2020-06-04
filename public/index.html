@@ -40,6 +40,7 @@
         <!-- Starter search page where you can enter a general location -->
         <div class="home_page visible">
             <div class="container mt-4">
+              <button type="button" class="navto_about_page">About</button>
                 <form id="bootstrap-form" class="bg-light border mx-auto p-4">
                       <h1 class="mb-3 text-center">Where would you like to hike?</h1>
                       <div class="form-group row">
@@ -60,11 +61,15 @@
                             onfocus="this.value=''"
                           />
                       </div>
+                      
                       <div class="text-center">
                         <button type="button" class="btn btn-lrg btn-secondary find_hikes navto_hike_detail_page">Find hikes</button>
                       </div>
+
                     </div>
                     </form>
+                    
+
           </div>
         </div>
 
@@ -92,8 +97,8 @@
             </div>  
             <!-- Other Buttons -->
             <button type="button" class="navto_directions_page">Directions</button>
-            <button type="button" class="navto_air_page">Air</button>
-            <button type="button" class="navto_weather_page">Weather</button><br><br>
+            <button type="button" class="navto_weather_page">Weather</button>
+            <br><br>
             <button type="button" class="navto_hike_detail_page">Go Back to Hike List</button>
             <button type="button" class="navto_home_page">Go Back to Search</button>
           </div>
@@ -147,7 +152,16 @@
             </table>
           </div>
         </div>
-        
+
+        <div class="about_page invisible">
+          <div class="container text-center">
+            <div>
+              <!-- BH Stuff -->
+              <!-- ML Stuff -->
+              <button type="button" class="navto_home_page">Go Back to Search</button>
+            </div>
+          </div>
+        </div>
         <!-- Script Source Code -->
         <script src="script.js"></script>
     </body>
