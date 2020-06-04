@@ -69,10 +69,11 @@ module.exports =
             var time_now = (resp["data"].list[0]["dt"] * ms);
             let time_zone = (resp["data"].city.timezone) * ms;
             console.log(time_zone);
-            // if (time_zone < 0)
-            //     var cur_midnight = time_now - (time_now % ms_day) - (time_zone) - ms_day;
+          
+            //if (time_zone < 0)
+            //    var cur_midnight = time_now - (time_now % ms_day) - (time_zone) - ms_day;
             // else
-                var cur_midnight = time_now - (time_now % ms_day) - (time_zone);
+            var cur_midnight = time_now - (time_now % ms_day) - (time_zone);
 
             var tom_midnight = cur_midnight + ms_day;
             console.log(cur_midnight);
