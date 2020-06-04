@@ -6,39 +6,150 @@ CSS Style Controller
 
 /* General Styling */
 
-.table_container {
-    text-align: center;
-    overflow-x: auto;
+/* Body */
+.body_style {
+    font-family: 'Roboto Mono', monospace;
 }
 
-.table_and_nav {
-    display: inline-block;
+/* Site Header */
+.app_name {
+    align-content: center;
 }
 
+
+/* Header Elements */
+h1 {
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+h3 {
+    padding-top: 2%;
+}
+
+/* Tables */ 
 table {
     border-collapse: collapse;
-    border-spacing: 0;
     width: 100%;
-    border: 1px solid #ddd;
-}
-    
-td {
-    text-align: left;
-    padding: 8px;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    position: relative;
 }
 
-#map {
-    height: 400px;
-    width: 100%;
-    margin-bottom: 2%;
+tbody {
+    height: 100%;
+    overflow-y: auto;
+}
+
+th {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-right: 4%;
+    background-color: rgb(71, 92, 72); /* just playing with colors, not set on anything */
+    color: white;
+    text-align: justify;
+    font-size: 1.25rem;
+    position: sticky;
+    top: 0;
+ }
+ 
+ /* again just playing */
+ tr:nth-child(even){
+    background-color: #f2f2f2
+ }
+ 
+ /* here too */
+ tr:hover {
+     background-color: #ddd;
+ }
+     
+ td {
+     text-align: left;
+     padding: 8px 8px;
+     padding-left: 4%;
+     padding-right: 4%;
+ }
+
+    /* Hike Table */
+    #hike_table {
+        border: 1px solid #ddd;
+    }
+
+    #hikes_column1 {
+        width: 60%;
+    }
+
+    #hikes_column2 {
+        width: 20%;
+        padding-left: 6.5%;
+    }
+
+    #hikes_column3 {
+        width: 20%;
+        padding-left: 6.25%;
+    }
+
+    .page_container {
+        text-align: center;
+        overflow-x: auto;
+        margin-bottom: 10%;
+    }
+    
+    .table_container {
+        display: inline-block;
+        height: 500px;
+        overflow: scroll;
+    }
+
+    /* Directions Table */
+    .directions_container {
+        display: inline-block;
+        text-align: center;
+        height: 500px;
+        overflow: scroll;
+    }
+
+    #directions_table {
+        padding-left: 10%;
+        padding-right: 10%;
+        width: 100%;
+        display: inline-block;
+    }
+
+    #directions_column1 {
+        width: 60%;
+    }
+
+    #directions_column2 {
+        width: 20%;
+    }
+
+    #directions_table td {
+        padding-left: 7.5%;
+    }
+
+    /* Weather Table */
+
+
+
+/* Buttons */
+button {
+    margin-bottom: 10%;
 }
 
 .navto_hike_map_page {
     margin-bottom: 2%;
 }
 
-.directions_container {
-    overflow-x: auto;
+/* Map */
+#map {
+    height: 400px;
+    width: 100%;
+    margin-bottom: 2%;
+}
+
+.container {
+    margin-bottom: 10%;
 }
 
 /* Visibility Controls */

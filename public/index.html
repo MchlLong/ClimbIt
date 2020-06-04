@@ -10,18 +10,33 @@
         <link rel="stylesheet" type="text/css" href="style.css">
         <title>Hiking App</title>
         <!-- Styling / JS Components-->
+        <!-- Favicons -->
         <!-- Insert your favorite CSS frameworks here -->
         <link
           rel="stylesheet"
           type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
         />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&family=Poppins:wght@200&family=Ubuntu&display=swap" rel="stylesheet">
+
         <!-- Insert your favorite JavaScript Library(ies) here -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     </head>
 
+    <!-- Nav bar at top of page -->
+    <header>
+      <nav>
+        <p class="app_name">App Name</p>
+        <ul class="header_links">
+          <li><a class="header_link" title="Home" href="">Home</a></li>
+          <li><a class="header_link" title="About" href="">About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    
+    <main>
     <body class="body_style">
-        
         <!-- Starter search page where you can enter a general location -->
         <div class="home_page visible">
             <div class="container mt-4">
@@ -60,21 +75,23 @@
 
         <!-- Page which defines an area where hikes are located and filter options -->
         <div class="hike_detail_page invisible">
-            <div class="table_container">
-              <div class="table_and_nav">
-                <h2>Nearby Trails</h2>
+            <div class="page_container">
+              <h1>Nearby Trails</h1>
+              <div class="table_container">
                 <table id="hike_table">
-                  <tbody id="hike_body"></tbody>       
+                   <!-- Hikes will go here -->
                 </table>
-                <button type="button" class="navto_home_page">Back</button>
               </div>
+              <div class="text-center">
+              <button type="button" class="navto_home_page">Back</button>
+            </div>
             </div>
         </div>
 
         <!-- Page which renders a map and allows for subindices of (weather, air quality, conditions, directions) -->
         <div class="hike_map_page invisible">
           <div class="container text-center">
-            <h2>Hike Map</h2>
+            <h1>Hike Map</h1>
             <div id="map">
               <!-- Map will go here -->
             </div>  
@@ -89,32 +106,32 @@
 
         <!-- Sub-index page which contains a list of directions to a hiking location -->
         <div class="directions_page invisible">
-          <div class="header_container text-center">
-            <h2>Directions</h2>
-            <label>Enter Origin:</label>
+          <div id="page_container" class="page_container text-center">
+            <h1>Directions</h1>
+            <label id="origin_label">Enter Origin:</label>
             <input 
               type="text"
-              id="origin"
+              id="origin_input"
               onfocus="this.value=''"/><br> 
-            </div>
-            <div class="directions_container">
-            <table id="directions_table">
-              <tbody id="directions_body"></tbody>   
-            </table>
-          </div>
-          
+            <button type="button" id ="direction_button" class="get_directions">Get Directions</button><br>
             <div class="button_container text-center">
-              <button type="button" class="get_directions">Get Directions</button><br><br>
               <button type="button" class="navto_hike_detail_page">Go Back to Hike List</button>
               <button type="button" class="navto_home_page">Go Back to Search</button>
               <button type="button" class="navto_hike_map_page">Go Back to Map</button>
             </div>
+            <div id="distance_and_duration"></div>
+            <div id="directions_container" class="directions_container">
+              <table id="directions_table">
+               <!-- Directions will go here -->
+              </table>
+            </div>
+          </div>
         </div>
  
         <!-- Sub-index page which contains the air quality and explanation / information -->
         <div class="air_page invisible">
           <div class="container text-center">
-            <h2>Air</h2>
+            <h1>Air</h1>
             <button type="button" class="navto_hike_detail_page">Go Back to Hike List</button>
             <button type="button" class="navto_home_page">Go Back to Search</button>
             <button type="button" class="navto_hike_map_page">Go Back to Map</button>
@@ -124,7 +141,7 @@
         <!-- Sub-index page which contains a weekly weather summary -->
         <div class="weather_page invisible">
           <div class="container text-center">
-            <h2>Weather</h2>
+            <h1>Weather</h1>
             <button type="button" class="navto_hike_detail_page">Go Back to Hike List</button>
             <button type="button" class="navto_home_page">Go Back to Search</button>
             <button type="button" class="navto_hike_map_page">Go Back to Map</button>
@@ -148,5 +165,6 @@
         <!-- Script Source Code -->
         <script src="script.js"></script>
     </body>
+  </main>
 
 </html>
