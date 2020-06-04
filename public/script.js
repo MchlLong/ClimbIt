@@ -362,7 +362,7 @@ Javascript Webpage Controller
         // Set button details
         button.innerHTML = hike_name;
         button.type = "button";
-        button.className = "navto_hike_map_page";
+        button.className = "navto_hike_map_page btn btn-outline-dark";
 
         // Add functionality to switch to map page and show map when clicked
         button.addEventListener("click", function() { goto_hike() });

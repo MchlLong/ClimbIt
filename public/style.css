@@ -71,6 +71,18 @@ th {
  }
 
     /* Hike Table */
+    .page_container {
+        text-align: center;
+        overflow-x: auto;
+        margin-bottom: 10%;
+    }
+    
+    .table_container {
+        display: inline-block;
+       /* height: 400px;*/
+        /*overflow: scroll;*/
+    }
+
     #hike_table {
         border: 1px solid #ddd;
     }
@@ -89,24 +101,12 @@ th {
         padding-left: 6.25%;
     }
 
-    .page_container {
-        text-align: center;
-        overflow-x: auto;
-        margin-bottom: 10%;
-    }
-    
-    .table_container {
-        display: inline-block;
-        height: 500px;
-        overflow: scroll;
-    }
-
     /* Directions Table */
     .directions_container {
-        display: inline-block;
+ /*       display: inline-block;
         text-align: center;
-        height: 500px;
-        overflow: scroll;
+        height: 400px;
+        overflow: scroll;*/
     }
 
     #directions_table {
@@ -137,9 +137,15 @@ button {
     margin-bottom: 10%;
 }
 
-.navto_hike_map_page {
-    margin-bottom: 2%;
+.button_container {
+    margin-top: 5%;
 }
+
+/* Input */
+input {
+    margin-bottom: 10%;
+}
+
 
 /* Map */
 #map {

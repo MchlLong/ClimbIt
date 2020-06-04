@@ -10,6 +10,9 @@
         <link rel="stylesheet" type="text/css" href="style.css">
         <title>Hiking App</title>
         <!-- Styling / JS Components-->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <!-- Favicons -->
         <!-- Insert your favorite CSS frameworks here -->
         <link
@@ -22,21 +25,24 @@
         <!-- Insert your favorite JavaScript Library(ies) here -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     </head>
-
-    <!-- Nav bar at top of page -->
-    <header>
-      <nav>
-        <p class="app_name">App Name</p>
-        <ul class="header_links">
-          <li><a class="header_link" title="Home" href="">Home</a></li>
-          <li><a class="header_link" title="About" href="">About</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    
     <main>
     <body class="body_style">
+    <!-- Nav bar at top of page -->
+    
+      <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+        <div class="container-fluid">
+          <a class="app_name">ClimbIt</a>
+            <ul class="nav justify-content-end">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+        </div>
+      </nav>
+  
+    
         <!-- Starter search page where you can enter a general location -->
         <div class="home_page visible">
             <div class="container mt-4">
@@ -72,14 +78,14 @@
         <div class="hike_detail_page invisible">
             <div class="page_container">
               <h1>Nearby Trails</h1>
+              <div class="text-center">
+                <button type="button" class="navto_home_page btn btn-outline-dark">Back</button>
+                </div>
               <div class="table_container">
                 <table id="hike_table">
                    <!-- Hikes will go here -->
                 </table>
               </div>
-              <div class="text-center">
-              <button type="button" class="navto_home_page">Back</button>
-            </div>
             </div>
         </div>
 
@@ -91,11 +97,8 @@
               <!-- Map will go here -->
             </div>  
             <!-- Other Buttons -->
-            <button type="button" class="navto_directions_page">Directions</button>
-            <button type="button" class="navto_air_page">Air</button>
-            <button type="button" class="navto_weather_page">Weather</button><br><br>
-            <button type="button" class="navto_hike_detail_page">Go Back to Hike List</button>
-            <button type="button" class="navto_home_page">Go Back to Search</button>
+            <button type="button" class="navto_directions_page btn btn-outline-dark">Directions</button>
+            <button type="button" class="navto_weather_page btn btn-outline-dark">Weather</button><br><br>
           </div>
         </div>
 
@@ -108,11 +111,10 @@
               type="text"
               id="origin_input"
               onfocus="this.value=''"/><br> 
-            <button type="button" id ="direction_button" class="get_directions">Get Directions</button><br>
+            <button type="button" id ="direction_button" class="get_directions btn btn-outline-dark">Get Directions</button>  
             <div class="button_container text-center">
-              <button type="button" class="navto_hike_detail_page">Go Back to Hike List</button>
-              <button type="button" class="navto_home_page">Go Back to Search</button>
-              <button type="button" class="navto_hike_map_page">Go Back to Map</button>
+             <!-- <button type="button" class="navto_hike_detail_page btn btn-light">Go Back to Hike List</button> -->
+             <button type="button" class="navto_hike_map_page btn btn-outline-dark">Back to Map</button>
             </div>
             <div id="distance_and_duration"></div>
             <div id="directions_container" class="directions_container">
@@ -127,8 +129,6 @@
         <div class="air_page invisible">
           <div class="container text-center">
             <h1>Air</h1>
-            <button type="button" class="navto_hike_detail_page">Go Back to Hike List</button>
-            <button type="button" class="navto_home_page">Go Back to Search</button>
             <button type="button" class="navto_hike_map_page">Go Back to Map</button>
           </div>
         </div>
@@ -137,9 +137,7 @@
         <div class="weather_page invisible">
           <div class="container text-center">
             <h1>Weather</h1>
-            <button type="button" class="navto_hike_detail_page">Go Back to Hike List</button>
-            <button type="button" class="navto_home_page">Go Back to Search</button>
-            <button type="button" class="navto_hike_map_page">Go Back to Map</button>
+            <button type="button" class="navto_hike_map_page btn btn-outline-dark">Back to Map</button>
             <table id="weather_table">
               <tbody id="weather_body">
                 <!-- Weather Table Goes Here, generated via "script.js" -->
