@@ -144,8 +144,8 @@ Javascript Webpage Controller
             let table = document.getElementById("hike_table");
 
             // Build array containing results to access outside of here if possible
-            let table_data = new Array();
-            let results = new Array();
+            let table_data = [];
+            let results = [];
 
             // Add header data
             table_data.push(["Hike Name", "Length<br> (in miles)", "Elevation Gain<br> (in feet)"]);
@@ -232,7 +232,7 @@ Javascript Webpage Controller
         let destination = `${lat},${long}`
 
         // Retrieve origin from user input 
-        let origin = document.getElementById("origin").value;
+        let origin = document.getElementById("origin_input").value;
         console.log({origin, destination});
 
         // API call
@@ -247,6 +247,14 @@ Javascript Webpage Controller
         .then (resp => { return resp; })
         .then (val => { return val.json(); })
         .then (mydata => { 
+
+            // TODO: Hide button and input field
+            let button = document.getElementById("direction_button");
+            let input = document.getElementById("origin_input");
+            let label = document.getElementById("origin_label");
+            button.classList.add("invisible");
+            input.classList.add("invisible");
+            label.classList.add("invisible");
 
             // Get data from response
             let total_distance = mydata["routes"][0].legs[0].distance.text;
@@ -269,7 +277,7 @@ Javascript Webpage Controller
             let table = document.getElementById("directions_table");
 
             // Save response data 
-            let results = new Array();
+            let results = [];
             // Save header data
             results.push(["Steps", "Distance to Next"]);
             // Save data to put in table
@@ -306,8 +314,6 @@ Javascript Webpage Controller
             }
         })
         .catch (error => console.log(error));
-
-        // TODO: Hide button and input field
     }
 
     function goto_weather() {
@@ -381,7 +387,7 @@ Javascript Webpage Controller
             table.deleteRow(i);
     }
 
-    // Remove elements with given IDs
+    // Remove array of elements with given IDs
     function remove_elements(elements) {
         for(let i = 0; i < elements.length; i++){
             let headers = document.getElementById(elements[i]);
@@ -440,6 +446,7 @@ Javascript Webpage Controller
             const skip_base = 25 - weather_list.length;
             var skip_factor = skip_base * elem_per_row;
             console.log(weather_list.length);
+            console.log(weather_list);
             // Generate table
             /*
             ret_week["time"] = (resp["data"].list[i]["dt"]) * ms;
@@ -453,12 +460,19 @@ Javascript Webpage Controller
                 // Generate row
                 for (let k=0; k<elem_per_row; k++){
                     let row = table.insertRow((i * elem_per_row) + k);
+                    // Add the header 
                     if (i == 0) {
-
                         for (let j=0; j<width; j++) {
-                            let cell = row.insertCell(j);
+                            //let cell = row.insertCell(j);
+                            let header_cell = document.createElement("th");
+                            //row.append(header_cell);
                             if (k == 0)
-                                cell.innerHTML = `Header: (${j}, ${i})`;
+                                //cell.innerHTML = `Header: (${j}, ${i})`;
+                                flat = (j * width) + (i-1) - skip_base;
+                                //date = new Date(weather_list[flat]["time"]);
+                                //header_cell.innerHTML = `${date.toGMTString().slice(0, -4)}`;;
+                                header_cell.innerHTML = 'Date';
+                                row.append(header_cell);
                         } 
 
                     }
