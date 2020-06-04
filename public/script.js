@@ -99,6 +99,13 @@ Javascript Webpage Controller
         empty_table("directions_table");
         remove_script();
         remove_elements(headers);
+        // add the input and button back to directions page
+        let button = document.getElementById("direction_button");
+        let input = document.getElementById("origin_input");
+        let label = document.getElementById("origin_label");
+        button.classList.remove("invisible");
+        input.classList.remove("invisible");
+        label.classList.remove("invisible");
 
     }
 
@@ -254,7 +261,7 @@ Javascript Webpage Controller
         .then (val => { return val.json(); })
         .then (mydata => { 
 
-            // TODO: Hide button and input field
+            // Hide button and input field
             let button = document.getElementById("direction_button");
             let input = document.getElementById("origin_input");
             let label = document.getElementById("origin_label");
@@ -391,6 +398,7 @@ Javascript Webpage Controller
         let num_rows = table.rows.length;
         for (let i = num_rows-1; i >= 0; i--) 
             table.deleteRow(i);
+        
     }
 
     // Remove array of elements with given IDs

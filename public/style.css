@@ -16,6 +16,14 @@ CSS Style Controller
     align-content: center;
 }
 
+.nav-link {
+    color: rgb(38, 94, 147) !important;
+}
+
+.nav-link:hover {
+    color: black !important;
+}
+
 
 /* Header Elements */
 h1 {
@@ -45,17 +53,21 @@ th {
     padding-top: 2%;
     padding-bottom: 2%;
     padding-right: 4%;
-    background-color: rgb(71, 92, 72); /* just playing with colors, not set on anything */
-    color: white;
+    background-color: rgb(215, 205, 183); /* just playing with colors, not set on anything */
+    color: black;
     text-align: justify;
     font-size: 1.25rem;
     position: sticky;
     top: 0;
  }
+
+ tr {
+    /*border: 1px solid grey; */
+ }
  
  /* again just playing */
  tr:nth-child(even){
-    background-color: #f2f2f2
+    background-color: #f2f2f2;
  }
  
  /* here too */
@@ -103,10 +115,10 @@ th {
 
     /* Directions Table */
     .directions_container {
- /*       display: inline-block;
+ /*     display: inline-block;
         text-align: center;
         height: 400px;
-        overflow: scroll;*/
+        overflow: scroll; */
     }
 
     #directions_table {
