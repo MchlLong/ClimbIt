@@ -50,6 +50,12 @@ Javascript Webpage Controller
     var get_directions_button = document.getElementsByClassName("get_directions");
     get_directions_button[0].addEventListener("click", function() { goto_directions() });
 
+    // About Us
+    var about_buttons = document.getElementsByClassName("navto_about_page");
+    for (var i = 0; i < about_buttons.length; i++) {
+        about_buttons[i].addEventListener("click", function() { goto_about() });
+    }
+
 /* Webpage Controller Functions */
 
     // Function to hide all pages, then make a page visible
@@ -461,4 +467,13 @@ Javascript Webpage Controller
 
     function get_icon(icon) {
         return icon;
+    }
+
+    // Switches to home page, deallocates tables, and removes map script from DOM
+    function goto_about() {
+        swap_page("about_page");
+        // should really implement emptyAll()
+        empty_table("hike_table");
+        empty_table("directions_table");
+        remove_script();
     }
