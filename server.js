@@ -14,7 +14,6 @@ const port = process.env.PORT || 5500;
 const host = process.env.HOST || "0.0.0.0"
 
 // Serve Static Pages
-//server.use(express.urlencoded());
 server.use(express.json());
 server.use(express.static("public"));
 
@@ -34,4 +33,14 @@ server.post("/get_directions", (req, resp) => {
     api.get_directions(req.body["origin"], req.body["destination"])
     .then(data => {resp.send(data);})
     .catch(error => console.log(error));
-})
+});
+
+server.post("/get_weather", (req, resp) => {
+    console.log("POST request for weather");
+    api.get_weather(req.body["lat"], req.body["long"])
+    .then(data => { 
+        console.log("Weather request successful: " + req.body["lat"] + ", " + req.body["long"])
+        resp.send(data);
+    })
+    .catch(error => console.log(error));
+});
