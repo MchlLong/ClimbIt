@@ -91,7 +91,7 @@ Javascript Webpage Controller
     // Switches to home page, deallocates tables, and removes map script from DOM
     function goto_home() {
 
-        headers = ["distance_and_duration"];
+        headers = ["distance_header", "duration_header", "origin_destination_header"];
 
         swap_page("home_page");
 
@@ -294,12 +294,12 @@ Javascript Webpage Controller
             // Add total distance to DOM
             let distance_header = document.createElement("h3");
             distance_header.innerHTML = `<b>Total Distance:</b> ${total_distance}`;
-            distance_header.id = "distance_header"
+            distance_header.id = "distance_header";
             document.getElementById("distance_and_duration").appendChild(distance_header);
             // Add duration to DOM
             let duration_header = document.createElement("h3");
             duration_header.innerHTML = `<b>Duration:</b> ${duration}`;
-            duration_header.id = "duration_header"
+            duration_header.id = "duration_header";
             document.getElementById("distance_and_duration").appendChild(duration_header);
            
             // Add the table body

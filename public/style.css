@@ -116,6 +116,7 @@ th {
 
     /* Directions Table */
     .directions_container {
+      display: inline-block;
         text-align: center;
     /*    height: 400px;
         overflow: scroll; */
