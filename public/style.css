@@ -8,12 +8,15 @@ CSS Style Controller
 
 /* Body */
 .body_style {
-    font-family: 'Roboto Mono', monospace;
+   /* font-family: 'Roboto Mono', monospace;*/
+   font-family: 'Mukta', sans-serif;
 }
 
 /* Site Header */
 .app_name {
     align-content: center;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.25rem;
 }
 
 .nav-link {
@@ -53,8 +56,8 @@ th {
     padding-top: 2%;
     padding-bottom: 2%;
     padding-right: 4%;
-    background-color: rgb(215, 205, 183); /* just playing with colors, not set on anything */
-    color: black;
+    background-color: rgb(63, 65, 67); /* just playing with colors, not set on anything */
+    color: white;
     text-align: justify;
     font-size: 1.25rem;
     position: sticky;
@@ -115,9 +118,9 @@ th {
 
     /* Directions Table */
     .directions_container {
- /*     display: inline-block;
+      display: inline-block;
         text-align: center;
-        height: 400px;
+    /*    height: 400px;
         overflow: scroll; */
     }
 

@@ -94,18 +94,27 @@ Javascript Webpage Controller
         headers = ["distance_and_duration"];
 
         swap_page("home_page");
-        // should really implement empty_all()
+
+        // Should really implement empty_all()
         empty_table("hike_table");
         empty_table("directions_table");
         remove_script();
         remove_elements(headers);
-        // add the input and button back to directions page
+
+        // Add the input and button back to directions page
         let button = document.getElementById("direction_button");
-        let input = document.getElementById("origin_input");
+        let origin_input = document.getElementById("origin_input");
         let label = document.getElementById("origin_label");
         button.classList.remove("invisible");
-        input.classList.remove("invisible");
+        origin_input.classList.remove("invisible");
         label.classList.remove("invisible");
+
+        // Remove input values from home page and directions page
+        let address_input = document.getElementById("address");
+        address_input.value= "";
+        let distance_input = document.getElementById("distance");
+        distance_input.value= "";
+        origin_input.value= "";
 
     }
 
@@ -405,7 +414,8 @@ Javascript Webpage Controller
     function remove_elements(elements) {
         for(let i = 0; i < elements.length; i++){
             let headers = document.getElementById(elements[i]);
-            headers.remove();
+            if(headers)
+                headers.remove();
         }
     }
 
