@@ -6,7 +6,17 @@ CSS Style Controller
 
 /* General Styling */
 
+/* Background */
+.home_page, .hike_detail_page, .hike_map_page {
+    /*background-color: #222022;*/
+    background-image: url("img/background.png");
+    min-height: 900px;
+    max-height: 900px;
+    max-width: 1920px;
+    background-repeat: no-repeat;   
+}
 /* Body */
+
 .body_style {
    font-family: 'Roboto Mono', monospace;
 }
