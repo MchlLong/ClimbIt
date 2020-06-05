@@ -8,7 +8,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="style.css">
-        <title>Hiking App</title>
+        <title>ClimbIt</title>
         <!-- Styling / JS Components-->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -56,7 +56,6 @@
                             type="address"
                             class="form-control ml-3 mr-3"
                             id="address"
-                            onfocus="this.value=''"
                           />
                           <label class = "col-form-label col-sm" for="distance">Distance from location (in miles):</label>
                           <input
@@ -64,7 +63,6 @@
                             type="distance"
                             class="form-control ml-3 mr-3"
                             id="distance"
-                            onfocus="this.value=''"
                           />
                       </div>
                       
@@ -114,9 +112,9 @@
             <label id="origin_label">Enter Origin:</label>
             <input 
               type="text"
-              id="origin_input"
-              onfocus="this.value=''"/><br> 
+              id="origin_input"/><br> 
             <button type="button" id ="direction_button" class="get_directions btn btn-outline-dark">Get Directions</button>  
+            <div id="origin_destination"></div>
             <div id="distance_and_duration"></div>
             <div id="directions_container" class="directions_container">
               <table id="directions_table">
@@ -152,13 +150,54 @@
         </div>
 
         <div class="about_page invisible">
-          <div class="container text-center">
-            <div>
+          <div class="header_container text-center">
+            <h2 class="about_header">About ClimbIt</h2>
+            <p class="app_info">ClimbIt is a web application built by Michael Long and Bryttanie House. Search for any location you wish to explore and ClimbIt will 
+               show you nearby hikes, plus a map, directions, and the current week's weather for each one.
+            </p>
+          
+            <h4 class="powered_by_header">Powered By</h4>
+             <ul class="powered_by">
+              <li class="tools_used">
+                <a href="https://openweathermap.org/api">OpenWeatherMap</a>
+              </li>
+              <li class="tools_used">
+                <a href="https://www.hikingproject.com/data">REI HikingProject</a>
+              </li>
+              <li class="tools_used">
+                <a href="https://developers.google.com/maps/documentation">Google Maps: Geocoding, Maps Javascript, Directions</a>
+              </li>
+              <li class="tools_used">
+                <a href="https://expressjs.com/">Express</a>
+              </li>
+              <li class="tools_used">
+                <a href="https://getbootstrap.com/docs/3.4/">Bootstrap</a>
+              </li>
+              <li class="tools_used">
+                <a href="https://www.heroku.com/">Heroku</a>
+              </li>
+             </ul>
+
+           <div class="team_container">
+            <h4 class="team_header">The Team</h4>
               <!-- BH Stuff -->
+              <div class="brtt">
+                <h5 class="member_name">Bryttanie House</h5>
+                <img class="brtt_github" src="img/brtt_icon.png">
+                <p>Googler, Front End Dev and Designer, Cheerleader</p>
+                <a href="http://github.com/xbhouse">Go to GitHub</a>
+              </div>
               <!-- ML Stuff -->
-              <button type="button" class="navto_home_page">Go Back to Search</button>
-            </div>
+              <div class="mchl">
+                <h5 class="member_name">Michael Long</h5>
+                <img class="mchl_github" src="img/mchl_icon.png">
+                <p>Node Man, Weather and Timezone Master, Icon Artist</p>
+                <a class="github_link" href="http://github.com/mchllong">Go to GitHub</a>
+              </div>
+           </div>
+
           </div>
+
         </div>
         <!-- Script Source Code -->
         <script src="script.js"></script>
