@@ -492,10 +492,10 @@ Javascript Webpage Controller
                             //row.append(header_cell);
                             if (k == 0)
                                 //cell.innerHTML = `Header: (${j}, ${i})`;
-                                flat = (j * width) + (i-1) - skip_base;
-                                //date = new Date(weather_list[flat]["time"]);
-                                //header_cell.innerHTML = `${date.toGMTString().slice(0, -4)}`;;
-                                header_cell.innerHTML = 'Date';
+                                flat = (j * width) + (i-1) - skip_base + 5;
+                                date = new Date(weather_list[flat]["time"]);
+                                header_cell.innerHTML = `${date.toGMTString().slice(0, -13)}`;;
+                                //header_cell.innerHTML = 'Date';
                                 row.append(header_cell);
                         } 
 
@@ -514,7 +514,7 @@ Javascript Webpage Controller
                                 let flat = (j * width) + (i-1) - skip_base;
                                 var temp = document.createElement("label");
                                 date = new Date(weather_list[flat]["time"]);
-                                temp.innerHTML = `${date.toGMTString().slice(0, -4)}`;
+                                temp.innerHTML = `${date.toGMTString().slice(16, -4)}`;
                                 cell.appendChild(temp);
                                 cell.appendChild(document.createElement("br"));
                                 var temp = document.createElement("IMG");
