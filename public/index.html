@@ -29,7 +29,7 @@
     <body class="body_style">
     <!-- Nav bar at top of page -->
     
-      <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top border">
+      <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top border border-dark">
         <div class="container-fluid">
           <h2 class="app_name">ClimbIt</h2>
             <ul class="nav justify-content-end">
@@ -45,9 +45,8 @@
     
         <!-- Starter search page where you can enter a general location -->
         <div class="home_page visible">
-            <div class="container mt-4">
-             <!-- <button type="button" class="navto_about_page">About</button> -->
-                <form id="bootstrap-form" class="bg-light border mx-auto p-4">
+            <div class="container">
+                <form id="bootstrap-form" class="bg-light border mx-auto p-4 border border-dark">
                       <h1 class="mb-3 text-center">Where would you like to hike?</h1>
                       <div class="form-group row">
                         <label class = "col-form-label col-sm" for="address">Location:</label>
@@ -82,7 +81,7 @@
             <div class="page_container">
               <h1>Nearby Trails</h1>
               <div class="text-center">
-                <button type="button" class="navto_home_page btn btn-outline-dark">Back</button>
+                <button type="button" class="navto_home_page btn btn-light">Back</button>
                 </div>
               <div class="table_container">
                 <table id="hike_table">
@@ -100,8 +99,8 @@
               <!-- Map will go here -->
             </div>  
             <!-- Other Buttons -->
-            <button type="button" class="navto_directions_page btn btn-outline-dark">Directions</button>
-            <button type="button" class="navto_weather_page btn btn-outline-dark">Weather</button><br><br>
+            <button type="button" class="navto_directions_page btn btn-light">Directions</button>
+            <button type="button" class="navto_weather_page btn btn-light">Weather</button><br><br>
           </div>
         </div>
 
@@ -113,7 +112,7 @@
             <input 
               type="text"
               id="origin_input"/><br> 
-            <button type="button" id ="direction_button" class="get_directions btn btn-outline-dark">Get Directions</button>  
+            <button type="button" id ="direction_button" class="get_directions btn btn-light">Get Directions</button>  
             <div id="origin_destination"></div>
             <div id="distance_and_duration"></div>
             <div id="directions_container" class="directions_container">
@@ -122,7 +121,7 @@
               </table>
             </div>
             <div class="button_container text-center">
-              <button type="button" class="navto_hike_map_page btn btn-outline-dark">Back to Map</button>
+              <button type="button" class="navto_hike_map_page btn btn-light">Back to Map</button>
              </div>
           </div>
         </div>
@@ -139,7 +138,7 @@
         <div class="weather_page invisible">
           <div class="weather_container text-center">
             <h1>Weather</h1>
-            <button type="button" class="navto_hike_map_page btn btn-outline-dark">Back to Map</button>
+            <button type="button" class="navto_hike_map_page btn btn-light">Back to Map</button>
             <table id="weather_table">
               <tbody id="weather_body">
                 <!-- Weather Table Goes Here, generated via "script.js" -->
@@ -151,7 +150,7 @@
         <div class="about_page invisible">
           <div class="header_container text-center">
 
-            <h1 class="about_header">About ClimbIt</h1>
+            <h1 class="about_header">About</h1>
             <p class="app_info">ClimbIt is a web application built by Michael Long and Bryttanie House. Search for any location you wish to explore and ClimbIt will 
                show you nearby hikes, plus a map, directions, and the current week's weather for each one.
             </p>
@@ -191,7 +190,7 @@
               <div class="mchl">
                 <h3 class="member_name">Michael Long</h3>
                 <img class="mchl_github" src="img/mchl_icon.png" alt="Michael's Icon">
-                <p>Node Man, Weather and Timezone Master, Icon Artist</p>
+                <p>Node Man, Weather and Timezone Master, Graphic Designer</p>
                 <a class="github_link" href="http://github.com/mchllong">Go to GitHub</a>
               </div>
            </div>

@@ -7,7 +7,7 @@ CSS Style Controller
 /* General Styling */
 
 /* Background */
-.home_page, .hike_detail_page, .hike_map_page {
+.home_page, .hike_detail_page, .hike_map_page, .directions_page, .weather_page > * {
     /*background-color: #222022;*/
     background-image: url("img/background.png");
     min-height: 900px;
@@ -15,10 +15,15 @@ CSS Style Controller
     max-width: 1920px;
     background-repeat: no-repeat;   
 }
+
 /* Body */
 
 .body_style {
    font-family: 'Roboto Mono', monospace;
+}
+
+.container {
+    padding-top: 7%;
 }
 
 /* Site Header */
@@ -74,7 +79,7 @@ th {
  
  /* again just playing */
  tr:nth-child(even){
-    background-color: #f2f2f2;
+    background-color: #c0baba;
  }
  
  /* here too */
@@ -87,6 +92,7 @@ th {
      padding: 8px 8px;
      padding-left: 4%;
      padding-right: 4%;
+     background-color: rgb(238, 234, 234);
  }
 
     /* Hike Table */
@@ -181,15 +187,9 @@ th {
     }
 
     #weather_column_1, #weather_column_2, #weather_column_3, #weather_column_4, 
-    #weather_column_5, #weather_column_6 {
-        height: 1%;	        
+    #weather_column_5, #weather_column_6 {	        
         width: auto;
     }
-        
-    img {
-        height: 100%;
-        width: 100%;
-    }	    
     
 
 /* Buttons */
@@ -199,6 +199,10 @@ button {
 
 .button_container {
     margin-top: 5%;
+}
+
+.btn-light {
+    border: 1px solid black !important;
 }
 
 /* Input */
@@ -212,6 +216,7 @@ input {
     height: 400px;
     width: 100%;
     margin-bottom: 2%;
+    border: 2px solid black;
 }
 
 .container {
