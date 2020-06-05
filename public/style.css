@@ -79,7 +79,7 @@ th {
  
  /* again just playing */
  tr:nth-child(even){
-    background-color: #c0baba;
+    background-color: #f4eeee;
  }
  
  /* here too */
@@ -280,11 +280,20 @@ input {
 
     .tools_used {
         font-size: 1.25rem;
+        color: rgb(40, 70, 97);
     }
 
     /* Team Area */ 
     .team_container {
         margin-bottom: 15%;
+    }
+
+    a:link {
+        text-decoration: none !important;
+      }
+
+    a:hover {
+        color:black !important;
     }
 
     .brtt {
