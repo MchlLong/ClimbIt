@@ -536,6 +536,10 @@ Javascript Webpage Controller
                                 temp.innerHTML = `${date.toGMTString().slice(0, -4)}`;
                                 cell.appendChild(temp);
                                 cell.appendChild(document.createElement("br"));
+                                var temp = document.createElement("IMG");
+                                temp.src = `/img/${convert_image_tag(weather_list[flat]["weather"])}.png`;
+                                temp.innerHTML = `${weather_list[flat]["weather"]}`;
+                                cell.appendChild(temp);
                                 var temp = document.createElement("label");
                                 temp.innerHTML = `${weather_list[flat]["weather"]}`;
                                 cell.appendChild(temp);
@@ -568,4 +572,39 @@ Javascript Webpage Controller
         empty_table("hike_table");
         empty_table("directions_table");
         remove_script();
+    }
+
+    // Get an image
+    function convert_image_tag(api_name) {
+        let ret = "";
+        switch (api_name) {
+            case("Clear"):
+                ret = "clear_sky";
+                break;
+            case("Clouds"):
+                ret = "few_clouds";
+                break;
+            case("scattered clouds"):
+                ret = "broken_clouds";
+                break;
+            case("Thunderstorm"):
+                ret = "thunderstorm";
+                break;
+            case("Drizzle"):
+                ret = "rain";
+                break;
+            case("Rain"):
+                ret = "rain";
+                break;
+            case("Snow"):
+                ret = "snow";
+                break;
+            case("Mist"):
+                ret = "broken_clouds";
+                break;
+            default: 
+                ret = "none";
+                break;
+        }
+        return ret;
     }
