@@ -159,15 +159,15 @@ th {
      /*   background-color: rgb(101, 25, 25); */
     }
 
-    #weather_row_1, #weather_row_2, #weather_row_3, #weather_row_4, #weather_row_5, 
-    #weather_row6 {
+    #weather_column_1, #weather_column_2, #weather_column_3, #weather_column_4, #weather_column_5, #weather_column_6 {
         height: 1%;
+        width: auto;
       /*  background-color: rgb(216, 216, 127);*/
     }
     
     img {
-        height: auto;
-        width: auto;
+        height: 100%;
+        width: 100%;
     }
 
 
