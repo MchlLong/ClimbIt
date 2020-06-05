@@ -186,8 +186,7 @@ th {
         }
     }
 
-    #weather_column_1, #weather_column_2, #weather_column_3, #weather_column_4, 
-    #weather_column_5, #weather_column_6 {	        
+    #weather_column_1, #weather_column_2, #weather_column_3, #weather_column_4, #weather_column_5, #weather_column_6 {	        
         width: auto;
     }
     
