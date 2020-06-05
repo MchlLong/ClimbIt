@@ -187,7 +187,7 @@ Javascript Webpage Controller
             let row = table.insertRow(-1);
             for (let i = 0; i < num_columns; i++) {
                 let header = document.createElement("th");
-                header.id = "hike_table_header";
+                header.id = `hike_table_header${i}`;
                 header.innerHTML = table_data[0][i];
                 row.appendChild(header);
             }
@@ -204,7 +204,7 @@ Javascript Webpage Controller
                             // Add hike button 
                             let hike_cell = add_hike(results[i][j+1], results[i][j], results[i][j+2], results[i][j+3]); 
                             // Set ids for styling
-                            hike_cell.id = "hikes_column1";
+                            hike_cell.id = `hikes_column1`;
                             // Append the data to the row
                             row.appendChild(hike_cell); 
                         }
@@ -503,6 +503,7 @@ Javascript Webpage Controller
                 // Generate row
                 for (let k=0; k<elem_per_row; k++){
                     let row = table.insertRow((i * elem_per_row) + k);
+                    row.id= `weather_row_${i}`;
                     // Add the header 
                     if (i == 0) {
                         for (let j=0; j<width; j++) {
@@ -513,7 +514,10 @@ Javascript Webpage Controller
                                 //cell.innerHTML = `Header: (${j}, ${i})`;
                                 flat = (j * width) + (i-1) - skip_base + 5;
                                 date = new Date(weather_list[flat]["time"]);
-                                header_cell.innerHTML = `${date.toGMTString().slice(0, -13)}`;;
+                                header_cell.innerHTML = `${date.toGMTString().slice(0, -13)}`;
+
+                                header_cell.id = `weather_column_${j}`
+
                                 //header_cell.innerHTML = 'Date';
                                 row.append(header_cell);
                         } 
@@ -529,29 +533,41 @@ Javascript Webpage Controller
                                 skip_factor--;
                             }
                             else {
-                                let cell = row.insertCell(j);
+                                let cell = row.insertCell(j); 
+                                cell.id = `weather_column_${j}`;
                                 let flat = (j * width) + (i-1) - skip_base;
+                                // Add time
                                 var temp = document.createElement("label");
                                 date = new Date(weather_list[flat]["time"]);
-                                temp.innerHTML = `${date.toGMTString().slice(16, -4)}`;
+                                temp.innerHTML = `${date.toGMTString().slice(16, 22)}${date.toGMTString().slice(26, -4)}`;
                                 cell.appendChild(temp);
                                 cell.appendChild(document.createElement("br"));
+                                // Add image 
                                 var temp = document.createElement("IMG");
                                 temp.src = `/img/${convert_image_tag(weather_list[flat]["weather"])}.png`;
+                                temp.alt = `${weather_list[flat]["weather"]}`;
                                 temp.innerHTML = `${weather_list[flat]["weather"]}`;
                                 cell.appendChild(temp);
                                 var temp = document.createElement("label");
+                                // Add weather (Rain, Clouds, etc)
                                 temp.innerHTML = `${weather_list[flat]["weather"]}`;
                                 cell.appendChild(temp);
                                 cell.appendChild(document.createElement("br"));
                                 var temp = document.createElement("label");
+                                // Add temperature
                                 temp.innerHTML = `${Math.round((weather_list[flat]["temp"] - 273.15)*(9/5) + 32)}ºF / ${Math.round(weather_list[flat]["temp"] - 273.15)}ºC`;
                                 cell.appendChild(temp);
                                 cell.appendChild(document.createElement("br"));
                                 //var temp = document.createElement("label");
                                 //temp.innerHTML = `${Math.round((weather_list[flat]["min_temp"] - 273.15)*(9/5) + 32)}ºF / ${Math.round(weather_list[flat]["min_temp"] - 273.15)}ºC ~ ${Math.round((weather_list[flat]["max_temp"] - 273.15)*(9/5) + 32)}ºF / ${Math.round(weather_list[flat]["max_temp"] - 273.15)}ºC`;
-                                //cell.appendChild(temp);                           
+                                //cell.appendChild(temp);                          
                             }
+
+                            
+
+
+
+
                         }
                     }
                 }

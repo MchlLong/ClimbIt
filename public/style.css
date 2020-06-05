@@ -6,9 +6,24 @@ CSS Style Controller
 
 /* General Styling */
 
+/* Background */
+.home_page, .hike_detail_page, .hike_map_page, .directions_page, .weather_page > * {
+    /*background-color: #222022;*/
+    background-image: url("img/background.png");
+    min-height: 900px;
+    max-height: 900px;
+    max-width: 1920px;
+    background-repeat: no-repeat;   
+}
+
 /* Body */
+
 .body_style {
    font-family: 'Roboto Mono', monospace;
+}
+
+.container {
+    padding-top: 7%;
 }
 
 /* Site Header */
@@ -64,7 +79,7 @@ th {
  
  /* again just playing */
  tr:nth-child(even){
-    background-color: #f2f2f2;
+    background-color: #f4eeee;
  }
  
  /* here too */
@@ -77,6 +92,7 @@ th {
      padding: 8px 8px;
      padding-left: 4%;
      padding-right: 4%;
+     background-color: rgb(238, 234, 234);
  }
 
     /* Hike Table */
@@ -138,7 +154,43 @@ th {
     }
 
     /* Weather Table */
+    .weather_container {
+        display: inline-block;
+    }
 
+    #weather_table {
+        padding-left: 10%;
+        padding-right: 10%;
+        width: 100%;
+        display: inline-block;
+    }
+
+    #weather_table td {
+        padding-left: 5%;
+        text-align: center;
+    }
+
+    #weather_table th {
+        padding-left: 4%;
+    }
+
+    #weather_row_0 > th {
+     /*   background-color: rgb(101, 25, 25); */
+
+    }
+    
+    /* To resize weather table for smaller screens */
+    @media (max-width: 720px) {
+        img {
+            height: 50%;
+        }
+    }
+
+    #weather_column_1, #weather_column_2, #weather_column_3, #weather_column_4, 
+    #weather_column_5, #weather_column_6 {	        
+        width: auto;
+    }
+    
 
 /* Buttons */
 button {
@@ -147,6 +199,10 @@ button {
 
 .button_container {
     margin-top: 5%;
+}
+
+.btn-light {
+    border: 1px solid black !important;
 }
 
 /* Input */
@@ -160,6 +216,7 @@ input {
     height: 400px;
     width: 100%;
     margin-bottom: 2%;
+    border: 2px solid black;
 }
 
 .container {
@@ -200,7 +257,7 @@ input {
     }
 
     .about_header:after {
-        width: 22%;
+        width: 10%;
     }
 
     .powered_by_header:after {
@@ -223,11 +280,20 @@ input {
 
     .tools_used {
         font-size: 1.25rem;
+        color: rgb(40, 70, 97);
     }
 
     /* Team Area */ 
     .team_container {
         margin-bottom: 15%;
+    }
+
+    a:link {
+        text-decoration: none !important;
+      }
+
+    a:hover {
+        color:black !important;
     }
 
     .brtt {
