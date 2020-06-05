@@ -138,6 +138,10 @@ th {
     }
 
     /* Weather Table */
+    .weather_container {
+        display: inline-block;
+    }
+
     #weather_table {
         padding-left: 10%;
         padding-right: 10%;
@@ -155,22 +159,17 @@ th {
     }
 
     #weather_row_0 > th {
-        height: 1%;
      /*   background-color: rgb(101, 25, 25); */
-    }
 
-    #weather_row_1, #weather_row_2, #weather_row_3, #weather_row_4, #weather_row_5, 
-    #weather_row6 {
-        height: 1%;
-      /*  background-color: rgb(216, 216, 127);*/
     }
     
-    img {
-        height: auto;
-        width: auto;
+    /* To resize weather table for smaller screens */
+    @media (max-width: 720px) {
+        img {
+            height: 50%;
+        }
     }
-
-
+    
 
 /* Buttons */
 button {
