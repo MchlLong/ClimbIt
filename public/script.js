@@ -287,7 +287,7 @@ Javascript Webpage Controller
             let data = document.getElementsByClassName("active")[0];
             let hike_name = data.attributes.getNamedItem("hike_name").value;
             let origin_destination_header = document.createElement("h3");
-            origin_destination_header.innerHTML = `From ${origin}, to ${hike_name}`;
+            origin_destination_header.innerHTML = `From <b>${origin}</b>, to <b>${hike_name}</b>`;
             origin_destination_header.id = "origin_destination_header"; 
             document.getElementById("origin_destination").appendChild(origin_destination_header);
            

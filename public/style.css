@@ -61,10 +61,6 @@ th {
     position: sticky;
     top: 0;
  }
-
- tr {
-    /*border: 1px solid grey; */
- }
  
  /* again just playing */
  tr:nth-child(even){
@@ -72,7 +68,7 @@ th {
  }
  
  /* here too */
- tr:hover {
+ #hike_table tr:hover, #directions_table tr:hover {
      background-color: #ddd;
  }
      
@@ -116,7 +112,7 @@ th {
 
     /* Directions Table */
     .directions_container {
-      display: inline-block;
+        display: inline-block;
         text-align: center;
     /*    height: 400px;
         overflow: scroll; */
@@ -144,7 +140,6 @@ th {
     /* Weather Table */
 
 
-
 /* Buttons */
 button {
     margin-bottom: 10%;
@@ -170,6 +165,90 @@ input {
 .container {
     margin-bottom: 10%;
 }
+
+/* About Page */
+
+    /* Headers and info */
+    .about_header {
+        margin-top: 3%;
+    }
+
+    .app_info {
+        margin-top: 3%;
+        margin-bottom: 10%;
+        margin-right: 10%;
+        margin-left: 10%;
+    }
+
+    .powered_by_header {
+        margin-bottom: 3%;
+    }
+
+    .team_header {
+        margin-top: 10%;
+    }
+
+
+    /* Borders */ 
+    .about_header:after, .powered_by_header:after, .team_header:after {
+        content: ""; 
+        display: block;
+        margin: 0 auto; 
+        width: 20%; 
+        padding-top: 10px; 
+        border-bottom: 2px solid rgb(101, 138, 172); 
+    }
+
+    .about_header:after {
+        width: 22%;
+    }
+
+    .powered_by_header:after {
+        width: 13%;
+    }
+
+    .team_header:after {
+        width: 10%;
+    }
+
+    /* Lists */
+    ul {
+        list-style-type: none;
+    }
+
+    .powered_by {
+        padding-right: 3%;
+        font-size: 2.25rem;
+    }
+
+    .tools_used {
+        font-size: 1.25rem;
+    }
+
+    /* Team Area */ 
+    .team_container {
+        margin-bottom: 15%;
+    }
+
+    .brtt {
+        margin-top: 2%;
+    }
+
+    .brtt, .mchl {
+        display: inline-block;
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+
+    .brtt_github {
+        height: 20%;
+        width: 45%;
+        margin-top: 12%;
+    }
+
+    .github_link {
+        margin-bottom: 5%;
+    }
 
 /* Visibility Controls */
 
