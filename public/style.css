@@ -8,14 +8,12 @@ CSS Style Controller
 
 /* Body */
 .body_style {
-   /* font-family: 'Roboto Mono', monospace;*/
-   font-family: 'Mukta', sans-serif;
+   font-family: 'Roboto Mono', monospace;
 }
 
 /* Site Header */
 .app_name {
     align-content: center;
-    font-family: 'Roboto Mono', monospace;
     font-size: 1.25rem;
 }
 
@@ -118,7 +116,6 @@ th {
 
     /* Directions Table */
     .directions_container {
-      display: inline-block;
         text-align: center;
     /*    height: 400px;
         overflow: scroll; */
