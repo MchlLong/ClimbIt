@@ -169,6 +169,17 @@ th {
             height: 50%;
         }
     }
+
+    #weather_column_1, #weather_column_2, #weather_column_3, #weather_column_4, 
+    #weather_column_5, #weather_column_6 {
+        height: 1%;	        
+        width: auto;
+    }
+        
+    img {
+        height: 100%;
+        width: 100%;
+    }	    
     
 
 /* Buttons */
