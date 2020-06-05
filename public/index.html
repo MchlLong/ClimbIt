@@ -8,7 +8,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="style.css">
-        <title>Hiking App</title>
+        <title>ClimbIt</title>
         <!-- Styling / JS Components-->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -56,7 +56,6 @@
                             type="address"
                             class="form-control ml-3 mr-3"
                             id="address"
-                            onfocus="this.value=''"
                           />
                           <label class = "col-form-label col-sm" for="distance">Distance from location (in miles):</label>
                           <input
@@ -64,7 +63,6 @@
                             type="distance"
                             class="form-control ml-3 mr-3"
                             id="distance"
-                            onfocus="this.value=''"
                           />
                       </div>
                       
@@ -114,9 +112,9 @@
             <label id="origin_label">Enter Origin:</label>
             <input 
               type="text"
-              id="origin_input"
-              onfocus="this.value=''"/><br> 
+              id="origin_input"/><br> 
             <button type="button" id ="direction_button" class="get_directions btn btn-outline-dark">Get Directions</button>  
+            <div id="origin_destination"></div>
             <div id="distance_and_duration"></div>
             <div id="directions_container" class="directions_container">
               <table id="directions_table">
@@ -155,8 +153,9 @@
           <div class="container text-center">
             <div>
               <!-- BH Stuff -->
+
               <!-- ML Stuff -->
-              <button type="button" class="navto_home_page">Go Back to Search</button>
+              <!--<button type="button" class="navto_home_page">Home</button>-->
             </div>
           </div>
         </div>

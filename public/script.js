@@ -165,7 +165,7 @@ Javascript Webpage Controller
 
             let table = document.getElementById("hike_table");
 
-            // Build array containing results to access outside of here if possible
+            // Build array containing results 
             let table_data = [];
             let results = [];
 
@@ -283,14 +283,22 @@ Javascript Webpage Controller
             let steps = mydata["routes"][0].legs[0].steps;
             let duration = mydata["routes"][0].legs[0].duration.text;
 
+            // Add origin and destination to the DOM
+            let data = document.getElementsByClassName("active")[0];
+            let hike_name = data.attributes.getNamedItem("hike_name").value;
+            let origin_destination_header = document.createElement("h3");
+            origin_destination_header.innerHTML = `From ${origin}, to ${hike_name}`;
+            origin_destination_header.id = "origin_destination_header"; 
+            document.getElementById("origin_destination").appendChild(origin_destination_header);
+           
             // Add total distance to DOM
             let distance_header = document.createElement("h3");
-            distance_header.innerHTML = `Total Distance: ${total_distance}`;
+            distance_header.innerHTML = `<b>Total Distance:</b> ${total_distance}`;
             distance_header.id = "distance_header"
             document.getElementById("distance_and_duration").appendChild(distance_header);
             // Add duration to DOM
             let duration_header = document.createElement("h3");
-            duration_header.innerHTML = `Duration: ${duration}`;
+            duration_header.innerHTML = `<b>Duration:</b> ${duration}`;
             duration_header.id = "duration_header"
             document.getElementById("distance_and_duration").appendChild(duration_header);
            
@@ -384,7 +392,7 @@ Javascript Webpage Controller
         // Set button details
         button.innerHTML = hike_name;
         button.type = "button";
-        button.className = "navto_hike_map_page btn btn-outline-dark";
+        button.className = "navto_hike_map_page btn btn-light";
 
         // Add functionality to switch to map page and show map when clicked
         button.addEventListener("click", function() { goto_hike() });
@@ -439,8 +447,15 @@ Javascript Webpage Controller
             center: new google.maps.LatLng(0,0),
             zoom: 10
         });
+
         // Add marker 
-        add_marker(map);
+        marker = add_marker(map);
+
+        // Zoom when clicked 
+        marker.addListener('click', function() {
+            map.setZoom(15);
+            map.setCenter(marker.getPosition());
+        })
     }
 
     // Add marker to map at given coordinates and center on the marker
@@ -452,12 +467,16 @@ Javascript Webpage Controller
         // Set marker at coordinates
         let marker = new google.maps.Marker({
             position: new google.maps.LatLng(lat, long),
-            map: map
+            map: map,
+            title: 'Click to zoom'
         });
+
         // Set map center at coordinates
         map.setCenter(marker.position);
+        return marker;
     }
 
+    // Add weather to DOM from OpenWeatherMap API 
     function render_weather(weather_list) {
             /*
                 <tbody id="weather_body">
