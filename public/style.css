@@ -138,6 +138,38 @@ th {
     }
 
     /* Weather Table */
+    #weather_table {
+        padding-left: 10%;
+        padding-right: 10%;
+        width: 100%;
+        display: inline-block;
+    }
+
+    #weather_table td {
+        padding-left: 5%;
+        text-align: center;
+    }
+
+    #weather_table th {
+        padding-left: 4%;
+    }
+
+    #weather_row_0 > th {
+        height: 1%;
+     /*   background-color: rgb(101, 25, 25); */
+    }
+
+    #weather_row_1, #weather_row_2, #weather_row_3, #weather_row_4, #weather_row_5, 
+    #weather_row6 {
+        height: 1%;
+      /*  background-color: rgb(216, 216, 127);*/
+    }
+    
+    img {
+        height: auto;
+        width: auto;
+    }
+
 
 
 /* Buttons */
@@ -200,7 +232,7 @@ input {
     }
 
     .about_header:after {
-        width: 22%;
+        width: 10%;
     }
 
     .powered_by_header:after {
