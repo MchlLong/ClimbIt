@@ -539,7 +539,7 @@ Javascript Webpage Controller
                                 // Add time
                                 var temp = document.createElement("label");
                                 date = new Date(weather_list[flat]["time"]);
-                                temp.innerHTML = `${date.toGMTString().slice(16, -4)}`;
+                                temp.innerHTML = `${date.toGMTString().slice(16, 22)}${date.toGMTString().slice(26, -4)}`;
                                 cell.appendChild(temp);
                                 cell.appendChild(document.createElement("br"));
                                 // Add image 
