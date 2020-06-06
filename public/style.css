@@ -186,7 +186,19 @@ th {
         }
     }
 
-    #weather_column_1, #weather_column_2, #weather_column_3, #weather_column_4, #weather_column_5, #weather_column_6 {	        
+    @media (max-width: 486px) {
+        img {
+            height: 30%
+        }       
+        
+        #weather_table th {
+            font-size: 1rem;
+        }
+
+    }
+
+    #weather_column_1, #weather_column_2, #weather_column_3, #weather_column_4, 
+    #weather_column_5, #weather_column_6 {	        
         width: auto;
     }
     
