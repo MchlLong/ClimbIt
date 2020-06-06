@@ -1,5 +1,6 @@
 # CS465HikingProject
-Bryttanie House and Michael Long's Full Stack programming project: "Hiking Project" (name and description tentative)
+Bryttanie House and Michael Long's Full Stack programming project: "ClimbIt"
+A fullstack application in which a user is able to search for hiking locations all around the world. Utilizes the 
 
 # Dependencies
 NodeJS
