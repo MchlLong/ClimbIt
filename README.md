@@ -1,6 +1,13 @@
 # CS465HikingProject
 Bryttanie House and Michael Long's Full Stack programming project: "ClimbIt"
-A fullstack application in which a user is able to search for hiking locations all around the world. Utilizes the 
+
+# About
+ClimbIt is a fullstack web application built by Bryttanie House and Michael Long. Search for any location you wish to explore and ClimbIt will show you nearby hikes, plus a map, directions, and the five day forecast for each location. An excellent tool and thought experiment to utilize some of the programming principles for a Fullstack application. ClimbIt is currently hosted via Heroku.
+
+# Stack
+Frontend / Client: HTML, CSS, JavaScript, Bootstrap
+Middleware: Node, Express, Axios, dotenv
+API's: OpenWeatherMap, REI HikingProject, Google Maps: Geocoding, Maps Javascript, Directions
 
 # Dependencies
 NodeJS
@@ -13,7 +20,10 @@ NodeJS
 # Install node (Ubuntu)
 <p><code>$ sudo apt install nodejs</p></code>
 
-# Install modules
+# Install modules with package.json
+<p><code>$ npm install</p></code>
+
+# Install modules without package.json
 <p><code>$ npm install express</p></code>
 <p><code>$ npm install body-parser</p></code>
 <p><code>$ npm install dotenv</p></code>
