@@ -83,7 +83,7 @@
         <!-- Page which defines an area where hikes are located and filter options -->
         <div class="hike_detail_page invisible">
             <div class="page_container">
-              <h1>Nearby Trails</h1>
+              <h1 class="header_title">Nearby Trails</h1>
               <div class="text-center">
                 <button type="button" class="navto_home_page btn btn-light">Back</button>
                 </div>
@@ -98,7 +98,7 @@
         <!-- Page which renders a map and allows for subindices of (weather, air quality, conditions, directions) -->
         <div class="hike_map_page invisible">
           <div class="container text-center">
-            <h1>Hike Map</h1>
+            <h1 class="header_title">Hike Map</h1>
             <div id="map">
               <!-- Map will go here -->
             </div>  
@@ -111,7 +111,7 @@
         <!-- Sub-index page which contains a list of directions to a hiking location -->
         <div class="directions_page invisible">
           <div id="page_container" class="page_container text-center">
-            <h1>Directions</h1>
+            <h1 class="header_title">Directions</h1>
             <label id="origin_label">Enter Origin:</label>
             <input 
               type="text"
@@ -140,8 +140,9 @@
 
         <!-- Sub-index page which contains a weekly weather summary -->
         <div class="weather_page invisible">
-          <div class="weather_container text-center">
-            <h1>Weather</h1>
+          <div class="page_container text-center">
+          <div class="weather_container">
+            <h1 class="header_title">Weather</h1>
             <button type="button" class="navto_hike_map_page btn btn-light">Back to Map</button>
             <table id="weather_table">
               <tbody id="weather_body">
@@ -150,15 +151,17 @@
             </table>
           </div>
         </div>
+        </div>
 
+        <!-- About Page -->
         <div class="about_page invisible">
           <div class="header_container text-center">
-
+            <!-- App Info -->
             <h1 class="about_header">About</h1>
             <p class="app_info">ClimbIt is a web application built by Michael Long and Bryttanie House. Search for any location you wish to explore and ClimbIt will 
                show you nearby hikes, plus a map, directions, and the current week's weather for each one.
             </p>
-          
+            <!-- List of APIs/tools -->
             <h2 class="powered_by_header">Powered By</h2>
              <ul class="powered_by">
               <li class="tools_used">
@@ -168,7 +171,7 @@
                 <a href="https://www.hikingproject.com/data">REI HikingProject</a>
               </li>
               <li class="tools_used">
-                <a href="https://developers.google.com/maps/documentation">Google Maps: Geocoding, Maps Javascript, Directions</a>
+                <a href="https://developers.google.com/maps/documentation">Google Maps</a>
               </li>
               <li class="tools_used">
                 <a href="https://expressjs.com/">Express</a>
@@ -180,25 +183,24 @@
                 <a href="https://www.heroku.com/">Heroku</a>
               </li>
              </ul>
-
+           <!-- Team Stuff -->
            <div class="team_container">
             <h2 class="team_header">The Team</h2>
               <!-- BH Stuff -->
-              <div class="brtt">
+              <div class="brtt_container">
                 <h3 class="member_name">Bryttanie House</h3>
                 <img class="brtt_github" src="img/brtt_icon.png" alt="Bryttanie's Icon">
                 <p>Googler, Front End Dev and Designer, Cheerleader</p>
-                <a href="http://github.com/xbhouse">Go to GitHub</a>
+                <a class="github_link" href="http://github.com/xbhouse">Go to GitHub</a>
               </div>
               <!-- ML Stuff -->
-              <div class="mchl">
+              <div class="mchl_container">
                 <h3 class="member_name">Michael Long</h3>
                 <img class="mchl_github" src="img/mchl_icon.png" alt="Michael's Icon">
                 <p>Node Man, Weather and Timezone Master, Graphic Designer</p>
                 <a class="github_link" href="http://github.com/mchllong">Go to GitHub</a>
               </div>
            </div>
-
           </div>
 
         </div>
