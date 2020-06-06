@@ -513,9 +513,15 @@ Javascript Webpage Controller
                             if (k == 0)
                                 //cell.innerHTML = `Header: (${j}, ${i})`;
                                 flat = (j * width) + (i-1) - skip_base + 5;
-                                date = new Date(weather_list[flat]["time"]);
-                                header_cell.innerHTML = `${date.toGMTString().slice(0, -13)}`;
-
+                                if (flat < 0) {
+                                    date = new Date(weather_list[0]["time"]);
+                                    date.setDate(date.getDate() - 1); // subtract one day
+                                    header_cell.innerHTML = `${date.toGMTString().slice(0, -13)}`;
+                                }
+                                else {
+                                    date = new Date(weather_list[flat]["time"]);
+                                    header_cell.innerHTML = `${date.toGMTString().slice(0, -13)}`;
+                                }
                                 header_cell.id = `weather_column_${j}`
 
                                 //header_cell.innerHTML = 'Date';
