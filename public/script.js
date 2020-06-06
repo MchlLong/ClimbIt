@@ -467,6 +467,7 @@ Javascript Webpage Controller
                                 header_cell.id = `weather_column_${j}`  // Add unique id for styling and access
                                 row.append(header_cell);                // Add newly created cell
                             }
+
                         } 
 
                     }
