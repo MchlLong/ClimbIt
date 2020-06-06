@@ -9,57 +9,60 @@ CSS Style Controller
 /* Background */
 .home_page, .hike_detail_page, .hike_map_page, .directions_page, .weather_page > * {
     /*background-color: #222022;*/
-    background-image: url("img/background.png");
-    min-height: 900px;
+    background-image: url("img/background.png");        
+    min-height: 900px;      /* Add background to these pages, set size */
     max-height: 900px;
     max-width: 1920px;
     background-repeat: no-repeat;   
 }
 
 /* Body */
-.body_style {
+.body_style {               /* Font type for entire app */
    font-family: 'Roboto Mono', monospace;
 }
 
-.container {
+.container {                /* Hike map and form container margins */ 
     padding-top: 7%;
-}
+    margin-bottom: 10%;
+}  
 
 /* Site Header */
-.app_name {
+.app_name {                 /* App name alignment and font size */
     align-content: center;
     font-size: 1.25rem;
 }
 
-.nav-link {
+.nav-link {                 /* Override Bootstrap to change color of "Home" and "About" links */
     color: rgb(38, 94, 147) !important;
 }
 
-.nav-link:hover {
+.nav-link:hover {           /* Override Bootstrap to change hover of "Home" and "About" links */
     color: black !important;
 }
 
 
-/* Page Headers */
-h1 {
+/* Page Titles */
+h1 {                        /* Spacing for each page title */
     padding-top: 3%;
     padding-bottom: 3%; 
 }
 
 /* Tables */ 
-table {
-    border-collapse: collapse;  /* no borders between cell elements */
+table {                     /* Set width, margins, and relative positioning for all tables */
+    border-collapse: collapse;  /* No borders between cell elements */
     width: 100%;                
     margin-top: 4%;
     margin-bottom: 4%;
     position: relative;
 }
 
-tbody {
+/* Table body */        
+tbody {                     /* Set size of table body */
     height: 100%;
 }
 
-th {
+/* Table headers */
+th {                        /* Settings for table headers */
     padding-top: 2%;
     padding-bottom: 2%;
     padding-right: 4%;
@@ -67,97 +70,92 @@ th {
     color: white;
     text-align: center;
     font-size: 1.25rem;
-    position: sticky;
+    position: sticky;       /* Keeps header at the top of the table, was using this when scrolling */
  }
 
- /* Alternates the background colors of the even cells */
  #hike_table tr:nth-child(even), #directions_table tr:nth-child(even), 
- #weather_table tr:nth-child(even){
+ #weather_table tr:nth-child(even){  /* Alternates the background colors of the even rows in each table */
     background-color: #f4eeee;
  }
 
-  /* Alternates the background colors of the odd cells */
  #hike_table tr:nth-child(odd), #directions_table tr:nth-child(odd), 
- #weather_table tr:nth-child(odd){
+ #weather_table tr:nth-child(odd){   /* Alternates the background colors of the odd rows in each table */
     background-color: #ffffff;
  }
  
  #hike_table tr:hover, #directions_table tr:hover, #weather_table tr:hover {
-     background-color: #ddd;
+     background-color: #ddd;        /* Background hover effect for each table row */
  }
      
- td {
+ /* Table data */ 
+ td {                       /* Align text and set spacing for all table data */
      text-align: left;
      padding: 8px 8px;
      padding-left: 4%;
      padding-right: 4%;
-    /* background-color: rgb(238, 234, 234);*/
  }
 
-    
+ /* Page container for the pages with tables */
 .page_container {
     text-align: center;
-    overflow-x: auto;
     margin-bottom: 10%;
 }
     
     /* Hike Table */
     .table_container {
-        display: inline-block;
+        display: inline-block;      /* Container for hike table */
     }
 
-    #hike_table {
-        border: 1px solid #ddd;
+    #hike_table {                   /* Table */
+        border: 1px solid #ddd;   
     }
 
-    #hikes_column1 {
+    #hikes_column1 {                /* Set size of first column */
         width: 60%;
     }
 
-    #hikes_column2 {
+    #hikes_column2 {                /* Set size and spacing of second column */
         width: 20%;
         padding-left: 6.5%;
     }
 
-    #hikes_column3 {
+    #hikes_column3 {                /* Set size and spacing of third column */
         width: 20%;
         padding-left: 6.25%;
     }
 
     /* Directions Table */
-    .directions_container {
+    .directions_container {         /* Container for directions table*/
         display: inline-block;
         text-align: center;
-    /*    height: 400px;
-        overflow: scroll; */
     }
 
-    #directions_table {
+    #directions_table {             /* Set size and spacing for entire table */
         padding-left: 10%;
         padding-right: 10%;
         width: 100%;
         display: inline-block;
     }
 
-    #directions_column1 {
+    #directions_column1 {           /* Set size for first column */
         width: 60%;
     }
 
-    #directions_column2 {
+    #directions_column2 {           /* Set size for second column */
         width: 20%;
     }
 
-    #directions_table td {
+    #directions_table td {          /* Set spacing of data */
         padding-left: 7.5%;
     }
 
     /* Weather Table */
-    .weather_container {
+    .weather_container {            /* Container for weather table */
         margin-left: 10%;
         margin-right: 10%;
     }
 
-    #weather_table > table {
+    #weather_table > table {        /* Weather table, set to override general table style */
         padding-left: 10%;
         padding-right: 10%;
         width: 100%;
@@ -165,178 +163,177 @@ th {
         margin-right: 10%;
     }
 
-    #weather_table td {
+    #weather_table td {             /* Set spacing and alignment of data */
         padding-left: 5%;
         text-align: center;
     }
 
-    #weather_table th {
+    #weather_table th {             /* Set spacing for table headers */
         padding-left: 4%;
-    }
-
-    #weather_row_0 > th {
-     /*   background-color: rgb(101, 25, 25); */
-
-    }
-    
-    @media (max-width: 720px) {
-        img {
-            height: 50%;
-        }
-    }
-
-    @media (max-width: 486px) {
-        img {
-            height: 30%
-        }       
-        
-        #weather_table th {
-            font-size: 1rem;
-        }
-
-        .tools_used {
-            margin-right: 7%;
-        }
-
     }
 
     #weather_column_1, #weather_column_2, #weather_column_3, #weather_column_4, 
     #weather_column_5, #weather_column_6 {	        
-        width: auto;
+        width: auto;                /* Make columns auto resize */
     }
     
 
 /* Buttons */
-button {
-    margin-bottom: 10%;
+button {                            /* Button margins */
+    margin-bottom: 10%;             
 }
 
-.button_container {
+.button_container {                 /* Button container margins */
     margin-top: 5%;
 }
 
-.btn-light {
+.btn-light {                        /* Override Bootstrap button formatting */
     border: 1px solid black !important;
 }
 
 /* Input */
 input {
-    margin-bottom: 10%;
+    margin-bottom: 10%;             /* Move button away from input field */
 }
 
 
 /* Map */
-#map {
+#map {                              /* Set size, margins, and border for Google Map */
     height: 400px;
     width: 100%;
     margin-bottom: 2%;
     border: 2px solid black;
-}
-
-.container {
-    margin-bottom: 10%;
-}
+}   
 
 /* About Page */
-
-    /* Headers and info */
-    .about_header {
+      
+    .about_header {             /* "About" header margins */
         margin-top: 3%;
     }
 
-    .app_info {
-        margin-top: 3%;
+    .app_info {                 /* App description margins */
+        margin-top: 3%;         
         margin-bottom: 10%;
         margin-right: 10%;
         margin-left: 10%;
     }
 
-    .powered_by_header {
+    .powered_by_header {        /* "Powered By" header margins */
         margin-bottom: 2%;
     }
 
-    .team_header {
+    .team_header {              /* "The Team" header margins */
         margin-top: 10%;
     }
 
 
     /* Borders */ 
-    .about_header:after, .powered_by_header:after, .team_header:after {
-        content: ""; 
+    .about_header:after, .powered_by_header:after, .team_header:after {     /* Bottom border of headers */
+        content: "";
         display: block;
         margin: 0 auto; 
-        width: 20%; 
-        padding-top: 10px; 
-        border-bottom: 2px solid rgb(101, 138, 172); 
+        width: 20%;             /* Length of border */
+        padding-top: 10px;      /* Distance from header */
+        border-bottom: 2px solid rgb(101, 138, 172);    
     }
 
-    .about_header:after {
+    .about_header:after {       /* Set width of border underneath "About" */
         width: 10%;
     }
 
-    .powered_by_header:after {
+    .powered_by_header:after {  /* Set width of border underneath "Powered By" */
         width: 13%;
     }
 
-    .team_header:after {
+    .team_header:after {        /* Set width of border underneath "The Team" */
         width: 10%;
     }
 
     /* Lists */
     ul {
-        list-style-type: none;
+        list-style-type: none;  /* Remove bullets from lists */
     }
 
-    .powered_by {
-        padding-right: 3%;
+    .powered_by {               /* "Powered By" ul class */
+        padding-right: 3%;      /* Move to the left to take up space from removed bullets */
         font-size: 2.25rem;
     }
 
-    .tools_used {
+    .tools_used {               /* Tool list items */ 
         font-size: 1.25rem;
         color: rgb(40, 70, 97);
     }
 
     /* Team Area */ 
-    .team_container {
-        margin-bottom: 15%;
+    .team_container {           /* Container margins */
+        margin-bottom: 15%;     
     }
 
-    h3 {
+    h3 {                        /* Member names spacing */
         padding-top: 2%;
     }
 
-    a:link {
-        text-decoration: none !important;
+    a:link {                    /* Remove underline from links */
+        text-decoration: none !important;   
       }
 
-    a:hover {
+    a:hover {                   /* Change color of link on hover */
         color:black !important;
     }
 
-    .brtt {
+    .brtt_container {           /* "Bryttanie" container margins (for responsive screens when everything goes vertical) */
         margin-top: 2%;
         margin-bottom: 5%;
     }
 
-    .brtt, .mchl {
-        display: inline-block;
-        padding-right: 5%;
+    .brtt_container, .mchl_container {     
+        display: inline-block;  /* Put team members on the same line */
+        padding-right: 5%;      /* Set spacing */
         padding-left: 5%;
     }
 
-    .brtt_github {
+    .brtt_github {              /* "Bryttanie" github photo size and margins */ 
         height: 20%;
         width: 45%;
         margin-top: 12%;
     }
 
-    .github_link {
+    .github_link {              /* GitHub link margins */
         margin-bottom: 5%;
+    }
+
+
+
+
+    /* Resize for medium screens */
+    @media (max-width: 720px) {
+        img {                   /* Resize all images */
+            height: 50%;
+        }
+    }
+
+    /* Resize for small screens */
+    @media (max-width: 486px) {
+        img {                   /* Resize all images */
+            height: 30%
+        }       
+        
+        #weather_table th {     /* Decrease table header font size for weather table */
+            font-size: 1rem;
+        }
+
+        .tools_used {           /* Fixes spacing issue in this list on phones */
+            margin-right: 7%;
+        }
+
+        .member_name {          /* Decrease size of "Bryttanie House" and "Michael Long" */
+            font-size: 1.5rem;
+        }
+
     }
 
 /* Visibility Controls */
 
-.invisible {
+.invisible {                    /* Hides element */ 
     display: none;
 }
