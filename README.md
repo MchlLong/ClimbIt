@@ -1,6 +1,6 @@
 # ClimbIt
 
-Bryttanie House and Michael Long's Full Stack programming project: "ClimbIt"
+Bryttanie House and Michael Long's Full Stack programming project: "ClimbIt", can be visited at the URL: https://climbit.herokuapp.com/
 
 # About
 ClimbIt is a fullstack web application built by Bryttanie House and Michael Long. Search for any location you wish to explore and ClimbIt will show you nearby hikes, plus a map, directions, and the five day forecast for each location. An excellent tool and thought experiment to utilize some of the programming principles for a Fullstack application. ClimbIt is currently hosted via Heroku.
