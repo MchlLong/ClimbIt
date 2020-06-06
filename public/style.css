@@ -69,7 +69,7 @@ th {
     padding-top: 2%;
     padding-bottom: 2%;
     padding-right: 4%;
-    background-color: rgb(63, 65, 67); /* just playing with colors, not set on anything */
+    background-color: rgb(63, 65, 67); 
     color: white;
     text-align: justify;
     font-size: 1.25rem;
@@ -77,13 +77,21 @@ th {
     top: 0;
  }
  
- /* again just playing */
  tr:nth-child(even){
     background-color: #f4eeee;
  }
+
+ #hike_table tr:nth-child(even), #directions_table tr:nth-child(even), 
+ #weather_table tr:nth-child(even){
+    background-color: #f4eeee;
+ }
+
+ #hike_table tr:nth-child(odd), #directions_table tr:nth-child(odd), 
+ #weather_table tr:nth-child(odd){
+    background-color: #ffffff;
+ }
  
- /* here too */
- #hike_table tr:hover, #directions_table tr:hover {
+ #hike_table tr:hover, #directions_table tr:hover, #weather_table tr:hover {
      background-color: #ddd;
  }
      
@@ -92,7 +100,7 @@ th {
      padding: 8px 8px;
      padding-left: 4%;
      padding-right: 4%;
-     background-color: rgb(238, 234, 234);
+    /* background-color: rgb(238, 234, 234);*/
  }
 
     /* Hike Table */
@@ -179,7 +187,6 @@ th {
 
     }
     
-    /* To resize weather table for smaller screens */
     @media (max-width: 720px) {
         img {
             height: 50%;
@@ -193,6 +200,10 @@ th {
         
         #weather_table th {
             font-size: 1rem;
+        }
+
+        .tools_used {
+            margin-right: 7%;
         }
 
     }
@@ -309,6 +320,7 @@ input {
 
     .brtt {
         margin-top: 2%;
+        margin-bottom: 5%;
     }
 
     .brtt, .mchl {
