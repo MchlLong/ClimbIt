@@ -83,7 +83,7 @@
         <!-- Page which defines an area where hikes are located and filter options -->
         <div class="hike_detail_page invisible">
             <div class="page_container">
-              <h1>Nearby Trails</h1>
+              <h1 class="header_title">Nearby Trails</h1>
               <div class="text-center">
                 <button type="button" class="navto_home_page btn btn-light">Back</button>
                 </div>
@@ -98,7 +98,7 @@
         <!-- Page which renders a map and allows for subindices of (weather, air quality, conditions, directions) -->
         <div class="hike_map_page invisible">
           <div class="container text-center">
-            <h1>Hike Map</h1>
+            <h1 class="header_title">Hike Map</h1>
             <div id="map">
               <!-- Map will go here -->
             </div>  
@@ -111,7 +111,7 @@
         <!-- Sub-index page which contains a list of directions to a hiking location -->
         <div class="directions_page invisible">
           <div id="page_container" class="page_container text-center">
-            <h1>Directions</h1>
+            <h1 class="header_title">Directions</h1>
             <label id="origin_label">Enter Origin:</label>
             <input 
               type="text"
@@ -140,8 +140,9 @@
 
         <!-- Sub-index page which contains a weekly weather summary -->
         <div class="weather_page invisible">
-          <div class="weather_container text-center">
-            <h1>Weather</h1>
+          <div class="page_container text-center">
+          <div class="weather_container">
+            <h1 class="header_title">Weather</h1>
             <button type="button" class="navto_hike_map_page btn btn-light">Back to Map</button>
             <table id="weather_table">
               <tbody id="weather_body">
@@ -149,6 +150,7 @@
               </tbody>       
             </table>
           </div>
+        </div>
         </div>
 
         <div class="about_page invisible">
@@ -168,7 +170,7 @@
                 <a href="https://www.hikingproject.com/data">REI HikingProject</a>
               </li>
               <li class="tools_used">
-                <a href="https://developers.google.com/maps/documentation">Google Maps: Geocoding, Maps Javascript, Directions</a>
+                <a href="https://developers.google.com/maps/documentation">Google Maps</a>
               </li>
               <li class="tools_used">
                 <a href="https://expressjs.com/">Express</a>

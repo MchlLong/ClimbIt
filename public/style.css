@@ -17,7 +17,6 @@ CSS Style Controller
 }
 
 /* Body */
-
 .body_style {
    font-family: 'Roboto Mono', monospace;
 }
@@ -41,20 +40,16 @@ CSS Style Controller
 }
 
 
-/* Header Elements */
+/* Page Headers */
 h1 {
     padding-top: 3%;
-    padding-bottom: 3%;
-}
-
-h3 {
-    padding-top: 2%;
+    padding-bottom: 3%; 
 }
 
 /* Tables */ 
 table {
-    border-collapse: collapse;
-    width: 100%;
+    border-collapse: collapse;  /* no borders between cell elements */
+    width: 100%;                
     margin-top: 4%;
     margin-bottom: 4%;
     position: relative;
@@ -62,28 +57,32 @@ table {
 
 tbody {
     height: 100%;
-    overflow-y: auto;
 }
 
 th {
     padding-top: 2%;
     padding-bottom: 2%;
     padding-right: 4%;
-    background-color: rgb(63, 65, 67); /* just playing with colors, not set on anything */
+    background-color: rgb(63, 65, 67); 
     color: white;
-    text-align: justify;
+    text-align: center;
     font-size: 1.25rem;
     position: sticky;
-    top: 0;
  }
- 
- /* again just playing */
- tr:nth-child(even){
+
+ /* Alternates the background colors of the even cells */
+ #hike_table tr:nth-child(even), #directions_table tr:nth-child(even), 
+ #weather_table tr:nth-child(even){
     background-color: #f4eeee;
  }
+
+  /* Alternates the background colors of the odd cells */
+ #hike_table tr:nth-child(odd), #directions_table tr:nth-child(odd), 
+ #weather_table tr:nth-child(odd){
+    background-color: #ffffff;
+ }
  
- /* here too */
- #hike_table tr:hover, #directions_table tr:hover {
+ #hike_table tr:hover, #directions_table tr:hover, #weather_table tr:hover {
      background-color: #ddd;
  }
      
@@ -92,20 +91,19 @@ th {
      padding: 8px 8px;
      padding-left: 4%;
      padding-right: 4%;
-     background-color: rgb(238, 234, 234);
+    /* background-color: rgb(238, 234, 234);*/
  }
 
-    /* Hike Table */
-    .page_container {
-        text-align: center;
-        overflow-x: auto;
-        margin-bottom: 10%;
-    }
     
+.page_container {
+    text-align: center;
+    overflow-x: auto;
+    margin-bottom: 10%;
+}
+    
+    /* Hike Table */
     .table_container {
         display: inline-block;
-       /* height: 400px;*/
-        /*overflow: scroll;*/
     }
 
     #hike_table {
@@ -155,14 +153,16 @@ th {
 
     /* Weather Table */
     .weather_container {
-        display: inline-block;
+        margin-left: 10%;
+        margin-right: 10%;
     }
 
-    #weather_table {
+    #weather_table > table {
         padding-left: 10%;
         padding-right: 10%;
         width: 100%;
         display: inline-block;
+        margin-right: 10%;
     }
 
     #weather_table td {
@@ -179,7 +179,6 @@ th {
 
     }
     
-    /* To resize weather table for smaller screens */
     @media (max-width: 720px) {
         img {
             height: 50%;
@@ -193,6 +192,10 @@ th {
         
         #weather_table th {
             font-size: 1rem;
+        }
+
+        .tools_used {
+            margin-right: 7%;
         }
 
     }
@@ -299,6 +302,10 @@ input {
         margin-bottom: 15%;
     }
 
+    h3 {
+        padding-top: 2%;
+    }
+
     a:link {
         text-decoration: none !important;
       }
@@ -309,6 +316,7 @@ input {
 
     .brtt {
         margin-top: 2%;
+        margin-bottom: 5%;
     }
 
     .brtt, .mchl {
